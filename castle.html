@@ -6,10 +6,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Inter:wght@400;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="img/ck-favicon.svg" type="image/svg+xml"><link rel="icon" href="img/ck-favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="img/ck-favicon-180.png">
-<link rel="stylesheet" href="group.css">
+<link rel="stylesheet" href="assets/group.css"><link rel="stylesheet" href="assets/pages.css">
 <link rel="preload" as="image" href="img/kit-white-1800.webp" imagesrcset="img/kit-white-900.webp 900w, img/kit-white-1800.webp 1800w" imagesizes="100vw">
-</head><body>
-<div class="proto">Homepage prototype for review · not the live site · <a href="bathemp.html">See Bath Emporium</a></div>
+</head><body data-page="home" data-live="/">
 <div id="hdr"></div>
 
 <main>
@@ -28,18 +27,18 @@
       <h1>Kitchens built to last a lifetime</h1>
       <p>Custom cabinetry from our own factory and the world's finest appliances, designed together in one Markham showroom.</p>
       <a class="btn light" href="#appliances">Shop appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a>
-      &nbsp;<a class="btn light" href="https://castlekitchens.ca/kitchen-remodeling-toronto/">Plan your kitchen</a>
+      &nbsp;<a class="btn light" href="#" data-live="/kitchen-remodeling-toronto/">Plan your kitchen</a>
     </div></div>
     <div class="ctrl"><div class="dots"></div><button class="pp"></button></div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <div class="sh"><div><h2>Explore our collections</h2></div><a class="more" href="https://castlekitchens.ca/projects/">View all projects <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
+      <div class="sh"><div><h2>Explore our collections</h2></div><a class="more" href="#" data-live="/projects/">View all projects <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
       <div class="tiles">
-        <a class="tile" href="https://castlekitchens.ca/modern-kitchen-cabinets-toronto/"><img src="img/kit-reveal-900.webp" alt="" loading="lazy"><div class="t"><b>Custom kitchens</b><span>Explore kitchens <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
-        <a class="tile" href="https://castlekitchens.ca/appliances/"><img src="img/app-dish-900.webp" alt="" loading="lazy"><div class="t"><b>Premium appliances</b><span>Explore appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
-        <a class="tile" href="https://castlekitchens.ca/outdoor-kitchens-toronto/"><img src="img/out-kitchen2-900.webp" alt="" loading="lazy"><div class="t"><b>Outdoor living</b><span>Explore outdoor <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
+        <a class="tile" href="#" data-live="/modern-kitchen-cabinets-toronto/"><img src="img/kit-reveal-900.webp" alt="" loading="lazy"><div class="t"><b>Custom kitchens</b><span>Explore kitchens <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
+        <a class="tile" href="#" data-live="/appliances/"><img src="img/app-dish-900.webp" alt="" loading="lazy"><div class="t"><b>Premium appliances</b><span>Explore appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
+        <a class="tile" href="#" data-live="/outdoor-kitchens-toronto/"><img src="img/out-kitchen2-900.webp" alt="" loading="lazy"><div class="t"><b>Outdoor living</b><span>Explore outdoor <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
         <a class="tile" href="bathemp.html"><img src="img/bath-tub-900.webp" alt="" loading="lazy"><div class="t"><b>Bath collections</b><span>Explore bath <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
       </div>
     </div>
@@ -47,7 +46,7 @@
 
   <section class="sec stone" id="appliances">
     <div class="wrap">
-      <div class="sh"><div><h2>Premium appliances</h2><p>Order online for delivery across Ontario, or ask our specialists to plan a full appliance package.</p></div><a class="more" href="https://castlekitchens.ca/appliances/">Shop all appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
+      <div class="sh"><div><h2>Premium appliances</h2><p>Order online for delivery across Ontario, or ask our specialists to plan a full appliance package.</p></div><a class="more" href="#" data-live="/appliances/">Shop all appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
       <div class="rail" data-products></div>
     </div>
   </section>
@@ -57,8 +56,8 @@
       <span class="eyebrow" style="color:#9a958f">Your one-stop shop</span>
       <div class="sh" style="margin-top:14px"><p class="lead" style="color:#fff">Cabinetry, appliances, fixtures and installation, coordinated by one team from design to delivery.</p></div>
       <div class="onestop">
-        <div><svg viewBox="0 0 40 40"><path fill="#fff" d="M6 4h6v5h4V4h8v5h4V4h6v13h-3v19H24V27a4 4 0 0 0-8 0v9H9V17H6z"/></svg><h3>Castle Kitchens</h3><p>Modern, transitional and traditional cabinetry, islands, closets and bars, made in our own factory.</p><a href="https://castlekitchens.ca/our-factory/">Our factory</a></div>
-        <div><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2.6"><rect x="5" y="4" width="30" height="32" rx="1.5"/><path d="M5 12h30"/><rect x="10" y="17" width="20" height="14"/></svg><h3>Castle Appliances</h3><p>Thermador, Gaggenau, Miele, Monogram, Bertazzoni, Liebherr and more, with display models in the showroom.</p><a href="https://castlekitchens.ca/our-brands/">Our brands</a></div>
+        <div><svg viewBox="0 0 40 40"><path fill="#fff" d="M6 4h6v5h4V4h8v5h4V4h6v13h-3v19H24V27a4 4 0 0 0-8 0v9H9V17H6z"/></svg><h3>Castle Kitchens</h3><p>Modern, transitional and traditional cabinetry, islands, closets and bars, made in our own factory.</p><a href="#" data-live="/our-factory/">Our factory</a></div>
+        <div><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2.6"><rect x="5" y="4" width="30" height="32" rx="1.5"/><path d="M5 12h30"/><rect x="10" y="17" width="20" height="14"/></svg><h3>Castle Appliances</h3><p>Thermador, Gaggenau, Miele, Monogram, Bertazzoni, Liebherr and more, with display models in the showroom.</p><a href="#" data-live="/our-brands/">Our brands</a></div>
         <div><svg viewBox="0 0 40 40"><path fill="#fff" d="M20 3c6 9 12 15.5 12 22.5A12 12 0 0 1 8 25.5C8 18.5 14 12 20 3z"/></svg><h3>Bath Emporium</h3><p>Sinks, faucets and pot fillers for your new kitchen, and everything for the bathrooms too.</p><a href="bathemp.html">Shop bath &amp; kitchen fixtures</a></div>
       </div>
     </div>
@@ -66,7 +65,7 @@
 
   <section class="split" id="experience">
     <div class="media"><img src="img/kit-display-1800.webp" srcset="img/kit-display-900.webp 900w, img/kit-display-1800.webp 1800w" sizes="(max-width:820px) 100vw, 56vw" alt="Stone island display at the Castle Kitchens showroom" loading="lazy">
-      <a class="play" href="https://bathemp.ca/wp-content/uploads/2020/10/Bath-Emporium-Castle-Kitchens-Showroom-Tour.mp4" data-video="https://bathemp.ca/wp-content/uploads/2020/10/Bath-Emporium-Castle-Kitchens-Showroom-Tour.mp4" aria-label="Watch the showroom tour"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></a></div>
+      <a class="play" href="#" data-video="https://bathemp.ca/wp-content/uploads/2020/10/Bath-Emporium-Castle-Kitchens-Showroom-Tour.mp4" aria-label="Watch the showroom tour"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></a></div>
     <div class="body">
       <span class="eyebrow" style="color:#9a958f">The Experience Centre</span>
       <h2>See, touch &amp; experience design</h2>
@@ -77,11 +76,11 @@
 
   <section class="sec">
     <div class="wrap">
-      <div class="sh"><div><h2>Featured projects</h2></div><a class="more" href="https://castlekitchens.ca/projects/">View all projects <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
+      <div class="sh"><div><h2>Featured projects</h2></div><a class="more" href="#" data-live="/projects/">View all projects <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
       <div class="proj">
-        <a href="https://castlekitchens.ca/kitchen-islands/"><img src="img/kit-king-900.webp" alt="" loading="lazy"><span><b>King City kitchen remodel</b><small>Kitchen · King City</small></span></a>
-        <a href="https://castlekitchens.ca/modern-kitchens/"><img src="img/kit-overview-900.webp" alt="" loading="lazy"><span><b>Raspberry Ridge</b><small>Kitchen · Markham</small></span></a>
-        <a href="https://castlekitchens.ca/transitional-kitchens/"><img src="img/kit-hood-900.webp" alt="" loading="lazy"><span><b>Peter Street</b><small>Kitchen · Markham</small></span></a>
+        <a href="#" data-live="/kitchen-islands/"><img src="img/kit-king-900.webp" alt="" loading="lazy"><span><b>King City kitchen remodel</b><small>Kitchen · King City</small></span></a>
+        <a href="#" data-live="/modern-kitchens/"><img src="img/kit-overview-900.webp" alt="" loading="lazy"><span><b>Raspberry Ridge</b><small>Kitchen · Markham</small></span></a>
+        <a href="#" data-live="/transitional-kitchens/"><img src="img/kit-hood-900.webp" alt="" loading="lazy"><span><b>Peter Street</b><small>Kitchen · Markham</small></span></a>
       </div>
     </div>
   </section>
@@ -90,7 +89,7 @@
     <div class="wrap">
       <p class="eyebrow" style="text-align:center;color:#6e6a66;margin:0 0 18px">Featured brands</p>
       <div class="logos">
-        <a href="https://castlekitchens.ca/thermador-promotion/" class="serif">Thermador</a><a href="#" class="thin">GAGGENAU</a><a href="https://castlekitchens.ca/miele-appliances/">Miele</a><a href="https://castlekitchens.ca/monogram-promotion-deals/" class="thin">MONOGRAM</a><a href="https://castlekitchens.ca/bertazzoni-canada-promotion/" class="serif">Bertazzoni</a><a href="https://castlekitchens.ca/liebherr-promotion/">LIEBHERR</a><a href="https://castlekitchens.ca/viking-range-canada-promotion/" class="thin">VIKING</a>
+        <a href="#" data-live="/thermador-promotion/" class="serif">Thermador</a><a href="#" data-live="/our-brands/" class="thin">GAGGENAU</a><a href="#" data-live="/miele-appliances/">Miele</a><a href="#" data-live="/monogram-promotion-deals/" class="thin">MONOGRAM</a><a href="#" data-live="/bertazzoni-canada-promotion/" class="serif">Bertazzoni</a><a href="#" data-live="/liebherr-promotion/">LIEBHERR</a><a href="#" data-live="/viking-range-canada-promotion/" class="thin">VIKING</a>
       </div>
     </div>
   </section>
@@ -108,57 +107,12 @@
       <h2>Experience it in person</h2>
       <p>Meet our kitchen designers, see the appliances in working displays, and leave with a plan for your new kitchen.</p>
       <dl><dt>Address</dt><dd>5 Shields Court, Unit 100, Markham, ON</dd><dt>Hours</dt><dd>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</dd><dt>Call</dt><dd><a href="tel:+19059440060">(905) 944-0060</a></dd></dl>
-      <a class="btn light" href="https://castlekitchens.ca/contact/">Book a design consultation <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a>
+      <a class="btn light" href="#" data-live="/contact/">Book a design consultation <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a>
     </div>
     <div class="media"><img src="img/store-castle-1800.webp" alt="Bath Emporium, Castle Kitchens and Castle Appliances showroom at 5 Shields Court, Markham" loading="lazy"></div>
   </section>
 </main>
 <div id="ftr"></div>
 
-<script>
-window.SITE = {
-  id: 'castle', active: ['kitchens', 'appliances'], usd: false, legal: 'Castle Kitchens',
-  util: 'CAD pricing · Delivery across Ontario',
-  menu: [
-    { label: 'Custom kitchens', mega: [
-      { h: 'Kitchens', links: [['Modern kitchen cabinets','https://castlekitchens.ca/modern-kitchen-cabinets-toronto/'],['White kitchen cabinets','https://castlekitchens.ca/white-kitchen-cabinets/'],['Kitchen remodeling','https://castlekitchens.ca/kitchen-remodeling-toronto/'],['Kitchen renovation','https://castlekitchens.ca/kitchen-renovation-in-toronto/'],['Kitchen islands','https://castlekitchens.ca/kitchen-islands/'],['Kitchen countertops','https://castlekitchens.ca/kitchen-countertops/']] },
-      { h: 'Portfolio', links: [['Modern kitchens','https://castlekitchens.ca/modern-kitchens/'],['Transitional kitchens','https://castlekitchens.ca/transitional-kitchens/'],['Traditional kitchens','https://castlekitchens.ca/traditional-kitchens/'],['Closets &amp; home office','https://castlekitchens.ca/closets-home-office-home-library/'],['Bars &amp; media centres','https://castlekitchens.ca/bars-media-centers-fire-places/'],['Storage solutions','https://castlekitchens.ca/storage-solutions/']] },
-      { h: 'Who we are', links: [['Our factory','https://castlekitchens.ca/our-factory/'],['Our process','https://castlekitchens.ca/our-process/'],['Our standards','https://castlekitchens.ca/our-standards/'],['What makes us different','https://castlekitchens.ca/what-makes-us-different/'],['Testimonials','https://castlekitchens.ca/testimonials/']] },
-      { h: 'Trades', links: [['Architects &amp; designers','https://castlekitchens.ca/custom-kitchens-for-architects-and-designers/'],['Multi-housing projects','https://castlekitchens.ca/multi-housing-projects/'],['New dealer','https://castlekitchens.ca/new-dealer/']] },
-    ], feat: { t: 'Kitchen projects', u: 'https://castlekitchens.ca/projects/', img: 'img/kit-aitken-900.webp' } },
-    { label: 'Appliances', mega: [
-      { h: 'Cooking', links: [['Ranges &amp; stoves','https://castlekitchens.ca/product-category/appliances/ranges/'],['Wall ovens','https://castlekitchens.ca/product-category/appliances/wall-ovens/'],['Cooktops','https://castlekitchens.ca/product-category/appliances/cooktops/'],['Range tops','https://castlekitchens.ca/product-category/appliances/ranges/range-tops/'],['Microwaves','https://castlekitchens.ca/product-category/appliances/microwaves/'],['Coffee machines','https://castlekitchens.ca/product-category/coffee-machines/']] },
-      { h: 'Refrigeration', links: [['Refrigerators','https://castlekitchens.ca/product-category/appliances/refrigerators/'],['Built-in refrigerators','https://castlekitchens.ca/product-category/appliances/refrigerators/built-in-refrigerators/'],['French door','https://castlekitchens.ca/product-category/appliances/refrigerators/french-door-refrigerators/'],['Freezers','https://castlekitchens.ca/product-category/appliances/freezers/'],['Wine storage','https://castlekitchens.ca/product-category/appliances/wine-storage/']] },
-      { h: 'Cleaning &amp; air', links: [['Dishwashers','https://castlekitchens.ca/product-category/appliances/dishwashers/'],['Ventilation','https://castlekitchens.ca/product-category/appliances/ventilation/'],['Custom range hoods','https://castlekitchens.ca/product-category/appliances/ventilation/custom-range-hoods/'],['Washers &amp; dryers','https://castlekitchens.ca/product-category/appliances/washers-and-dryers/']] },
-      { h: 'Offers', links: [['All deals &amp; promotions','https://castlekitchens.ca/special-offers-promotions/'],['Thermador promotion','https://castlekitchens.ca/thermador-promotion/'],['Miele','https://castlekitchens.ca/miele-appliances/'],['Monogram','https://castlekitchens.ca/monogram-promotion-deals/'],['Display clearance','https://castlekitchens.ca/product-category/display-clearance/']] },
-    ], feat: { t: 'Built-in refrigeration', u: 'https://castlekitchens.ca/product-category/appliances/refrigerators/built-in-refrigerators/', img: 'img/app-oak-900.webp' } },
-    { label: 'Outdoor living', mega: [
-      { h: 'Outdoor kitchens', links: [['Outdoor kitchens Toronto','https://castlekitchens.ca/outdoor-kitchens-toronto/'],['Backyard kitchens','https://castlekitchens.ca/backyard-kitchens/'],['Outdoor kitchen cabinets','https://castlekitchens.ca/product-category/outdoor-kitchens/outdoor-kitchen-cabinets/'],['Outdoor promotions','https://castlekitchens.ca/outdoor-kitchens-promotions/']] },
-      { h: 'Grills &amp; ovens', links: [['Built-in grills','https://castlekitchens.ca/product-category/outdoor-kitchens/built-in-grills/'],['Freestanding grills','https://castlekitchens.ca/product-category/outdoor-kitchens/freestanding-grills/'],['Pellet grills','https://castlekitchens.ca/product-category/outdoor-kitchens/pellet-grills/'],['Pizza ovens','https://castlekitchens.ca/product-category/outdoor-kitchens/outdoor-pizza-ovens/']] },
-    ], feat: { t: 'Outdoor kitchens', u: 'https://castlekitchens.ca/outdoor-kitchens-toronto/', img: 'img/out-kitchen-900.webp' } },
-    { label: 'Projects', u: 'https://castlekitchens.ca/projects/' },
-    { label: 'Brands', u: 'https://castlekitchens.ca/our-brands/' },
-    { label: 'Experience Centre', u: '#experience' },
-    { label: 'Contact', u: 'https://castlekitchens.ca/contact/' },
-    { label: 'Display clearance', u: 'https://castlekitchens.ca/product-category/display-clearance/', sale: true },
-  ],
-  // No Castle prices yet: they come from Sukhjinder's list. Until a product has a price it shows Inquire now (as here).
-  products: [
-    { id: '4480', b: 'Thermador', n: 'Thermador PRD606WCSG 60" Pro Grand Dual Fuel Steam Range', img: 'ck-4480.webp', u: 'https://castlekitchens.ca/product/thermador-prd606wcsg/' },
-    { id: '15289', b: 'Gaggenau', n: 'Gaggenau GO470720 Expressive Series 24" Smart Oven', img: 'ck-15289.webp', u: 'https://castlekitchens.ca/product/gaggenau-go470720-oven/' },
-    { id: '9110', b: 'Miele', n: 'Miele CVA 7845 Built-In Coffee Machine', img: 'ck-9110.webp', u: 'https://castlekitchens.ca/product/miele-cva-7845-coffee-machine/' },
-    { id: '3802', b: 'Monogram', n: 'Monogram ZDP366NPSS 36" Dual Fuel Pro Range, 6 Burners', img: 'ck-3802.webp', u: 'https://castlekitchens.ca/product/monogram-zdp366npss/' },
-    { id: '4045', b: 'Monogram', n: 'Monogram ZWE23ESHSS Counter-Depth French-Door Refrigerator', img: 'ck-4045.webp', u: 'https://castlekitchens.ca/product/monogram-zwe23eshss/' },
-    { id: '2766', b: 'Liebherr', n: 'Liebherr HWS1800 24" Built-In Fully Integrated Wine Cabinet', img: 'ck-2766.webp', u: 'https://castlekitchens.ca/product/liebherr-hws1800/' },
-    { id: '9063', b: 'Miele', n: 'Miele KF 2812 Vi 30" MasterCool Bottom-Mount Fridge Freezer', img: 'ck-9063.webp', u: 'https://castlekitchens.ca/product/miele-kf-2812-vi-30-inch-fridge/' },
-    { id: '14560', b: 'Monogram', n: 'Monogram ZTS90DPSNSS 30" Statement Built-In Single Oven', badge: 'Display clearance', img: 'ck-14560.webp', u: 'https://castlekitchens.ca/product/monogram-30-inch-oven/' },
-  ],
-  footer: [
-    { h: 'Kitchens', links: [['Custom kitchens','https://castlekitchens.ca/modern-kitchen-cabinets-toronto/'],['Kitchen remodeling','https://castlekitchens.ca/kitchen-remodeling-toronto/'],['Projects','https://castlekitchens.ca/projects/'],['Our factory','https://castlekitchens.ca/our-factory/']] },
-    { h: 'Appliances', links: [['All appliances','https://castlekitchens.ca/appliances/'],['Brands','https://castlekitchens.ca/our-brands/'],['Promotions','https://castlekitchens.ca/special-offers-promotions/'],['Display clearance','https://castlekitchens.ca/product-category/display-clearance/']] },
-    { h: 'Company', links: [['Our process','https://castlekitchens.ca/our-process/'],['Testimonials','https://castlekitchens.ca/testimonials/'],['Blog','https://castlekitchens.ca/blog/'],['Contact','https://castlekitchens.ca/contact/']] },
-  ],
-};
-</script>
-<script src="group.js"></script>
+<script src="assets/site-castle.js"></script><script src="assets/content-castle.js"></script><script src="assets/group.js"></script><script src="assets/pages.js"></script>
 </body></html>

@@ -6,10 +6,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Inter:wght@400;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="img/be-favicon-32.png" sizes="32x32"><link rel="icon" href="img/be-favicon-192.png" sizes="192x192"><link rel="apple-touch-icon" href="img/be-favicon-180.png">
-<link rel="stylesheet" href="group.css">
+<link rel="stylesheet" href="assets/group.css"><link rel="stylesheet" href="assets/pages.css">
 <link rel="preload" as="image" href="img/bath-hero-1800.webp" imagesrcset="img/bath-hero-900.webp 900w, img/bath-hero-1800.webp 1800w" imagesizes="100vw">
-</head><body>
-<div class="proto">Homepage prototype for review · not the live site · <a href="castle.html">See Castle Kitchens</a></div>
+</head><body data-page="home" data-live="/">
 <div id="hdr"></div>
 
 <main>
@@ -37,12 +36,12 @@
   <!-- Collections: the mockup's four tiles -->
   <section class="sec">
     <div class="wrap">
-      <div class="sh"><div><h2>Explore our collections</h2></div><a class="more" href="https://bathemp.ca/bathroom-products-categories/">View all collections <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
+      <div class="sh"><div><h2>Explore our collections</h2></div><a class="more" href="#" data-live="/bathroom-products-categories/">View all collections <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
       <div class="tiles">
-        <a class="tile" href="https://bathemp.ca/bathroom-products-categories/"><img src="img/bath-tub-900.webp" alt="" loading="lazy"><div class="t"><b>Bath collections</b><span>Explore bath <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
-        <a class="tile" href="https://castlekitchens.ca/"><img src="img/kit-reveal-900.webp" alt="" loading="lazy"><div class="t"><b>Custom kitchens</b><span>Explore kitchens <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
-        <a class="tile" href="https://castlekitchens.ca/appliances/"><img src="img/app-oak-900.webp" alt="" loading="lazy"><div class="t"><b>Premium appliances</b><span>Explore appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
-        <a class="tile" href="https://castlekitchens.ca/outdoor-kitchens-toronto/"><img src="img/out-kitchen-900.webp" alt="" loading="lazy"><div class="t"><b>Outdoor living</b><span>Explore outdoor <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
+        <a class="tile" href="#" data-live="/bathroom-products-categories/"><img src="img/bath-tub-900.webp" alt="" loading="lazy"><div class="t"><b>Bath collections</b><span>Explore bath <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
+        <a class="tile" href="#" data-live="ck:/"><img src="img/kit-reveal-900.webp" alt="" loading="lazy"><div class="t"><b>Custom kitchens</b><span>Explore kitchens <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
+        <a class="tile" href="#" data-live="ck:/appliances/"><img src="img/app-oak-900.webp" alt="" loading="lazy"><div class="t"><b>Premium appliances</b><span>Explore appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
+        <a class="tile" href="#" data-live="ck:/outdoor-kitchens-toronto/"><img src="img/out-kitchen-900.webp" alt="" loading="lazy"><div class="t"><b>Outdoor living</b><span>Explore outdoor <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></span></div></a>
       </div>
     </div>
   </section>
@@ -50,7 +49,7 @@
   <!-- Shop: priced products get Add to cart, others Inquire now -->
   <section class="sec stone" id="shop">
     <div class="wrap">
-      <div class="sh"><div><h2>Shop bestsellers</h2><p>Order online with free shipping on most items, or ask our specialists about finishes and availability.</p></div><a class="more" href="https://bathemp.ca/shop/">Shop all <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
+      <div class="sh"><div><h2>Shop bestsellers</h2><p>Order online with free shipping on most items, or ask our specialists about finishes and availability.</p></div><a class="more" href="#" data-live="/shop/">Shop all <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
       <div class="rail" data-products></div>
     </div>
   </section>
@@ -61,9 +60,9 @@
       <span class="eyebrow" style="color:#9a958f">Your one-stop shop</span>
       <div class="sh" style="margin-top:14px"><p class="lead" style="color:#fff">Bath, kitchen and appliances from one showroom, planned together by one team.</p></div>
       <div class="onestop">
-        <div><svg viewBox="0 0 40 40"><path fill="#fff" d="M20 3c6 9 12 15.5 12 22.5A12 12 0 0 1 8 25.5C8 18.5 14 12 20 3z"/></svg><h3>Bath Emporium</h3><p>Faucets, tubs, vanities, showers and smart toilets from Riobel, TOTO, Victoria + Albert, BainUltra and more.</p><a href="https://bathemp.ca/bathroom-products-categories/">Shop bath</a></div>
-        <div><svg viewBox="0 0 40 40"><path fill="#fff" d="M6 4h6v5h4V4h8v5h4V4h6v13h-3v19H24V27a4 4 0 0 0-8 0v9H9V17H6z"/></svg><h3>Castle Kitchens</h3><p>Custom cabinetry built in our own factory, from design to installation, for kitchens, closets and bars.</p><a href="https://castlekitchens.ca/">Plan a kitchen</a></div>
-        <div><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2.6"><rect x="5" y="4" width="30" height="32" rx="1.5"/><path d="M5 12h30"/><rect x="10" y="17" width="20" height="14"/></svg><h3>Castle Appliances</h3><p>Thermador, Gaggenau, Miele, Monogram and more, with display models in the showroom.</p><a href="https://castlekitchens.ca/appliances/">Shop appliances</a></div>
+        <div><svg viewBox="0 0 40 40"><path fill="#fff" d="M20 3c6 9 12 15.5 12 22.5A12 12 0 0 1 8 25.5C8 18.5 14 12 20 3z"/></svg><h3>Bath Emporium</h3><p>Faucets, tubs, vanities, showers and smart toilets from Riobel, TOTO, Victoria + Albert, BainUltra and more.</p><a href="#" data-live="/bathroom-products-categories/">Shop bath</a></div>
+        <div><svg viewBox="0 0 40 40"><path fill="#fff" d="M6 4h6v5h4V4h8v5h4V4h6v13h-3v19H24V27a4 4 0 0 0-8 0v9H9V17H6z"/></svg><h3>Castle Kitchens</h3><p>Custom cabinetry built in our own factory, from design to installation, for kitchens, closets and bars.</p><a href="#" data-live="ck:/">Plan a kitchen</a></div>
+        <div><svg viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="2.6"><rect x="5" y="4" width="30" height="32" rx="1.5"/><path d="M5 12h30"/><rect x="10" y="17" width="20" height="14"/></svg><h3>Castle Appliances</h3><p>Thermador, Gaggenau, Miele, Monogram and more, with display models in the showroom.</p><a href="#" data-live="ck:/appliances/">Shop appliances</a></div>
       </div>
     </div>
   </section>
@@ -71,7 +70,7 @@
   <!-- Showroom experience + video -->
   <section class="split" id="experience">
     <div class="media"><img src="img/bath-showroom-1800.webp" srcset="img/bath-showroom-900.webp 900w, img/bath-showroom-1800.webp 1800w" sizes="(max-width:820px) 100vw, 56vw" alt="Bathroom display at the Bath Emporium showroom" loading="lazy">
-      <a class="play" href="https://bathemp.ca/wp-content/uploads/2020/10/Bath-Emporium-Castle-Kitchens-Showroom-Tour.mp4" data-video="https://bathemp.ca/wp-content/uploads/2020/10/Bath-Emporium-Castle-Kitchens-Showroom-Tour.mp4" aria-label="Watch the showroom tour"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></a></div>
+      <a class="play" href="#" data-video="https://bathemp.ca/wp-content/uploads/2020/10/Bath-Emporium-Castle-Kitchens-Showroom-Tour.mp4" aria-label="Watch the showroom tour"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></a></div>
     <div class="body">
       <span class="eyebrow" style="color:#9a958f">The Experience Centre</span>
       <h2>See, touch &amp; experience design</h2>
@@ -83,11 +82,11 @@
   <!-- Projects -->
   <section class="sec">
     <div class="wrap">
-      <div class="sh"><div><h2>Featured projects</h2></div><a class="more" href="https://bathemp.ca/portfolio/">View all projects <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
+      <div class="sh"><div><h2>Featured projects</h2></div><a class="more" href="#" data-live="/portfolio/">View all projects <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a></div>
       <div class="proj">
-        <a href="https://bathemp.ca/bathrooms/"><img src="img/bath-stone-900.webp" alt="" loading="lazy"><span><b>Stone and oak powder room</b><small>Bathroom · Toronto</small></span></a>
-        <a href="https://bathemp.ca/kitchens-portfolio/"><img src="img/kit-hood-900.webp" alt="" loading="lazy"><span><b>Peter Street kitchen</b><small>Kitchen · Markham</small></span></a>
-        <a href="https://bathemp.ca/bathrooms/"><img src="img/bath-tub-900.webp" alt="" loading="lazy"><span><b>Marble spa ensuite</b><small>Bathroom · York Region</small></span></a>
+        <a href="#" data-live="/bathrooms/"><img src="img/bath-stone-900.webp" alt="" loading="lazy"><span><b>Stone and oak powder room</b><small>Bathroom · Toronto</small></span></a>
+        <a href="#" data-live="/kitchens-portfolio/"><img src="img/kit-hood-900.webp" alt="" loading="lazy"><span><b>Peter Street kitchen</b><small>Kitchen · Markham</small></span></a>
+        <a href="#" data-live="/bathrooms/"><img src="img/bath-tub-900.webp" alt="" loading="lazy"><span><b>Marble spa ensuite</b><small>Bathroom · York Region</small></span></a>
       </div>
     </div>
   </section>
@@ -97,7 +96,7 @@
     <div class="wrap">
       <p class="eyebrow" style="text-align:center;color:#6e6a66;margin:0 0 18px">Featured brands</p>
       <div class="logos">
-        <a href="https://bathemp.ca/brands/riobel/" class="serif">Riobel</a><a href="#">TOTO</a><a href="#" class="thin">victoria + albert</a><a href="#">BainUltra</a><a href="#" class="thin">BRIZO</a><a href="#" class="serif">ROHL</a><a href="#">BLANCO</a>
+        <a href="#" data-live="/brands/riobel/" class="serif">Riobel</a><a href="#" data-live="/brands/toto/">TOTO</a><a href="#" data-live="/brands/victoria-and-albert/" class="thin">victoria + albert</a><a href="#" data-live="/brands/bainultra/">BainUltra</a><a href="#" data-live="/brands/brizo/" class="thin">BRIZO</a><a href="#" data-live="/brands/rohl/" class="serif">ROHL</a><a href="#" data-live="/brands/blanco/">BLANCO</a>
       </div>
     </div>
   </section>
@@ -117,57 +116,12 @@
       <h2>Experience it in person</h2>
       <p>Bring your plans, or just your ideas. Our designers will walk you through bath, kitchen and appliance options in one visit.</p>
       <dl><dt>Address</dt><dd>5 Shields Court, Unit 100, Markham, ON</dd><dt>Hours</dt><dd>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</dd><dt>Call</dt><dd><a href="tel:+19059440060">(905) 944-0060</a></dd></dl>
-      <a class="btn light" href="https://bathemp.ca/contact/">Book a showroom visit <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a>
+      <a class="btn light" href="#" data-live="/contact/">Book a showroom visit <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a>
     </div>
     <div class="media"><img src="img/store-bath-1800.webp" alt="Bath Emporium, Castle Kitchens and Castle Appliances showroom at 5 Shields Court, Markham" loading="lazy"></div>
   </section>
 </main>
 <div id="ftr"></div>
 
-<script>
-window.SITE = {
-  id: 'bathemp', active: ['bath'], usd: true, legal: 'Bath Emporium',
-  util: 'Free shipping on most items · Canada &amp; USA',
-  menu: [
-    { label: 'Bathroom', mega: [
-      { h: 'Bathroom products', links: [['Bathtubs','https://bathemp.ca/product-category/bathtubs/'],['Bathroom vanities','https://bathemp.ca/product-category/bathroom-vanities/'],['Bathroom faucets','https://bathemp.ca/product-category/bathroom-faucet/'],['Toilets','https://bathemp.ca/product-category/bathroom-toilets/'],['Smart toilets','https://bathemp.ca/product-category/bathroom-toilets/intelligent-smart-toilets/'],['Bathroom sinks','https://bathemp.ca/product-category/bathroom-sinks/'],['Steam units','https://bathemp.ca/product-category/bathroom/bathroom-bathroom-steam-units/']] },
-      { h: 'Shower', links: [['Shower kits','https://bathemp.ca/product-category/bathroom-faucet/bath-shower-kit-geo/'],['Shower columns','https://bathemp.ca/product-category/bathroom/bathroom-bathroom-shower-columns/'],['Shower doors','https://bathemp.ca/product-category/bathroom/bathroom-shower-doors/'],['Shower bases','https://bathemp.ca/product-category/bathroom-shower-bases/'],['Shower drains','https://bathemp.ca/product-category/bathroom/bathroom-bathroom-shower-drains/']] },
-      { h: 'Wall mounted', links: [['Wall-mounted faucets','https://bathemp.ca/product-category/bathroom-faucet/wall-mounted-bathroom-faucets/'],['Wall-mounted tub fillers','https://bathemp.ca/product-category/bathroom-faucet/wall-mounted-tub-fillers/']] },
-      { h: 'Accessories', links: [['LED mirrors','https://bathemp.ca/product-category/bathroom/bath-accessories/bathroom-mirrors/'],['Medicine cabinets','https://bathemp.ca/product-category/bathroom/bath-accessories/bathroom-medicine-cabinets/'],['Towel &amp; floor warmers','https://bathemp.ca/product-category/bathroom/bathroom-towelfloor-warmers/'],['Bath accessories','https://bathemp.ca/product-category/bathroom/bath-accessories/']] },
-    ], feat: { t: 'Smart toilets', u: 'https://bathemp.ca/product-category/bathroom-toilets/intelligent-smart-toilets/', img: 'img/bath-neorest-900.webp' } },
-    { label: 'Kitchen', mega: [
-      { h: 'Kitchen', links: [['Kitchen sinks','https://bathemp.ca/product-category/kitchen/kitchen-sink-geo/'],['Workstation sinks','https://bathemp.ca/product-category/kitchen/kitchen-sink-geo/workstation-kitchen-sinks/'],['Kitchen faucets','https://bathemp.ca/product-category/kitchen-faucets-geo/'],['Pot fillers','https://bathemp.ca/product-category/kitchen-faucets-geo/pot-fillers/'],['Soap dispensers','https://bathemp.ca/product-category/kitchen/kitchen-soap-dispensers/'],['Kitchen accessories','https://bathemp.ca/product-category/kitchen/kitchen-kitchen-accessories/']] },
-      { h: 'Castle Kitchens', links: [['Custom kitchen cabinets','https://bathemp.ca/kitchen-cabinets/'],['Kitchen appliances','https://castlekitchens.ca/appliances/']] },
-      { h: 'Outdoor', links: [['Outdoor kitchens','https://castlekitchens.ca/outdoor-kitchens-toronto/'],['Outdoor cabinets','https://castlekitchens.ca/product-category/outdoor-kitchens/outdoor-kitchen-cabinets/'],['Outdoor appliances','https://castlekitchens.ca/product-category/outdoor-kitchens/']] },
-    ], feat: { t: 'Custom kitchens', u: 'https://castlekitchens.ca/', img: 'img/kit-reveal-900.webp' } },
-    { label: 'Services', mega: [
-      { h: 'Design', links: [['Bathroom design','https://bathemp.ca/bathroom-design-services/'],['Kitchen design','https://bathemp.ca/kitchen-design-services/'],['Installation services','https://bathemp.ca/installation-services/'],['Get a quote','https://bathemp.ca/getaquote/']] },
-      { h: 'Portfolio', links: [['Bathroom projects','https://bathemp.ca/bathrooms/'],['Kitchen projects','https://bathemp.ca/kitchens-portfolio/'],['Closets','https://bathemp.ca/closets-portfolio/'],['Project videos','https://bathemp.ca/recent-project-videos/']] },
-    ], feat: { t: 'Our projects', u: 'https://bathemp.ca/portfolio/', img: 'img/bath-stone-900.webp' } },
-    { label: 'Brands', u: 'https://bathemp.ca/our-brands/' },
-    { label: 'Experience Centre', u: '#experience' },
-    { label: 'Blog', u: 'https://bathemp.ca/blog/' },
-    { label: 'Contact', u: 'https://bathemp.ca/contact/' },
-    { label: 'Sale', u: 'https://bathemp.ca/product-category/sale-items/', sale: true },
-    { label: 'Display clearance', u: 'https://bathemp.ca/product-category/display-clearance/', sale: true },
-  ],
-  // Prices = the matching Bliss price (they will follow Bliss automatically). The Fleurco display model has no price yet: Inquire now.
-  products: [
-    { id: '3700', b: 'Riobel', n: 'Riobel Zendo ZOTQ54C Pressure Balance Shower Kit', p: 640.50, img: 'be-3700.webp', u: 'https://bathemp.ca/product/riobel-zotq54c-shower-kit/' },
-    { id: '146006', b: 'TOTO', n: 'TOTO MS644114CEFG Carolina II One-Piece Toilet, Elongated', p: 1299, img: 'be-146006.webp', u: 'https://bathemp.ca/product/toto-carolina-2-one-piece-high-efficiency-toilet-with-sanagloss-1-28gpf-ms644114cefg/' },
-    { id: '170418', b: 'ROHL', n: 'ROHL Amahle Widespread Bathroom Faucet With C-Spout', p: 880.60, img: 'be-170418.webp', u: 'https://bathemp.ca/product/rohl-am08d3iwapc-amahle-faucet/' },
-    { id: '170375', b: 'Blanco', n: 'Blanco 402043 Panera Kitchen Faucet With Pullout Spray', p: 823.20, img: 'be-170375.webp', u: 'https://bathemp.ca/product/blanco-402043-panera-faucet/' },
-    { id: '3669', b: 'Riobel', n: 'Riobel ZSOP01 Single Hole Lavatory Open Spout Faucet', p: 421, img: 'be-3669.webp', u: 'https://bathemp.ca/product/riobel-zsop01c-single-hole-lavatory-open-spout-faucet/' },
-    { id: '172756', b: 'Grohe', n: 'Grohe Rainshower GrohTherm Thermostatic Shower Kit', p: 1722, img: 'be-172756.webp', u: 'https://bathemp.ca/product/grohe-1030690000-rainshower-shower-kit/' },
-    { id: '172134', b: 'Duravit', n: 'Duravit D-Neo Wall Mounted Rimless Toilet', p: 282, img: 'be-172134.webp', u: 'https://bathemp.ca/product/duravit-2577090092-d-neo-wall-mounted-toilet/' },
-    { id: '142503', b: 'Fleurco', n: 'Fleurco Aria Voce Grande Freestanding Tub — display model', badge: 'Display clearance', img: 'be-142503.webp', u: 'https://bathemp.ca/product/fleurco-aria-voce/' },
-  ],
-  footer: [
-    { h: 'Shop', links: [['Bathroom','https://bathemp.ca/bathroom-products-categories/'],['Kitchen','https://bathemp.ca/kitchen-products-categories/'],['Brands','https://bathemp.ca/our-brands/'],['Sale','https://bathemp.ca/product-category/sale-items/'],['Display clearance','https://bathemp.ca/product-category/display-clearance/']] },
-    { h: 'Services', links: [['Design services','https://bathemp.ca/design-services/'],['Installation','https://bathemp.ca/installation-services/'],['Get a quote','https://bathemp.ca/getaquote/'],['Portfolio','https://bathemp.ca/portfolio/']] },
-    { h: 'Company', links: [['About us','https://bathemp.ca/aboutus/'],['Experience Centre','#experience'],['Blog','https://bathemp.ca/blog/'],['Contact','https://bathemp.ca/contact/']] },
-  ],
-};
-</script>
-<script src="group.js"></script>
+<script src="assets/site-bathemp.js"></script><script src="assets/content-bathemp.js"></script><script src="assets/group.js"></script><script src="assets/pages.js"></script>
 </body></html>
