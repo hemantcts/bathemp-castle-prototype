@@ -251,7 +251,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 }
 @media (max-width:820px){
   .brands-row{height:64px}
-  .brand:not(.on),.brands .sep{display:none}
+  .brand:not(.on),.brands .sep,.brand.on~.brand.on{display:none}
   .split,.visit{grid-template-columns:1fr}
   .split .media,.visit .media{min-height:300px}
   .onestop{grid-template-columns:1fr}
