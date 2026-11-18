@@ -26,6 +26,7 @@ PAGES = {
         ('be-quote.html', 'quote', '/getaquote/', 'Get a quote', '/getaquote/', '1'),
         ('be-about.html', 'about', '/aboutus/', 'About', '/aboutus/', '1'),
         ('be-contact.html', 'contact', '/contact/', 'Contact', '/contact/', '1'),
+        ('be-showroom.html', 'showroom', '/showroom/', 'Showroom', '/showroom/ (new page: map, directions, appointments)', 'new'),
         ('be-experience.html', 'experience', '/experience-centre/', 'Experience Centre', '/experience-centre/ (new page)', 'new'),
         ('be-cart.html', 'cart', '/cart/', 'Cart', '/cart/ (exists, unused today)', 'new'),
         ('be-checkout.html', 'checkout', '/checkout/', 'Checkout', '/checkout/ (exists, unused today)', 'new'),
@@ -53,6 +54,7 @@ PAGES = {
         ('ck-blog.html', 'blog', '/blog/', 'Blog', '/blog/', '1'),
         ('ck-post.html', 'post', '', 'Article', '/{article}/', '31'),
         ('ck-contact.html', 'contact', '/contact/', 'Contact', '/contact/', '1'),
+        ('ck-showroom.html', 'showroom', '/kitchen-showroom-toronto/', 'Showroom', '/kitchen-showroom-toronto/ (existing page kept)', '1'),
         ('ck-experience.html', 'experience', '/experience-centre/', 'Experience Centre', '/experience-centre/ (new page)', 'new'),
         ('ck-search.html', 'search', '/?s=', 'Search results', '/?s=…', '—'),
         ('ck-cart.html', 'cart', '/cart/', 'Cart', '/cart/ (new)', 'new'),
@@ -124,7 +126,7 @@ rows = lambda pre: ''.join(f'<tr><td><a href="{f}">{html.escape(n)}</a></td><td>
 h1{{font:500 clamp(22px,3vw,32px) Cinzel,serif;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px}}h2{{font:600 13px Montserrat,sans-serif;letter-spacing:.18em;text-transform:uppercase;margin:44px 0 12px;color:#fff}}
 p{{color:#aaa;max-width:80ch}}.home{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0}}.home a{{border:1px solid #333;padding:22px;display:flex;gap:14px;align-items:center;font:600 13px Montserrat;letter-spacing:.14em;text-transform:uppercase}}.home a:hover{{background:#fff;color:#000}}.home img{{width:40px;border-radius:7px}}
 a{{color:inherit}}table{{width:100%;border-collapse:collapse;font-size:14px}}th,td{{text-align:left;border-bottom:1px solid #262626;padding:10px 8px;vertical-align:top}}th{{font:600 11px Montserrat;letter-spacing:.14em;text-transform:uppercase;color:#888}}
-td a{{color:#fff;font-weight:600}}code{{color:#d9c39a;font-size:13px;word-break:break-word}}.r{{text-align:right;white-space:nowrap}}.k{{background:#151515;border:1px solid #262626;padding:18px 22px;margin-top:22px}}.k li{{margin:4px 0;color:#bbb}}
+td a{{color:#fff;font-weight:600}}code{{color:#c9d3df;font-size:13px;word-break:break-word}}.r{{text-align:right;white-space:nowrap}}.k{{background:#151515;border:1px solid #262626;padding:18px 22px;margin-top:22px}}.k li{{margin:4px 0;color:#bbb}}
 @media(max-width:640px){{.home{{grid-template-columns:1fr}}td:nth-child(2){{display:none}}}}</style></head>
 <body><main><h1>Prototype templates</h1><p>Bath Emporium and Castle Kitchens / Castle Appliances · new design and online store, for client approval. Not the live sites: every link stays inside the prototype, and every page is marked "noindex".</p>
 <div class="home"><a href="bathemp.html"><img src="img/be-favicon-180.png" alt="">Bath Emporium homepage</a><a href="castle.html"><img src="img/ck-favicon-180.png" alt="">Castle Kitchens homepage</a></div>

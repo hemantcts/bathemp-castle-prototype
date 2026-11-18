@@ -24,6 +24,7 @@
       [/^\/(design-services|bathroom-design-services|kitchen-design-services|installation-services|kitchen-cabinets)\/$/, 'be-service.html', 'Service page'],
       [/^\/(portfolio|bathrooms|kitchens-portfolio|closets-portfolio|office-library-portfolio|bar-portfolio|recent-project-videos|laundry)\/$/, 'be-projects.html', 'Portfolio'],
       [/^\/experience-centre\/$/, 'be-experience.html', 'Experience Centre (new)'],
+      [/^\/showroom\/$/, 'be-showroom.html', 'Showroom (new)'],
       [/^\/cart\/$/, 'be-cart.html', 'Cart (new)'],
       [/^\/checkout\/$/, 'be-checkout.html', 'Checkout (new)'],
       [/^\/checkout\/order-received\//, 'be-order.html', 'Order confirmed (new)'],
@@ -53,6 +54,7 @@
       [/^\/blog\/$/, 'ck-blog.html', 'Blog'],
       [/^\/contact\/$/, 'ck-contact.html', 'Contact'],
       [/^\/experience-centre\/$/, 'ck-experience.html', 'Experience Centre (new)'],
+      [/^\/(kitchen-showroom-toronto|showroom)\/$/, 'ck-showroom.html', 'Showroom'],
       [/^\/cart\/$/, 'ck-cart.html', 'Cart (new)'],
       [/^\/checkout\/$/, 'ck-checkout.html', 'Checkout (new)'],
       [/^\/checkout\/order-received\//, 'ck-order.html', 'Order confirmed (new)'],
@@ -140,10 +142,9 @@
   const navHtml = S.menu.map((m, i) => m.mega
     ? `<li><button aria-expanded="false" aria-controls="mega${i}">${m.label}${ico.down}</button><div class="mega" id="mega${i}"><div class="wrap mgrid" style="--cols:${m.mega.length}"><div class="mcols">${m.mega.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}</div>${m.feat ? `<a class="feat" href="${url(m.feat.u)}"><img src="${m.feat.img}" alt="" loading="lazy"><span><small>Explore</small>${m.feat.t} →</span></a>` : ''}</div>
       <div class="mbar"><div class="wrap">${m.feat ? `<a href="${url(m.feat.u)}">View all ${esc(m.label.toLowerCase())} →</a>` : ''}<span>Need help choosing? <a href="${url('/experience-centre/')}">Book a showroom visit</a> · (905) 944-0060</span></div></div></div></li>`
-    : `<li><a href="${url(m.u)}"${m.sale ? ' class="sale"' : ''}>${m.label}</a></li>`).join('');
+    : `<li><a href="${url(m.u)}"${m.sale ? ' class="sale"' : ''}>${m.label}${m.badge ? `<em class="nbadge" aria-label="up to ${esc(m.badge)}"><small>up to</small> ${esc(m.badge)}</em>` : ''}</a></li>`).join('');
   $('#hdr').outerHTML = `
-  <div class="proto"><b>Prototype</b> · ${esc(tpl)} template · live address kept: <code>${esc(live.split('?')[0] === '/' ? '/' : live)}</code> · <a href="index.html">All templates</a> · <a href="${S.other}">See ${S.id === 'bathemp' ? 'Castle Kitchens' : 'Bath Emporium'}</a></div>
-  <div class="util"><div class="wrap"><span class="l">${S.util}</span><div class="r"><a href="#" onclick="return false">(905) 944-0060</a><a href="${url('/experience-centre/')}">Visit the showroom</a><a href="${url('/my-account/')}">Trade program</a>${S.usd ? `<div class="cur" role="group" aria-label="Currency"><button data-cur="CAD">CAD</button><button data-cur="USD">USD</button></div>` : ''}</div></div></div>
+  <div class="util"><div class="wrap"><span class="l">${S.util}</span><div class="r"><a href="#" onclick="return false">(905) 944-0060</a><a href="${url(S.showroomLive)}">Visit the showroom</a><a href="${url('/my-account/')}">Trade program</a>${S.usd ? `<div class="cur" role="group" aria-label="Currency"><button data-cur="CAD">CAD</button><button data-cur="USD">USD</button></div>` : ''}</div></div></div>
   <header class="hdr" id="top">
     <div class="wrap brands-row">
       <button class="tool burger" aria-label="Menu" data-open-drawer>${ico.menu}</button>
@@ -161,7 +162,7 @@
   <div class="drawer" id="drawer"><div class="bg" data-close></div><div class="panel" role="dialog" aria-label="Menu">
     <button class="tool" data-close aria-label="Close" style="margin-left:auto">${ico.x.replace('<svg', '<svg style="stroke:#000"')}</button>
     <div class="brandlinks">${brands.map(b => `<a href="${b.href}">${b.name} ${b.sub}</a>`).join('')}</div>
-    ${S.menu.map(m => m.mega ? `<details><summary>${m.label}</summary>${m.mega.map(c => `<ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul>`).join('')}</details>` : `<a class="lnk" href="${url(m.u)}">${m.label}</a>`).join('')}
+    ${S.menu.map(m => m.mega ? `<details><summary>${m.label}</summary>${m.mega.map(c => `<ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul>`).join('')}</details>` : `<a class="lnk" href="${url(m.u)}">${m.label}${m.badge ? `<em class="nbadge"><small>up to</small> ${esc(m.badge)}</em>` : ''}</a>`).join('')}
   </div></div>`;
 
   $$('.nav>.wrap>ul>li').forEach(li => {
@@ -179,7 +180,7 @@
     <div class="top">
       <div class="news"><h4>Stay inspired</h4><p>New collections, showroom events and offers from Bath Emporium, Castle Kitchens and Castle Appliances.</p><form onsubmit="event.preventDefault();G.toast('Thanks for signing up (prototype: nothing was sent)')"><label class="sr" for="nl">Email</label><input id="nl" type="email" placeholder="Your email address"><button>Sign up</button></form></div>
       ${S.footer.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}
-      <div><h4>Showroom</h4><ul><li>5 Shields Court, Unit 100<br>Markham, ON L3R 0G3</li><li>(905) 944-0060</li><li>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</li><li><a href="${url('/experience-centre/')}">Plan your visit</a></li></ul></div>
+      <div><h4>Showroom</h4><ul><li>5 Shields Court, Unit 100<br>Markham, ON L3R 0G3</li><li>(905) 944-0060</li><li>Mon–Fri 9–7<br>Sat 9–5<br>Sun 12–5</li><li><a href="${url(S.showroomLive)}">Directions &amp; hours</a></li></ul></div>
     </div>
     <div class="bot"><span>© 2026 ${S.legal}</span><span><a href="${url('/privacy-policy/')}">Privacy</a> · <a href="${url(S.shipLive)}">Shipping</a> · <a href="${url('/returns/')}">Returns</a> · <a href="${url('/payment-methods/')}">Payment</a></span></div>
   </div></footer>`;
@@ -188,8 +189,8 @@
   document.body.insertAdjacentHTML('beforeend', `
   <div class="modal" id="inq" role="dialog" aria-modal="true" aria-labelledby="inqH"><div class="box">
     <button class="x" data-close aria-label="Close">${ico.x}</button>
-    <h3 id="inqH">Inquire now</h3><p style="margin:0;color:#6e6a66">A specialist from our Markham showroom will get back to you by email or phone.</p>
-    <div class="prod"><img alt=""><div><b data-n></b><div style="font-size:13px;color:#6e6a66" data-b></div></div></div>
+    <h3 id="inqH">Inquire now</h3><p style="margin:0;color:#6b6b6b">A specialist from our Markham showroom will get back to you by email or phone.</p>
+    <div class="prod"><img alt=""><div><b data-n></b><div style="font-size:13px;color:#6b6b6b" data-b></div></div></div>
     <form><div class="row"><div><label for="f1">Name</label><input id="f1" required autocomplete="name"></div><div><label for="f2">Phone</label><input id="f2" type="tel" autocomplete="tel"></div></div>
     <label for="f3">Email</label><input id="f3" type="email" required autocomplete="email">
     <label for="f4">Message</label><textarea id="f4" rows="3">I'd like pricing and availability for this product.</textarea>
@@ -290,7 +291,7 @@
     const here = location.pathname.split('/').pop() || S.home;
     const opt = (pre, label) => `<optgroup label="${label}">${T[pre].map(([f, n, l]) => `<option value="${f}${l && l !== '/' ? `?live=${encodeURIComponent(l)}` : ''}"${f === here ? ' selected' : ''}>${esc(n)}</option>`).join('')}</optgroup>`;
     document.body.insertAdjacentHTML('beforeend', `<div class="tswitch" id="tswitch"><button class="tsbtn" aria-expanded="false" aria-controls="tspanel"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Prototype pages</span></button>
-      <div class="tspanel" id="tspanel" hidden><label for="tsel">Jump to a template</label><select id="tsel">${S.pre === 'be' ? opt('be', 'Bath Emporium') + opt('ck', 'Castle Kitchens') : opt('ck', 'Castle Kitchens') + opt('be', 'Bath Emporium')}</select>
+      <div class="tspanel" id="tspanel" hidden><p class="tsnow"><b>${esc(tpl)}</b> template<br>Live address kept: <code>${esc(live)}</code></p><label for="tsel">Jump to a template</label><select id="tsel">${S.pre === 'be' ? opt('be', 'Bath Emporium') + opt('ck', 'Castle Kitchens') : opt('ck', 'Castle Kitchens') + opt('be', 'Bath Emporium')}</select>
         <div class="tsrow"><button data-ts="-1">← Previous</button><a href="index.html">All templates</a><button data-ts="1">Next →</button></div></div></div>`);
     const sel = $('#tsel'), btn = $('.tsbtn'), panel = $('#tspanel');
     btn.addEventListener('click', () => { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); if (!panel.hidden) sel.focus(); });

@@ -1,8 +1,8 @@
 /* Bath Emporium · Castle Kitchens · Castle Appliances — shared homepage prototype styles.
    Black / white / warm grey, after the client's mockup and kohler.ca: oversized imagery, wide uppercase headings. */
 :root{
-  --ink:#0b0b0b; --ink-2:#1b1b1b; --grey:#6e6a66; --line:#e3e0dc; --stone:#f4f2ef; --white:#fff;
-  --accent:#b08d57; /* warm brass, used sparingly */
+  --ink:#0b0b0b; --ink-2:#1b1b1b; --grey:#6b6b6b; --line:#e1e1e1; --stone:#f5f5f5; --white:#fff;
+  --accent:#1c2b3a; /* deep navy (Kohler-style CTA), used sparingly */
   --head:"Montserrat",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif; --mark:"Cinzel",Georgia,serif;
   --wrap:1360px; --gut:clamp(16px,4vw,48px);
 }
@@ -21,7 +21,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .proto a{text-decoration:underline}
 
 /* ---------- utility bar ---------- */
-.util{background:var(--ink-2);color:#cfcac4;font-size:12px;letter-spacing:.04em}
+.util{background:var(--ink-2);color:#cccccc;font-size:12px;letter-spacing:.04em}
 .util .wrap{display:flex;justify-content:space-between;gap:16px;height:34px;align-items:center}
 .util a:hover{color:#fff}
 .util .r{display:flex;gap:18px;align-items:center}
@@ -51,9 +51,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 /* main nav + mega menu */
 .nav{border-top:1px solid #222}
 .nav>.wrap>ul{display:flex;justify-content:space-between;list-style:none;margin:0;padding:0}
-.nav>.wrap>ul>li>a,.nav>.wrap>ul>li>button{display:flex;align-items:center;gap:6px;height:48px;font:600 12px var(--head);letter-spacing:.14em;text-transform:uppercase;color:#e9e6e2;border-bottom:2px solid transparent}
+.nav>.wrap>ul>li>a,.nav>.wrap>ul>li>button{display:flex;align-items:center;gap:6px;height:48px;font:600 12px var(--head);letter-spacing:.14em;text-transform:uppercase;color:#e6e6e6;border-bottom:2px solid transparent}
 .nav>.wrap>ul>li>a:hover,.nav li.open>button,.nav>.wrap>ul>li>button:hover{color:#fff;border-color:#fff}
-.nav .sale{color:#e8c48a!important}
+.nav .sale{color:#ff6b6b!important}
 .nav button svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .2s}
 .nav li.open>button svg{transform:rotate(180deg)}
 .mega{position:absolute;left:0;right:0;top:100%;background:#fff;color:var(--ink);border-top:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,.18);display:none}
@@ -121,7 +121,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .onestop>div+div{padding-left:32px;border-left:1px solid #333}
 .onestop svg{width:38px;height:38px}
 .onestop h3{font:500 20px var(--mark);letter-spacing:.12em;text-transform:uppercase;margin:18px 0 8px}
-.onestop p{color:#bdb8b2;margin:0 0 18px}
+.onestop p{color:#bdbdbd;margin:0 0 18px}
 .onestop a{font:600 11px var(--head);letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid #fff;padding-bottom:3px}
 .lead{font:400 clamp(20px,2.2vw,28px)/1.45 var(--body);max-width:30ch;margin:0}
 
@@ -131,7 +131,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .split .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .split .body{display:flex;flex-direction:column;justify-content:center;padding:clamp(36px,5vw,80px)}
 .split h2{font:500 clamp(30px,3.6vw,52px)/1.05 var(--head);text-transform:uppercase;margin:14px 0 18px}
-.split p{color:#cfcac4;max-width:42ch;margin:0 0 28px}
+.split p{color:#cccccc;max-width:42ch;margin:0 0 28px}
 .split .acts{display:flex;flex-wrap:wrap;gap:12px}
 .play{position:absolute;inset:0;margin:auto;width:92px;height:92px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;transition:transform .2s}
 .play:hover{transform:scale(1.06)}
@@ -178,9 +178,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .visit{display:grid;grid-template-columns:1fr 1.2fr;background:var(--ink);color:#fff}
 .visit .body{padding:clamp(40px,6vw,96px) clamp(24px,5vw,80px)}
 .visit h2{font:500 clamp(30px,3.6vw,50px)/1.05 var(--head);text-transform:uppercase;margin:14px 0 18px}
-.visit p{color:#cfcac4;margin:0 0 26px;max-width:44ch}
+.visit p{color:#cccccc;margin:0 0 26px;max-width:44ch}
 .visit dl{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;margin:0 0 30px;font-size:15px}
-.visit dt{color:#9a958f;font:600 11px/2 var(--head);letter-spacing:.14em;text-transform:uppercase}
+.visit dt{color:#999999;font:600 11px/2 var(--head);letter-spacing:.14em;text-transform:uppercase}
 .visit dd{margin:0}
 .visit .media{position:relative;min-height:420px}
 .visit .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -193,7 +193,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .trust span{font-size:14px;color:var(--grey)}
 
 /* footer */
-.ftr{background:#000;color:#bdb8b2;font-size:14px}
+.ftr{background:#000;color:#bdbdbd;font-size:14px}
 .ftr .top{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px;padding:70px 0 50px}
 .ftr h4{font:600 11px var(--head);letter-spacing:.16em;text-transform:uppercase;color:#fff;margin:0 0 16px}
 .ftr ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
@@ -214,7 +214,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .modal .prod{display:flex;gap:14px;align-items:center;background:var(--stone);padding:12px;margin:16px 0 20px}
 .modal .prod img{width:64px;height:64px;object-fit:contain;background:#fff}
 .modal label{display:block;font:600 11px var(--head);letter-spacing:.12em;text-transform:uppercase;margin:12px 0 6px}
-.modal input,.modal textarea{width:100%;border:1px solid #cfcac4;padding:12px;font:inherit}
+.modal input,.modal textarea{width:100%;border:1px solid #cccccc;padding:12px;font:inherit}
 .modal .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .modal .btn{width:100%;justify-content:center;margin-top:18px}
 .modal.video .box{width:min(1100px,100%);padding:0;background:#000}

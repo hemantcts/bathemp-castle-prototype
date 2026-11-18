@@ -24,7 +24,7 @@ window.SITE = {
     { label: 'Blog', u: '/blog/' },
     { label: 'Contact', u: '/contact/' },
     { label: 'Sale', u: '/product-category/sale-items/', sale: true },
-    { label: 'Display clearance', u: '/product-category/display-clearance/', sale: true },
+    { label: 'Display clearance', u: '/product-category/display-clearance/', sale: true, badge: '74% off' }, // live menu: "Display Clearance (Up To 74% OFF)"
   ],
   // Homepage cards. Prices = the matching Bliss price (they follow Bliss automatically). No price = Inquire now.
   products: [
@@ -44,6 +44,7 @@ window.SITE = {
     { h: 'Services', links: [['Design services','/design-services/'],['Installation','/installation-services/'],['Get a quote','/getaquote/'],['Portfolio','/portfolio/']] },
     { h: 'Help', links: [['Shipping','/shipping/'],['Returns','/returns/'],['My account','/my-account/'],['About us','/aboutus/'],['Contact','/contact/']] },
   ],
+  showroomLive: '/showroom/', // new page
   shipLive: '/shipping/', // shipping policy address (existing page on bathemp.ca)
   shipping: 'Free shipping on items under 70 lb across Canada and the USA. Heavier items ship by freight, cost confirmed before we process the order. Free pickup from our Markham showroom.',
 };

@@ -327,7 +327,7 @@
   R.contact = () => {
     main().innerHTML = pagehead('Contact us', 'Call, email or visit our Markham showroom. A specialist will reply within business hours.', [['Contact']]) + `<section class="sec tight"><div class="wrap two">
       <div class="panel">${form(`<div class="row2">${field('cn', 'Name', 'text', 'required')}${field('cp', 'Phone', 'tel')}</div>${field('ce', 'Email', 'email', 'required')}${field('cs', 'Topic', 'select', '<option>Product question</option><option>Order status</option><option>Design consultation</option><option>Trade account</option><option>Returns</option>')}${field('cm', 'Message', 'textarea')}`, 'Send message')}</div>
-      <div><div class="facts col"><div><b>Showroom</b>5 Shields Court, Unit 100, Markham, ON L3R 0G3</div><div><b>Call</b>(905) 944-0060</div><div><b>Hours</b>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</div></div><img class="rounded" src="img/store-${be ? 'bath' : 'castle'}-900.webp" alt="The showroom at 5 Shields Court, Markham" loading="lazy"></div></div></section>`;
+      <div><div class="facts col"><div><b>Showroom</b>5 Shields Court, Unit 100, Markham, ON L3R 0G3</div><div><b>Call</b>(905) 944-0060</div><div><b>Hours</b><span class="nw">Mon–Fri 9–7</span> · <span class="nw">Sat 9–5</span> · <span class="nw">Sun 12–5</span></div></div><img class="rounded" src="img/store-${be ? 'bath' : 'castle'}-900.webp" alt="The showroom at 5 Shields Court, Markham" loading="lazy"></div></div></section>`;
   };
 
   R.quote = () => {
@@ -338,7 +338,7 @@
     const vid = be ? 'video/bath-tour.mp4' : 'video/castle-tour.mp4';
     main().innerHTML = banner(be ? 'img/bath-showroom-1800.webp' : 'img/kit-display-1800.webp', 'The Experience Centre', 'See, touch and experience design: working bathrooms, full kitchens and premium appliances in one Markham showroom.', 'Bath Emporium · Castle Kitchens · Castle Appliances', `<a class="btn light" href="#book">Book your visit ${arrow}</a> <button class="btn light" data-video="${vid}">Watch the tour</button>`) +
       `<section class="sec"><div class="wrap"><div class="tiles">${[['Bath Emporium', 'img/bath-tub-900.webp', 'Freestanding tubs, smart toilets and showers you can try.'], ['Castle Kitchens', 'img/kit-reveal-900.webp', 'Full kitchen displays, door styles and countertops.'], ['Castle Appliances', 'img/app-oak-900.webp', 'Working ranges, ovens and refrigeration.'], ['Outdoor living', 'img/out-kitchen-900.webp', 'Outdoor kitchens, grills and pizza ovens.']].map(([t, im, p]) => `<div class="tile"><img src="${im}" alt="" loading="lazy"><div class="t"><b>${t}</b><p style="margin:6px 0 0;font-size:14px">${p}</p></div></div>`).join('')}</div></div></section>
-      <section class="sec stone" id="book"><div class="wrap two"><div><h2 class="h2">Plan your visit</h2><p>Book a time and a designer will be ready for you, with samples for your project. Walk-ins are welcome too.</p><div class="facts col"><div><b>Address</b>5 Shields Court, Unit 100, Markham, ON</div><div><b>Hours</b>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</div></div></div>
+      <section class="sec stone" id="book"><div class="wrap two"><div><h2 class="h2">Plan your visit</h2><p>Book a time and a designer will be ready for you, with samples for your project. Walk-ins are welcome too.</p><div class="facts col"><div><b>Address</b>5 Shields Court, Unit 100, Markham, ON</div><div><b>Hours</b><span class="nw">Mon–Fri 9–7</span> · <span class="nw">Sat 9–5</span> · <span class="nw">Sun 12–5</span></div></div></div>
       <div class="panel">${form(`<div class="row2">${field('vn', 'Name', 'text', 'required')}${field('vp', 'Phone', 'tel')}</div>${field('ve', 'Email', 'email', 'required')}<div class="row2">${field('vd', 'Date', 'date', 'required')}${field('vt', 'Time', 'select', '<option>Morning</option><option>Afternoon</option><option>Evening (weekdays)</option>')}</div>${field('vi', 'Interested in', 'select', '<option>Bathroom</option><option>Kitchen &amp; cabinetry</option><option>Appliances</option><option>Outdoor kitchen</option><option>Everything</option>')}`, 'Book my visit')}</div></div></section>`;
   };
 
@@ -350,6 +350,32 @@
       `<div class="wrap narrow"><div class="chips">${tabs.map(([t, u]) => `<a href="${url(u)}" ${u === live ? 'aria-current="page"' : ''}>${esc(t)}</a>`).join('')}</div></div>
       <section class="sec tight"><div class="wrap narrow prose policy-doc">${P.html}</div>
       <div class="wrap narrow"><p class="note">Adapted from the Bliss Bath and Kitchen policy pages${be ? ' (same rules).' : ', for Ontario-only delivery in CAD. The client confirms the final wording.'}</p></div></section>`;
+  };
+
+
+  R.showroom = () => {
+    const addr = '5 Shields Court, Unit 100, Markham, ON L3R 0G3', q = encodeURIComponent('5 Shields Court Unit 100 Markham Ontario L3R 0G3');
+    const dir = `https://www.google.com/maps/dir/?api=1&destination=${q}`, embed = `https://www.google.com/maps?q=${q}&output=embed`;
+    const vid = be ? 'video/bath-tour.mp4' : 'video/castle-tour.mp4';
+    main().innerHTML = banner(be ? 'img/bath-showroom-1800.webp' : 'img/kit-display-1800.webp', 'Visit our showroom', `See the quality, finishes and details in person: ${be ? 'bathroom fixtures, tubs, showers and vanities, with Castle Kitchens cabinetry and appliances' : 'full kitchen displays, door styles, countertops and premium appliances, with Bath Emporium fixtures'} under one roof in Markham.`, be ? 'Bath Emporium · Markham' : 'Castle Kitchens · Markham',
+      `<a class="btn light" href="${dir}" target="_blank" rel="noopener">Get directions ${arrow}</a> <a class="btn light" href="#book">Book an appointment</a>`) +
+      `<div class="wrap">${crumbs([['Showroom']])}</div>
+      <section class="sec tight"><div class="wrap showgrid">
+        <div class="sinfo"><h2 class="h2">Plan your visit</h2><p>Whether you're renovating one room or planning a whole home, our team helps you compare products, coordinate finishes and find the right selections for your style and budget.</p>
+          <dl class="sdl"><dt>Address</dt><dd>${addr}<br><a href="${dir}" target="_blank" rel="noopener">Get directions ↗</a></dd>
+            <dt>Hours</dt><dd><table class="hours"><tr><th>Monday – Friday</th><td>9 am – 7 pm</td></tr><tr><th>Saturday</th><td>9 am – 5 pm</td></tr><tr><th>Sunday</th><td>12 pm – 5 pm</td></tr></table></dd>
+            <dt>Call</dt><dd>(905) 944-0060</dd><dt>Parking</dt><dd>Free parking at the door</dd></dl>
+          <h3 class="h3">Visit us for</h3><ul class="ticks"><li>${be ? 'Bathroom and kitchen fixtures' : 'Custom kitchen cabinetry'}</li><li>${be ? 'Tubs, showers and smart toilets you can try' : 'Working appliance displays'}</li><li>Product and finish selections</li><li>Design and specification advice</li><li>Project and package pricing</li></ul></div>
+        <div class="mapbox" data-map><img src="img/store-${be ? 'bath' : 'castle'}-1800.webp" alt="The showroom at 5 Shields Court, Markham" loading="lazy"><div class="mapcta"><p>The map is loaded from Google when you open it.</p><button class="btn dark" data-load-map="${embed}">Show map</button><a class="btn light" href="${dir}" target="_blank" rel="noopener">Directions</a></div></div>
+      </div></section>
+      <section class="split"><div class="media"><img src="img/${be ? 'bath-tub' : 'kit-reveal'}-1800.webp" alt="" loading="lazy"><a class="play" href="#" data-video="${vid}" aria-label="Watch the showroom tour">${ico.play}</a></div>
+        <div class="body"><span class="eyebrow" style="color:#999">Showroom tour</span><h2>Take a look inside</h2><p>A two-minute walk through our displays before you visit.</p><div class="acts"><button class="btn light" data-video="${vid}">Watch the tour</button><a class="btn light" href="${url('/experience-centre/')}">The Experience Centre</a></div></div></section>
+      <section class="sec stone" id="book"><div class="wrap two"><div><h2 class="h2">Book an appointment</h2><p>Stop by anytime, or book a time for dedicated one-on-one help with your project. We'll confirm by email or phone.</p></div>
+        <div class="panel">${form(`<div class="row2">${field('sd', 'Preferred date', 'date', 'required')}${field('st', 'Preferred time', 'select', '<option>10:00 am</option><option>11:30 am</option><option>1:00 pm</option><option>2:30 pm</option><option>4:00 pm</option><option>6:00 pm (weekdays)</option>')}</div>
+          <div><label>Visit length</label><div class="pills">${['30 min: quick selection', '1 hour: room planning', '2 hours: whole-home project'].map((t, i) => `<label><input type="radio" name="vl"${i ? '' : ' checked'}> ${t}</label>`).join('')}</div></div>
+          <div><label>I'm planning</label><div class="pills">${(be ? ['Bathroom', 'Kitchen', 'Appliances', 'Whole home', 'Trade project'] : ['New kitchen', 'Renovation', 'Appliances', 'Outdoor kitchen', 'Trade project']).map(t => `<label><input type="checkbox"> ${t}</label>`).join('')}</div></div>
+          <div class="row2">${field('sn', 'Name', 'text', 'required autocomplete="name"')}${field('sp', 'Phone', 'tel', 'autocomplete="tel"')}</div>${field('se', 'Email', 'email', 'required autocomplete="email"')}${field('sm', 'Anything we should prepare?', 'textarea')}`, 'Request appointment')}</div></div></section>`;
+    main().addEventListener('click', e => { const b = e.target.closest('[data-load-map]'); if (!b) return; const box = b.closest('[data-map]'); box.innerHTML = `<iframe class="map" title="Map to the showroom" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${b.dataset.loadMap}"></iframe>`; });
   };
 
   R.notfound = () => {
@@ -411,7 +437,7 @@
       `<section class="sec stone"><div class="wrap"><div class="promos">${p.heads.slice(0, 6).map(h => `<div><b>${esc(h)}</b></div>`).join('')}</div></div></section>` + cta('See outdoor kitchens in person', 'Grills, pizza ovens and outdoor cabinets on display.');
   };
 
-  const map = { materials: 'materials', shop: 'shop', category: 'category', product: 'product', brands: 'brands', brand: 'brand', search: 'search', cart: 'cart', checkout: 'checkout', order: 'order', account: 'account', wishlist: 'wishlist', blog: 'blog', post: 'post', city: 'city', projects: 'projects', project: 'project', gallery: 'gallery', service: 'service', about: 'about', testimonials: 'testimonials', contact: 'contact', quote: 'quote', experience: 'experience', policy: 'policy', '404': 'notfound', appliances: 'appliances', promotion: 'promotion', outdoor: 'outdoor' };
+  const map = { showroom: 'showroom', materials: 'materials', shop: 'shop', category: 'category', product: 'product', brands: 'brands', brand: 'brand', search: 'search', cart: 'cart', checkout: 'checkout', order: 'order', account: 'account', wishlist: 'wishlist', blog: 'blog', post: 'post', city: 'city', projects: 'projects', project: 'project', gallery: 'gallery', service: 'service', about: 'about', testimonials: 'testimonials', contact: 'contact', quote: 'quote', experience: 'experience', policy: 'policy', '404': 'notfound', appliances: 'appliances', promotion: 'promotion', outdoor: 'outdoor' };
   const page = document.body.dataset.page;
   if (map[page]) window.PAGE = () => { R[map[page]](); document.title = `${($('#main h1') || {}).textContent || S.name} — ${S.name} (prototype)`; };
 })();

@@ -25,7 +25,7 @@ window.SITE = {
     { label: 'Brands', u: '/our-brands/' },
     { label: 'Experience Centre', u: '/experience-centre/' },
     { label: 'Contact', u: '/contact/' },
-    { label: 'Display clearance', u: '/product-category/display-clearance/', sale: true },
+    { label: 'Display clearance', u: '/product-category/display-clearance/', sale: true, badge: '70% off' }, // live menu: "Display Clearance (Up To 70% OFF)"
   ],
   // Homepage cards: real clearance prices (from the live product titles) can be bought; the rest Inquire now
   // until Sukhjinder's price list is loaded.
@@ -46,6 +46,7 @@ window.SITE = {
     { h: 'Appliances', links: [['All appliances','/appliances/'],['Brands','/our-brands/'],['Promotions','/special-offers-promotions/'],['Display clearance','/product-category/display-clearance/']] },
     { h: 'Help', links: [['Delivery','/shipping-info/'],['Returns','/returns/'],['My account','/my-account/'],['Testimonials','/testimonials/'],['Contact','/contact/']] },
   ],
+  showroomLive: '/kitchen-showroom-toronto/', // existing page on castlekitchens.ca
   shipLive: '/shipping-info/', // shipping policy address (new page, same address as Bliss)
   shipping: 'Delivery within Ontario. Appliances ship by freight; the delivery cost is shown at checkout from the weight. Free pickup from our Markham showroom.',
 };
