@@ -235,8 +235,9 @@
 
   /* ---------- hero slider ---------- */
   const initHero = () => {
-    const slides = $$('.hero .slide'); if (slides.length < 2) return;
-    const dots = $('.hero .dots'), pp = $('.hero .pp');
+    const hero = $('.hero:not([hidden])'); if (!hero) return;
+    const slides = $$('.slide', hero); if (slides.length < 2) return;
+    const dots = $('.dots', hero), pp = $('.pp', hero);
     let i = 0, timer, playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
     dots.innerHTML = slides.map((_, n) => `<button aria-label="Slide ${n + 1}"></button>`).join('');
     const go = n => { i = (n + slides.length) % slides.length; slides.forEach((s, k) => { s.classList.toggle('on', k === i); s.setAttribute('aria-hidden', String(k !== i)); }); $$('button', dots).forEach((d, k) => d.setAttribute('aria-current', String(k === i))); };
@@ -245,6 +246,14 @@
     pp.addEventListener('click', () => { playing = !playing; run(); });
     go(0); run();
   };
+
+  /* ---------- header option for the client: A = showroom video, B = shop-first slideshow (?hero=a|b) ---------- */
+  const heroOpt = (() => { const q = qs('hero'); if (q === 'a' || q === 'b') { try { localStorage.setItem('hero_opt', q); } catch {} return q; } try { return localStorage.getItem('hero_opt') || 'a'; } catch { return 'a'; } })();
+  if ($('.heroB')) {
+    $$('.heroA').forEach(e => { e.hidden = heroOpt === 'b'; });
+    $$('.heroB').forEach(e => { e.hidden = heroOpt !== 'b'; });
+    if (heroOpt === 'b') $$('.heroA video').forEach(v => { v.removeAttribute('data-hero-video'); v.preload = 'none'; });
+  }
 
   /* ---------- hero video (Kohler style): plays muted, starts after the storefront shot, poster for reduced motion ---------- */
   const initVideo = () => {
@@ -292,7 +301,7 @@
     const here = location.pathname.split('/').pop() || S.home;
     const opt = (pre, label) => `<optgroup label="${label}">${T[pre].map(([f, n, l]) => `<option value="${f}${l && l !== '/' ? `?live=${encodeURIComponent(l)}` : ''}"${f === here ? ' selected' : ''}>${esc(n)}</option>`).join('')}</optgroup>`;
     document.body.insertAdjacentHTML('beforeend', `<div class="tswitch" id="tswitch"><button class="tsbtn" aria-expanded="false" aria-controls="tspanel"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Prototype pages</span></button>
-      <div class="tspanel" id="tspanel" hidden><p class="tsnow"><b>${esc(tpl)}</b> template<br>Live address kept: <code>${esc(live)}</code></p><label for="tsel">Jump to a template</label><select id="tsel">${opt(S.pre, S.name)}</select>
+      <div class="tspanel" id="tspanel" hidden><p class="tsnow"><b>${esc(tpl)}</b> template<br>Live address kept: <code>${esc(live)}</code></p>${$('.heroB') ? `<div class="hopt"><span>Header option</span><a href="?hero=a" ${heroOpt === 'a' ? 'aria-current="true"' : ''}>A · Video</a><a href="?hero=b" ${heroOpt === 'b' ? 'aria-current="true"' : ''}>B · Shop-first</a></div>` : ''}<label for="tsel">Jump to a template</label><select id="tsel">${opt(S.pre, S.name)}</select>
         <div class="tsrow"><button data-ts="-1">← Previous</button><button data-ts="1">Next →</button></div></div></div>`);
     const sel = $('#tsel'), btn = $('.tsbtn'), panel = $('#tspanel');
     btn.addEventListener('click', () => { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); if (!panel.hidden) sel.focus(); });

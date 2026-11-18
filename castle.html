@@ -12,7 +12,20 @@
 <div id="hdr"></div>
 
 <main>
-  <section class="hero" aria-label="Showroom video">
+  <!-- Option B: shop-first header (photo slideshow + category shortcuts), shown with ?hero=b -->
+  <section class="hero heroB" aria-label="Featured" hidden>
+    <div class="slide on"><img src="img/kit-white-1800.webp" srcset="img/kit-white-900.webp 900w, img/kit-white-1800.webp 1800w" sizes="100vw" alt="White custom kitchen with a large island">
+      <div class="copy"><div class="wrap"><span class="eyebrow">Castle Kitchens</span><h1 class="h1x">Kitchens built to last a lifetime</h1><p>Custom cabinetry made in our own factory, designed with you in our Markham showroom.</p><a class="btn light" href="#" data-live="/kitchen-remodeling-toronto/">Plan your kitchen <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a> <a class="btn light" href="#" data-live="/door-styles/">Door styles</a></div></div></div>
+    <div class="slide"><img src="img/app-oak-1800.webp" srcset="img/app-oak-900.webp 900w, img/app-oak-1800.webp 1800w" sizes="100vw" alt="Thermador built-in refrigerator in a light oak kitchen" loading="lazy">
+      <div class="copy"><div class="wrap"><span class="eyebrow">Display clearance</span><h2 class="h1x">Up to 70% off display appliances</h2><p>Thermador, Gaggenau, Miele, Monogram and more. Buy online for delivery across Ontario.</p><a class="btn light" href="#" data-live="/product-category/display-clearance/">Shop clearance <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a> <a class="btn light" href="#" data-live="/appliances/">All appliances</a></div></div></div>
+    <div class="slide"><img src="img/kit-aitken-1800.webp" srcset="img/kit-aitken-900.webp 900w, img/kit-aitken-1800.webp 1800w" sizes="100vw" alt="Fluted cabinets and a waterfall peninsula" loading="lazy">
+      <div class="copy"><div class="wrap"><span class="eyebrow">Castle Appliances</span><h2 class="h1x">The finest appliances, delivered across Ontario</h2><p>Ranges, refrigeration, wall ovens and ventilation from the brands chefs trust.</p><a class="btn light" href="#" data-live="/appliances/">Shop appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a> <a class="btn light" href="#" data-live="/kitchen-showroom-toronto/">Visit the showroom</a></div></div></div>
+    <div class="ctrl"><div class="dots"></div><button class="pp"></button></div>
+  </section>
+  <nav class="catbar heroB" aria-label="Shop by category" hidden><div class="wrap"><span>Shop by category</span><a href="#" data-live="/product-category/appliances/ranges/">Ranges</a><a href="#" data-live="/product-category/appliances/refrigerators/">Refrigerators</a><a href="#" data-live="/product-category/appliances/wall-ovens/">Wall ovens</a><a href="#" data-live="/product-category/appliances/cooktops/">Cooktops</a><a href="#" data-live="/product-category/appliances/dishwashers/">Dishwashers</a><a href="#" data-live="/product-category/appliances/wine-storage/">Wine storage</a><a href="#" data-live="/product-category/outdoor-kitchens/">Outdoor kitchens</a></div></nav>
+  <!-- /Option B -->
+
+  <section class="hero heroA" aria-label="Showroom video">
     <div class="slide on video">
       <video data-hero-video data-start="3.2" muted playsinline preload="metadata" poster="img/castle-video-poster.webp" aria-label="A walk through the Castle Kitchens showroom: full kitchen displays with premium appliances"><source src="video/castle-kitchens.mp4" type="video/mp4"></video>
     </div>

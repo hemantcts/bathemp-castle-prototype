@@ -335,7 +335,7 @@
   };
 
   R.experience = () => {
-    const vid = be ? 'video/bath-tour.mp4' : 'video/castle-tour.mp4';
+    const vid = be ? 'video/bath-showroom.mp4' : 'video/castle-tour.mp4';
     main().innerHTML = banner(be ? 'img/bath-showroom-1800.webp' : 'img/kit-display-1800.webp', 'The Experience Centre', 'See, touch and experience design: working bathrooms, full kitchens and premium appliances in one Markham showroom.', 'Bath Emporium · Castle Kitchens · Castle Appliances', `<a class="btn light" href="#book">Book your visit ${arrow}</a> <button class="btn light" data-video="${vid}">Watch the tour</button>`) +
       `<section class="sec"><div class="wrap"><div class="tiles">${[['Bath Emporium', 'img/showroom-bath-900.webp', 'Freestanding tubs, shower systems and faucet walls you can see and touch.'], ['Castle Kitchens', 'img/showroom-kitchen-900.webp', 'Full kitchen displays, door styles and countertops.'], ['Castle Appliances', 'img/showroom-appliances-900.webp', 'Working ranges, ovens and refrigeration.'], ['Outdoor living', 'img/showroom-outdoor-900.webp', 'Outdoor kitchens, grills and pizza ovens on display.']].map(([t, im, p]) => `<div class="tile"><img src="${im}" alt="" loading="lazy"><div class="t"><b>${t}</b><p style="margin:6px 0 0;font-size:14px">${p}</p></div></div>`).join('')}</div></div></section>
       <section class="sec stone" id="book"><div class="wrap two"><div><h2 class="h2">Plan your visit</h2><p>Book a time and a designer will be ready for you, with samples for your project. Walk-ins are welcome too.</p><div class="facts col"><div><b>Address</b>5 Shields Court, Unit 100, Markham, ON</div><div><b>Hours</b><span class="nw">Mon–Fri 9–7</span> · <span class="nw">Sat 9–5</span> · <span class="nw">Sun 12–5</span></div></div></div>
@@ -356,7 +356,7 @@
   R.showroom = () => {
     const addr = '5 Shields Court, Unit 100, Markham, ON L3R 0G3', q = encodeURIComponent('5 Shields Court Unit 100 Markham Ontario L3R 0G3');
     const dir = `https://www.google.com/maps/dir/?api=1&destination=${q}`, embed = `https://www.google.com/maps?q=${q}&output=embed`;
-    const vid = be ? 'video/bath-tour.mp4' : 'video/castle-tour.mp4';
+    const vid = be ? 'video/bath-showroom.mp4' : 'video/castle-tour.mp4';
     main().innerHTML = banner(be ? 'img/bath-showroom-1800.webp' : 'img/kit-display-1800.webp', 'Visit our showroom', `See the quality, finishes and details in person: ${be ? 'bathroom fixtures, tubs, showers and vanities, with Castle Kitchens cabinetry and appliances' : 'full kitchen displays, door styles, countertops and premium appliances, with Bath Emporium fixtures'} under one roof in Markham.`, be ? 'Bath Emporium · Markham' : 'Castle Kitchens · Markham',
       `<a class="btn light" href="${dir}" target="_blank" rel="noopener">Get directions ${arrow}</a> <a class="btn light" href="#book">Book an appointment</a>`) +
       `<div class="wrap">${crumbs([['Showroom']])}</div>
