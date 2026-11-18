@@ -488,3 +488,20 @@ body.barup .hdr{transform:translateY(-100%)}
 body.barup .chat,body:has(.stickybar.on) .chat{bottom:84px}
 @media (max-width:820px){.tsbtn span,.chatbtn span{display:none}.tsbtn,.chatbtn{padding:12px;border-radius:50%}body:has(.stickybar.on) .chat,body:has(.stickybar.on) .tswitch{bottom:84px}.tspanel{width:calc(100vw - 32px)}}
 @media (min-width:821px){body.barup .chat{bottom:16px}}
+
+/* ===== mega menu: columns adapt to each menu, feature photo always on the right (2026-11-18) ===== */
+.mega .wrap.mgrid{display:grid;grid-template-columns:1fr minmax(240px,22%);gap:40px;padding-top:34px;padding-bottom:30px;align-items:stretch}
+.mcols{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:28px 32px}
+.mega h4{margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.mega li a{font-size:14.5px;padding:6px 0;color:#2a2724}
+.mega li a:hover{color:#000}
+.mega .feat{min-height:0;height:100%;max-height:340px;aspect-ratio:auto}
+.mega .feat span{display:flex;flex-direction:column;gap:4px;font-size:13px}
+.mega .feat span small{font:600 10px var(--head);letter-spacing:.2em;opacity:.8}
+.mega .feat img{transition:transform .8s}
+.mega .feat:hover img{transform:scale(1.04)}
+.mbar{border-top:1px solid var(--line);background:var(--stone)}
+.mbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:14px;padding-bottom:14px;font-size:13px;color:#4b4743}
+.mbar a{font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.mbar>.wrap>a{font:600 12px var(--head);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+@media (max-width:1280px){.mcols{gap:22px 22px}.mega .wrap.mgrid{grid-template-columns:1fr 220px;gap:28px}}

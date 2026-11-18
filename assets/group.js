@@ -138,7 +138,8 @@
   const tpl = route(live)[2];
   const brandHtml = brands.map((b, i) => `${i ? '<span class="sep"></span>' : ''}<a class="brand${S.active.includes(b.id) ? ' on' : ''}" href="${b.href}">${ico[b.icon]}<b>${b.name}<small>${b.sub}</small></b></a>`).join('');
   const navHtml = S.menu.map((m, i) => m.mega
-    ? `<li><button aria-expanded="false" aria-controls="mega${i}">${m.label}${ico.down}</button><div class="mega" id="mega${i}"><div class="wrap">${m.mega.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}${m.feat ? `<a class="feat" href="${url(m.feat.u)}"><img src="${m.feat.img}" alt="" loading="lazy"><span>${m.feat.t} →</span></a>` : '<div></div>'}</div></div></li>`
+    ? `<li><button aria-expanded="false" aria-controls="mega${i}">${m.label}${ico.down}</button><div class="mega" id="mega${i}"><div class="wrap mgrid" style="--cols:${m.mega.length}"><div class="mcols">${m.mega.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}</div>${m.feat ? `<a class="feat" href="${url(m.feat.u)}"><img src="${m.feat.img}" alt="" loading="lazy"><span><small>Explore</small>${m.feat.t} →</span></a>` : ''}</div>
+      <div class="mbar"><div class="wrap">${m.feat ? `<a href="${url(m.feat.u)}">View all ${esc(m.label.toLowerCase())} →</a>` : ''}<span>Need help choosing? <a href="${url('/experience-centre/')}">Book a showroom visit</a> · (905) 944-0060</span></div></div></div></li>`
     : `<li><a href="${url(m.u)}"${m.sale ? ' class="sale"' : ''}>${m.label}</a></li>`).join('');
   $('#hdr').outerHTML = `
   <div class="proto"><b>Prototype</b> · ${esc(tpl)} template · live address kept: <code>${esc(live.split('?')[0] === '/' ? '/' : live)}</code> · <a href="index.html">All templates</a> · <a href="${S.other}">See ${S.id === 'bathemp' ? 'Castle Kitchens' : 'Bath Emporium'}</a></div>
