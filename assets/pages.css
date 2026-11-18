@@ -563,3 +563,5 @@ body:has(.drawer.on) :is(.tswitch,.chat),body:has(.cdrawer.on) :is(.tswitch,.cha
 .hopt a[aria-current]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .hero.heroB{height:min(68vh,660px);min-height:460px}
 .heroB .slide .copy{bottom:clamp(40px,8vh,90px)}
+.tile .t p{min-height:4.6em;line-height:1.5}
+@media (max-width:520px){.tile .t p{min-height:0}}
