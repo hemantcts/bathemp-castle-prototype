@@ -202,6 +202,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .ftr form{display:flex;border-bottom:1px solid #555}
 .ftr input{flex:1;background:none;border:0;color:#fff;padding:10px 0;font:inherit;min-width:0}
 .ftr form button{font:600 11px var(--head);letter-spacing:.16em;text-transform:uppercase;color:#fff}
+.ftr .credit{margin:0;padding:0 0 18px;font-size:11px;line-height:1.4;text-align:center;opacity:.55}
+.ftr .credit a{text-decoration:underline;text-underline-offset:2px}
 .ftr .bot{border-top:1px solid #222;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 0;font-size:12px}
 
 /* modal (inquire + video) */

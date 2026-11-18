@@ -183,6 +183,7 @@
       <div><h4>Showroom</h4><ul><li>5 Shields Court, Unit 100<br>Markham, ON L3R 0G3</li><li>(905) 944-0060</li><li>Mon–Fri 9–7<br>Sat 9–5<br>Sun 12–5</li><li><a href="${url(S.showroomLive)}">Directions &amp; hours</a></li></ul></div>
     </div>
     <div class="bot"><span>© 2026 ${S.legal}</span><span><a href="${url('/privacy-policy/')}">Privacy</a> · <a href="${url(S.shipLive)}">Shipping</a> · <a href="${url('/returns/')}">Returns</a> · <a href="${url('/payment-methods/')}">Payment</a></span></div>
+    <p class="credit">Designed and Developed by <a href="https://cresttechnosoft.com/" target="_blank" rel="noopener">Cresttechnosoft</a></p>
   </div></footer>`;
 
   /* ---------- pop-ups ---------- */
