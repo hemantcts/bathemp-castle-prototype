@@ -122,7 +122,7 @@
         </div>
       </div>
     </section>
-    <section class="sec love"><div class="wrap"><div class="sh"><div><h2 class="thin">Things you'll love</h2><p>Pairs well with your ${esc((cat?.n || 'selection').toLowerCase())}.</p></div></div><div class="rail">${related.map(card).join('')}</div></div></section>` + cta();
+    <section class="sec love"><div class="wrap"><div class="sh"><div><h2 class="h-thin">Things you'll love</h2><p>Pairs well with your ${esc((cat?.n || 'selection').toLowerCase())}.</p></div></div><div class="rail">${related.map(card).join('')}</div></div></section>` + cta();
     main().addEventListener('click', e => {
       const t = e.target.closest('[data-thumb]'); if (t) { $('[data-main]').src = t.dataset.thumb; $('.zoom').dataset.lb = t.dataset.thumb; $$('[data-thumb]').forEach(b => b.removeAttribute('aria-current')); t.setAttribute('aria-current', 'true'); }
       const f = e.target.closest('[data-finish]'); if (f) { $$('[data-finish]').forEach(b => b.setAttribute('aria-pressed', String(b === f))); $('[data-fin]').textContent = f.dataset.finish; const sf = $('.stickybar [data-sfin]'); if (sf) sf.textContent = f.dataset.finish; }
@@ -139,7 +139,7 @@
     const list = (C.brands || []).slice().sort((a, b) => a.n.localeCompare(b.n));
     const groups = list.reduce((g, b) => ((g[b.n[0].toUpperCase()] = g[b.n[0].toUpperCase()] || []).push(b), g), {});
     main().innerHTML = pagehead('Our brands', `${list.length} brands, all from authorized Canadian distributors with full manufacturer warranty.`) +
-      `<section class="sec tight"><div class="wrap"><div class="logos big">${(S.featuredBrands || []).map(n => `<a href="${url(be ? `/brands/${n.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/` : '/our-brands/')}">${esc(n)}</a>`).join('')}</div>
+      `<section class="sec tight"><div class="wrap"><div class="logos big" data-logos></div>
       <div class="az">${Object.entries(groups).map(([l, bs]) => `<div><h3>${l}</h3><ul>${bs.map(b => `<li><a href="${url(b.live || (be ? `/brands/${b.n.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/` : '/our-brands/'))}">${esc(b.n)}</a> <small>${b.count}</small></li>`).join('')}</ul></div>`).join('')}</div></div></section>` + cta();
   };
 

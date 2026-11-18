@@ -404,7 +404,7 @@ body.noscroll{overflow:hidden}
 .docs{list-style:none;padding:0;margin:0;display:grid;gap:8px}
 .docs a{text-decoration:underline;text-underline-offset:3px}
 .love{background:#ebebea}
-.thin{font:300 clamp(30px,3.6vw,48px)/1.1 var(--body)!important;text-transform:none!important}
+.h-thin{font:300 clamp(30px,3.6vw,48px)/1.1 var(--body)!important;text-transform:none!important}
 .love .sh p{color:#4b4743}
 .stickybar{top:0;bottom:auto;transform:translateY(-110%);z-index:70;border-top:0;border-bottom:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.08)}
 .stickybar strong{font:400 18px var(--body);white-space:nowrap}
@@ -433,3 +433,22 @@ body.barup .hdr{transform:translateY(-100%)}
 @media (max-width:820px){body.barup .hdr{transform:none}}
 @media (max-width:1100px){.lgrid,.lgrid.nofilters{grid-template-columns:1fr;gap:0}.lgrid.nofilters .filters{display:block}}
 @media (max-width:820px){.pdp{grid-template-columns:1fr}.info h1{font-size:28px}}
+.lgrid.nofilters{grid-template-columns:1fr;gap:0}
+.lgrid.nofilters .rail.three{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1100px){.lgrid.nofilters .rail.three{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:820px){.lgrid.nofilters .rail.three,.rail.three{grid-template-columns:repeat(2,1fr)}}
+
+/* brand logos (real logos, grey until hover) */
+.logos a{display:flex;align-items:center;justify-content:center;min-height:96px}
+.logos img{height:38px;width:auto;max-width:150px;object-fit:contain;filter:grayscale(1) contrast(1.1);opacity:.75;transition:filter .3s,opacity .3s}
+.logos a:hover img{filter:none;opacity:1}
+@media (max-width:820px){.logos{display:grid;grid-template-columns:repeat(3,1fr)}.logos a{min-width:0;min-height:72px;padding:16px 8px;border-bottom:1px solid var(--line)}.logos a+a{border-left:0}.logos img{height:28px;max-width:100%}}
+@media (max-width:820px){
+  .listing .toolbar{flex-wrap:wrap;gap:10px}
+  .listing .toolbar>b{width:100%;font-size:20px}
+  .listing .toolbar>div{width:100%;justify-content:space-between}
+  .tbtn{border:1px solid var(--ink);padding:9px 14px}
+  .tbtn span{font-size:0}.tbtn span::after{content:"Filters";font-size:14px}
+  .projlist{grid-template-columns:1fr}
+  .badge{font-size:9px;padding:4px 6px;top:auto;bottom:8px;left:8px}
+}

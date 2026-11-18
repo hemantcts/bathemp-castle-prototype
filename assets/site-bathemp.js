@@ -37,7 +37,8 @@ window.SITE = {
     { id: '172134', b: 'Duravit', n: 'Duravit D-Neo Wall Mounted Rimless Toilet', p: 282, img: 'img/p/be-172134.webp', live: '/product/duravit-2577090092-d-neo-wall-mounted-toilet/' },
     { id: '142503', b: 'Fleurco', n: 'Fleurco Aria Voce Grande Freestanding Tub — display model', badge: 'Display clearance', img: 'img/p/be-142503.webp', live: '/product/fleurco-aria-voce/' },
   ],
-  featuredBrands: ['Riobel', 'TOTO', 'Victoria And Albert', 'BainUltra', 'Brizo', 'ROHL', 'Blanco'],
+  featuredBrands: ['Riobel','TOTO','Victoria + Albert','BainUltra','Brizo','ROHL','Blanco'],
+  logos: [['Riobel','img/logos/riobel.webp','/brands/riobel/'],['TOTO','img/logos/toto.webp','/brands/toto/'],['Victoria + Albert','img/logos/victoria-and-albert.webp','/brands/victoria-and-albert/'],['BainUltra','img/logos/bainultra.webp','/brands/bainultra/'],['Brizo','img/logos/brizo.webp','/brands/brizo/'],['ROHL','img/logos/rohl.webp','/brands/rohl/'],['Blanco','img/logos/blanco.webp','/brands/blanco/']], // real brand logos (Bliss brand logos / Castle's brands page)
   footer: [
     { h: 'Shop', links: [['Bathroom','/bathroom-products-categories/'],['Kitchen','/kitchen-products-categories/'],['Brands','/our-brands/'],['Sale','/product-category/sale-items/'],['Display clearance','/product-category/display-clearance/']] },
     { h: 'Services', links: [['Design services','/design-services/'],['Installation','/installation-services/'],['Get a quote','/getaquote/'],['Portfolio','/portfolio/']] },

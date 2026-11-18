@@ -255,6 +255,9 @@
     icon();
   };
 
+  /* ---------- brand logo strip ---------- */
+  const initLogos = () => $$('[data-logos]').forEach(el => { el.innerHTML = (S.logos || []).map(([n, src, u]) => `<a href="${url(u)}" aria-label="${esc(n)}"><img src="${src}" alt="${esc(n)}" loading="lazy" height="40"></a>`).join(''); });
+
   /* ---------- Instagram row (@bathempcastlekitchens) ---------- */
   const initIg = () => $$('[data-ig]').forEach(el => {
     el.innerHTML = (C.ig || []).slice().sort((a, b) => (Math.abs(a[1] / a[2] - 1) > .05) - (Math.abs(b[1] / b[2] - 1) > .05)).slice(0, 8).map(([src, w, h]) => `<a href="#" onclick="G.toast('Opens the post on Instagram (prototype)');return false" aria-label="Instagram post"><img src="${src}" alt="" loading="lazy" width="${w}" height="${h}"${Math.abs(w / h - 1) > .05 ? ' style="object-fit:contain"' : ''}></a>`).join('');
@@ -288,7 +291,7 @@
   document.title = document.title || S.name;
   window.addEventListener('DOMContentLoaded', () => {
     if (window.PAGE) window.PAGE();
-    hydrate(); initHero(); initVideo(); initIg();
+    initLogos(); hydrate(); initHero(); initVideo(); initIg();
     if (S.usd) setCur(cur); else renderCards();
     counts();
   });

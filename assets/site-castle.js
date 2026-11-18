@@ -39,7 +39,8 @@ window.SITE = {
     { id: '9063', b: 'Miele', n: 'Miele KF 2812 Vi 30" MasterCool Bottom-Mount Fridge Freezer', img: 'img/p/ck-9063.webp', live: '/product/miele-kf-2812-vi-30-inch-fridge/' },
     { id: '14560', b: 'Monogram', n: 'Monogram ZTS90DPSNSS 30" Statement Built-In Single Oven', p: 4999, badge: 'Display clearance', img: 'img/p/ck-14560.webp', live: '/product/monogram-30-inch-oven/' },
   ],
-  featuredBrands: ['Thermador', 'Gaggenau', 'Miele', 'Monogram', 'Bertazzoni', 'Liebherr', 'Viking Range'],
+  featuredBrands: ['Thermador','Gaggenau','Miele','Bertazzoni','Liebherr','Viking','Hestan'],
+  logos: [['Thermador','img/logos/thermador.webp','/thermador-promotion/'],['Gaggenau','img/logos/gaggenau.webp','/our-brands/'],['Miele','img/logos/miele.webp','/miele-appliances/'],['Bertazzoni','img/logos/bertazzoni.webp','/bertazzoni-canada-promotion/'],['Liebherr','img/logos/liebherr.webp','/liebherr-promotion/'],['Viking','img/logos/viking.webp','/viking-range-canada-promotion/'],['Hestan','img/logos/hestan.webp','/our-brands/']], // real brand logos (Bliss brand logos / Castle's brands page)
   footer: [
     { h: 'Kitchens', links: [['Custom kitchens','/modern-kitchen-cabinets-toronto/'],['Kitchen remodeling','/kitchen-remodeling-toronto/'],['Projects','/projects/'],['Our factory','/our-factory/']] },
     { h: 'Appliances', links: [['All appliances','/appliances/'],['Brands','/our-brands/'],['Promotions','/special-offers-promotions/'],['Display clearance','/product-category/display-clearance/']] },
