@@ -188,7 +188,7 @@
       ${be ? field('co2', 'Country', 'select', '<option value="CA">Canada</option><option value="US">United States</option>') : '<p class="note">Castle Appliances delivers within Ontario. For other provinces please <a data-inq="">contact the showroom</a>.</p>'}
       <h2>Delivery</h2><div class="radios"><label><input type="radio" name="sh" checked> ${be ? 'Standard shipping — free on items under 70 lb' : 'Ontario delivery (freight)'}</label><label><input type="radio" name="sh"> Pick up at our Markham showroom — free</label></div>
       <h2>Payment</h2><div class="radios pay"><label><input type="radio" name="pm" checked> Credit / debit card <small>Visa, Mastercard, Amex, Apple Pay, Google Pay</small></label><div class="cardbox">Card fields appear here (Stripe) — prototype, no payment is taken.</div><label><input type="radio" name="pm"> PayPal</label></div>
-      <label class="chk"><input type="checkbox" required><span>I agree to the <a href="${url('/terms/')}">terms</a> and <a href="${url('/returns/')}">return policy</a>.</span></label>
+      <label class="chk"><input type="checkbox" required><span>I agree to the <a href="${url('/returns/')}">return policy</a> and <a href="${url(S.shipLive)}">shipping policy</a>.</span></label>
       <button class="btn dark full">Place order ${arrow}</button></form>
       <aside class="summary"><h2>Your order</h2><ul class="mini">${items.map(i => `<li><img src="${i.p.img}" alt=""><span>${esc(i.p.n)} <small>× ${i.qty}</small></span><b>${money(i.p.p * i.qty)}</b></li>`).join('')}</ul><dl data-tot></dl><p class="note" data-curnote></p><ul class="assure"><li>Secure checkout, encrypted card payments</li><li>Authorized dealer · full manufacturer warranty</li><li>Questions? (905) 944-0060 or Inquire now</li></ul></aside></div></section>`;
     const tot = () => {
@@ -343,15 +343,13 @@
   };
 
   R.policy = () => {
-    const key = live.replace(/\//g, '');
-    const P = {
-      'shipping-policy': ['Shipping & delivery', be ? [['Where we ship', 'Canada and the USA. US orders are charged in USD; Canadian orders in CAD.'], ['Cost', 'Items under 70 lb ship free. Items of 70 lb or more ship by freight; we confirm the cost with you before processing the order.'], ['Timing', 'In-stock items usually ship in 2–5 business days. Special-order items show their lead time on the product page.'], ['Pickup', 'Free pickup from our Markham showroom.'], ['Inspect on delivery', 'Please check every item before signing and report damage within 24 hours.']] : [['Where we deliver', 'Within Ontario. For other provinces, contact the showroom.'], ['Cost', 'Appliances ship by freight; the delivery cost is shown at checkout.'], ['Scheduling', 'We call you to book the delivery date.'], ['Pickup', 'Free pickup from our Markham showroom.']]],
-      returns: ['Returns', [['Window', 'Eligible products can be returned within 14 days of delivery.'], ['Condition', 'Unused, uninstalled and unassembled, in the complete original packaging.'], ['Approval first', 'All returns need approval before anything is shipped back.'], ['Fees', 'Approved returns are subject to a 25% restocking fee plus shipping; return shipping is paid by the customer unless the return is our error or shipping damage.']]],
-      'privacy-policy': ['Privacy policy', [['What we collect', 'The details you give us at checkout or in forms, and cookies you agree to.'], ['How we use it', 'To fulfil orders, answer questions and, with your consent, send offers.'], ['Your choices', 'Cookie preferences and email unsubscribe are always available.']]],
-      terms: ['Terms & conditions', [['Prices', `Prices are in ${be ? 'CAD or USD' : 'CAD'} and exclude tax.`], ['Orders', 'An order is accepted when we confirm it by email.'], ['Warranty', 'Manufacturer warranties apply to every product.']]],
-    }[key] || ['Policy', []];
-    main().innerHTML = pagehead(P[0], '', [[P[0]]]) + `<section class="sec tight"><div class="wrap narrow"><p class="note">${be ? 'Draft based on the Bliss Bath and Kitchen policies (same rules).' : 'Draft for Castle Appliances — the client confirms the delivery fees and the return rules for appliances.'}</p><dl class="policy">${P[1].map(([t, d]) => `<dt>${t}</dt><dd>${d}</dd>`).join('')}</dl>
-      <div class="chips">${[['Shipping', '/shipping-policy/'], ['Returns', '/returns/'], ['Privacy', '/privacy-policy/'], ['Terms', '/terms/']].map(([t, u]) => `<a href="${url(u)}" ${u === live ? 'aria-current="page"' : ''}>${t}</a>`).join('')}</div></div></section>`;
+    const key = { '/shipping/': 'shipping-info', '/shipping-info/': 'shipping-info', '/returns/': 'returns', '/privacy-policy/': 'privacy-policy', '/payment-methods/': 'payment-methods' }[live] || 'shipping-info';
+    const P = (C.policies || {})[key] || { t: 'Policy', html: '' };
+    const tabs = [['Shipping', S.shipLive], ['Returns', '/returns/'], ['Privacy & cookies', '/privacy-policy/'], ['Payment & security', '/payment-methods/']];
+    main().innerHTML = pagehead(P.t, be ? 'Same policies and rules as Bliss Bath and Kitchen: delivery across Canada and the USA, prices in CAD or USD.' : 'Castle Kitchens and Castle Appliances: delivery within Ontario, prices and payments in Canadian dollars (CAD).', [[P.t]]) +
+      `<div class="wrap narrow"><div class="chips">${tabs.map(([t, u]) => `<a href="${url(u)}" ${u === live ? 'aria-current="page"' : ''}>${esc(t)}</a>`).join('')}</div></div>
+      <section class="sec tight"><div class="wrap narrow prose policy-doc">${P.html}</div>
+      <div class="wrap narrow"><p class="note">Adapted from the Bliss Bath and Kitchen policy pages${be ? ' (same rules).' : ', for Ontario-only delivery in CAD. The client confirms the final wording.'}</p></div></section>`;
   };
 
   R.notfound = () => {

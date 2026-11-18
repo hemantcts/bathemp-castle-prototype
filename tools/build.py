@@ -32,7 +32,7 @@ PAGES = {
         ('be-order.html', 'order', '/checkout/order-received/175450/', 'Order confirmed', '/checkout/order-received/…/', 'new'),
         ('be-account.html', 'account', '/my-account/', 'My account', '/my-account/', 'new'),
         ('be-wishlist.html', 'wishlist', '/wishlist/', 'Wishlist', '/wishlist/', '1'),
-        ('be-policy.html', 'policy', '/shipping-policy/', 'Policy pages', '/shipping-policy/, /returns/, /privacy-policy/, /terms/', 'new'),
+        ('be-policy.html', 'policy', '/shipping/', 'Policy pages', '/shipping/ (existing), /returns/, /privacy-policy/, /payment-methods/ (new, from Bliss)', '1 + 3 new'),
         ('be-404.html', '404', '/404/', 'Page not found', '(any missing address)', '—'),
     ],
     'ck': [
@@ -60,7 +60,7 @@ PAGES = {
         ('ck-order.html', 'order', '/checkout/order-received/175450/', 'Order confirmed', '/checkout/order-received/…/', 'new'),
         ('ck-account.html', 'account', '/my-account/', 'My account', '/my-account/', '1'),
         ('ck-wishlist.html', 'wishlist', '/wishlist/', 'Wishlist', '/wishlist/ (new)', 'new'),
-        ('ck-policy.html', 'policy', '/shipping-policy/', 'Policy pages', '/shipping-policy/, /returns/, /privacy-policy/, /terms/', 'new'),
+        ('ck-policy.html', 'policy', '/shipping-info/', 'Policy pages', '/shipping-info/, /returns/, /privacy-policy/, /payment-methods/ (new, from Bliss, Ontario + CAD)', 'new'),
         ('ck-404.html', '404', '/404/', 'Page not found', '(any missing address)', '—'),
     ],
 }

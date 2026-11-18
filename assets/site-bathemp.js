@@ -42,7 +42,8 @@ window.SITE = {
   footer: [
     { h: 'Shop', links: [['Bathroom','/bathroom-products-categories/'],['Kitchen','/kitchen-products-categories/'],['Brands','/our-brands/'],['Sale','/product-category/sale-items/'],['Display clearance','/product-category/display-clearance/']] },
     { h: 'Services', links: [['Design services','/design-services/'],['Installation','/installation-services/'],['Get a quote','/getaquote/'],['Portfolio','/portfolio/']] },
-    { h: 'Help', links: [['Shipping','/shipping-policy/'],['Returns','/returns/'],['My account','/my-account/'],['About us','/aboutus/'],['Contact','/contact/']] },
+    { h: 'Help', links: [['Shipping','/shipping/'],['Returns','/returns/'],['My account','/my-account/'],['About us','/aboutus/'],['Contact','/contact/']] },
   ],
+  shipLive: '/shipping/', // shipping policy address (existing page on bathemp.ca)
   shipping: 'Free shipping on items under 70 lb across Canada and the USA. Heavier items ship by freight, cost confirmed before we process the order. Free pickup from our Markham showroom.',
 };

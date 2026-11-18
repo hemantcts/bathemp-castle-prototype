@@ -44,7 +44,8 @@ window.SITE = {
   footer: [
     { h: 'Kitchens', links: [['Custom kitchens','/modern-kitchen-cabinets-toronto/'],['Kitchen remodeling','/kitchen-remodeling-toronto/'],['Projects','/projects/'],['Our factory','/our-factory/']] },
     { h: 'Appliances', links: [['All appliances','/appliances/'],['Brands','/our-brands/'],['Promotions','/special-offers-promotions/'],['Display clearance','/product-category/display-clearance/']] },
-    { h: 'Help', links: [['Delivery','/shipping-policy/'],['Returns','/returns/'],['My account','/my-account/'],['Testimonials','/testimonials/'],['Contact','/contact/']] },
+    { h: 'Help', links: [['Delivery','/shipping-info/'],['Returns','/returns/'],['My account','/my-account/'],['Testimonials','/testimonials/'],['Contact','/contact/']] },
   ],
+  shipLive: '/shipping-info/', // shipping policy address (new page, same address as Bliss)
   shipping: 'Delivery within Ontario. Appliances ship by freight; the delivery cost is shown at checkout from the weight. Free pickup from our Markham showroom.',
 };

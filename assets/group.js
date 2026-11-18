@@ -29,7 +29,7 @@
       [/^\/checkout\/order-received\//, 'be-order.html', 'Order confirmed (new)'],
       [/^\/my-account\//, 'be-account.html', 'My account (new)'],
       [/^\/wishlist\/$/, 'be-wishlist.html', 'Wishlist'],
-      [/^\/(shipping-policy|returns|privacy-policy|terms)\/$/, 'be-policy.html', 'Policy page (new)'],
+      [/^\/(shipping|returns|privacy-policy|payment-methods)\/$/, 'be-policy.html', 'Policy page'],
       [/^\/\?s=/, 'be-search.html', 'Search results'],
       [/^\/404\/$/, 'be-404.html', 'Page not found'],
       [/^\/[a-z0-9-]+-(for|in)-[a-z-]+\/$/, 'be-city.html', 'Local SEO article (city page)'],
@@ -58,7 +58,7 @@
       [/^\/checkout\/order-received\//, 'ck-order.html', 'Order confirmed (new)'],
       [/^\/my-account\//, 'ck-account.html', 'My account'],
       [/^\/wishlist\/$/, 'ck-wishlist.html', 'Wishlist (new)'],
-      [/^\/(shipping-policy|returns|privacy-policy|terms)\/$/, 'ck-policy.html', 'Policy page (new)'],
+      [/^\/(shipping-info|returns|privacy-policy|payment-methods)\/$/, 'ck-policy.html', 'Policy page (new)'],
       [/^\/\?s=/, 'ck-search.html', 'Search results'],
       [/^\/404\/$/, 'ck-404.html', 'Page not found'],
       [/^\/[a-z0-9-]+\/$/, 'ck-post.html', 'Article'],
@@ -180,7 +180,7 @@
       ${S.footer.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}
       <div><h4>Showroom</h4><ul><li>5 Shields Court, Unit 100<br>Markham, ON L3R 0G3</li><li>(905) 944-0060</li><li>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</li><li><a href="${url('/experience-centre/')}">Plan your visit</a></li></ul></div>
     </div>
-    <div class="bot"><span>© 2026 ${S.legal}</span><span><a href="${url('/privacy-policy/')}">Privacy</a> · <a href="${url('/terms/')}">Terms</a> · <a href="${url('/shipping-policy/')}">Shipping</a> · <a href="${url('/returns/')}">Returns</a></span></div>
+    <div class="bot"><span>© 2026 ${S.legal}</span><span><a href="${url('/privacy-policy/')}">Privacy</a> · <a href="${url(S.shipLive)}">Shipping</a> · <a href="${url('/returns/')}">Returns</a> · <a href="${url('/payment-methods/')}">Payment</a></span></div>
   </div></footer>`;
 
   /* ---------- pop-ups ---------- */
