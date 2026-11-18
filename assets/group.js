@@ -283,6 +283,44 @@
   const be = () => S.pre === 'be';
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
 
+  /* ---------- "Prototype pages" switcher (bottom-left): jump to any template of either site ---------- */
+  const T = window.TEMPLATES || {};
+  if (T.be) {
+    const here = location.pathname.split('/').pop() || S.home;
+    const opt = (pre, label) => `<optgroup label="${label}">${T[pre].map(([f, n, l]) => `<option value="${f}${l && l !== '/' ? `?live=${encodeURIComponent(l)}` : ''}"${f === here ? ' selected' : ''}>${esc(n)}</option>`).join('')}</optgroup>`;
+    document.body.insertAdjacentHTML('beforeend', `<div class="tswitch" id="tswitch"><button class="tsbtn" aria-expanded="false" aria-controls="tspanel"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Prototype pages</span></button>
+      <div class="tspanel" id="tspanel" hidden><label for="tsel">Jump to a template</label><select id="tsel">${S.pre === 'be' ? opt('be', 'Bath Emporium') + opt('ck', 'Castle Kitchens') : opt('ck', 'Castle Kitchens') + opt('be', 'Bath Emporium')}</select>
+        <div class="tsrow"><button data-ts="-1">← Previous</button><a href="index.html">All templates</a><button data-ts="1">Next →</button></div></div></div>`);
+    const sel = $('#tsel'), btn = $('.tsbtn'), panel = $('#tspanel');
+    btn.addEventListener('click', () => { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); if (!panel.hidden) sel.focus(); });
+    sel.addEventListener('change', () => { location.href = sel.value; });
+    panel.addEventListener('click', e => { const b = e.target.closest('[data-ts]'); if (!b) return; const i = Math.min(sel.options.length - 1, Math.max(0, sel.selectedIndex + +b.dataset.ts)); location.href = sel.options[i].value; });
+  }
+
+  /* ---------- chat assistant (placeholder): quick answers + hand-off to the showroom; nothing is sent ---------- */
+  const CHAT = {
+    hi: `Hi! I'm the ${S.name} assistant. I can help you find a product, check delivery, or book a showroom visit.`,
+    replies: {
+      'Find a product': `Tell me what you're looking for (e.g. "${S.pre === 'be' ? 'black freestanding tub' : '36 inch dual fuel range'}") or browse <a href="${url(S.pre === 'be' ? '/bathroom-products-categories/' : '/appliances/')}">${S.pre === 'be' ? 'bathroom products' : 'all appliances'}</a>.`,
+      'Delivery & shipping': S.pre === 'be' ? 'Items under 70 lb ship free across Canada and the USA. Heavier items go by freight, and we confirm the cost before processing. Free pickup in Markham.' : 'We deliver within Ontario. Items under 70 lb ship free; appliances and heavier items go by freight, cost confirmed before processing. Free pickup in Markham.',
+      'Book a showroom visit': `Our Markham showroom is open Mon–Fri 9–7, Sat 9–5, Sun 12–5. <a href="${url('/experience-centre/')}">Book a visit</a> and a designer will be ready for you.`,
+      'Order status': `Sign in to <a href="${url('/my-account/')}">My account</a> to see your orders, or tell me your order number and email and a specialist will check.`,
+      'Talk to a person': 'Call (905) 944-0060, or leave your name and email here and a specialist will get back to you during business hours.',
+    },
+  };
+  document.body.insertAdjacentHTML('beforeend', `<div class="chat" id="chat"><button class="chatbtn" aria-expanded="false" aria-controls="chatpanel" aria-label="Chat with us"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg><span>Chat</span></button>
+    <section class="chatpanel" id="chatpanel" hidden aria-label="Chat"><header><div><b>${esc(S.name)}</b><small><i></i> Usually replies in a few minutes</small></div><button class="x" data-chat-close aria-label="Close chat">${ico.x}</button></header>
+      <div class="chatlog" aria-live="polite"></div>
+      <div class="chips chatq">${Object.keys(CHAT.replies).map(q => `<button data-q="${esc(q)}">${esc(q)}</button>`).join('')}</div>
+      <form class="chatin"><label class="sr" for="chatmsg">Message</label><input id="chatmsg" placeholder="Type a message…" autocomplete="off"><button aria-label="Send">${ico.arrow}</button></form>
+      <p class="chatnote">Prototype: answers are samples, nothing is sent. The live chat can use the same assistant as Bliss.</p></section></div>`);
+  const chat = $('#chat'), log = $('.chatlog', chat), cpanel = $('#chatpanel');
+  const say = (who, html) => { log.insertAdjacentHTML('beforeend', `<div class="msg ${who}">${html}</div>`); log.scrollTop = log.scrollHeight; };
+  const answer = q => setTimeout(() => say('bot', CHAT.replies[q] || `Thanks! A specialist from our Markham showroom will reply about “${esc(q)}”. Can I have your email?`), 450);
+  $('.chatbtn', chat).addEventListener('click', () => { cpanel.hidden = !cpanel.hidden; $('.chatbtn', chat).setAttribute('aria-expanded', String(!cpanel.hidden)); if (!cpanel.hidden && !log.children.length) say('bot', CHAT.hi); if (!cpanel.hidden) $('#chatmsg').focus(); });
+  chat.addEventListener('click', e => { const q = e.target.closest('[data-q]'); if (q) { say('me', esc(q.dataset.q)); answer(q.dataset.q); } if (e.target.closest('[data-chat-close]')) { cpanel.hidden = true; $('.chatbtn', chat).setAttribute('aria-expanded', 'false'); } });
+  $('.chatin', chat).addEventListener('submit', e => { e.preventDefault(); const v = $('#chatmsg').value.trim(); if (!v) return; say('me', esc(v)); $('#chatmsg').value = ''; answer(v); });
+
   /* links written in page HTML as data-live="/live/address/" */
   const hydrate = (root = document) => $$('a[data-live]', root).forEach(a => { a.href = url(a.dataset.live); });
 
