@@ -43,7 +43,8 @@
       [/^\/our-brands\/$/, 'ck-brands.html', 'All brands'],
       [/^\/(outdoor-kitchens-toronto|backyard-kitchens|outdoor-kitchens-promotions|lynx-grills-toronto-canada|kamado-joe-canada-grills|best-outdoor-pizza-ovens|urban-bonfire-outdoor-kitchen-cabinets|brand\/station-grill)\/$/, 'ck-outdoor.html', 'Outdoor kitchens landing'],
       [/^\/(special-offers-promotions|[a-z-]*promotions?|[a-z-]*-promo|[a-z-]*-deals|miele-appliances)\/$/, 'ck-promotion.html', 'Brand promotion'],
-      [/^\/(kitchen-remodeling-toronto|kitchen-renovation-in-toronto|white-kitchen-cabinets|modern-kitchen-cabinets-toronto|kitchen-countertops|storage-solutions)\/$/, 'ck-service.html', 'Kitchen service page'],
+      [/^\/(door-styles|maple|birch|oak|walnut|mdf|melemine|high-gloss|thermo|etc|kitchen-countertops|quartz|granite|marble|edge-profiles|kitchen-accessories-and-organizers|spice-racks|drawer-organizers|corner-solutions|kitchen-island)\/$/, 'ck-materials.html', 'Door styles / countertops / accessories'],
+      [/^\/(kitchen-remodeling-toronto|kitchen-renovation-in-toronto|white-kitchen-cabinets|modern-kitchen-cabinets-toronto|storage-solutions)\/$/, 'ck-service.html', 'Kitchen service page'],
       [/^\/(modern-kitchens|transitional-kitchens|traditional-kitchens|kitchen-islands|bathroom-vanities|closets-home-office-home-library|bars-media-centers-fire-places)\/$/, 'ck-gallery.html', 'Portfolio gallery'],
       [/^\/(projects|kitchen-bathroom-project-videos)\/$/, 'ck-projects.html', 'Projects'],
       [/^\/projects\/[a-z0-9-]+\/$/, 'ck-project.html', 'Single project (new)'],
@@ -140,7 +141,7 @@
         <button class="tool" aria-label="Search" data-open-search>${ico.search}</button>
         <a class="tool hide-sm" href="${url('/my-account/')}" aria-label="My account">${ico.user}</a>
         <a class="tool" href="${url('/wishlist/')}" aria-label="Wishlist">${ico.heart}<span class="n" data-wish-n></span></a>
-        <a class="tool" href="${url('/cart/')}" aria-label="Cart">${ico.bag}<span class="n" data-cart-n></span></a>
+        <a class="tool" href="${url('/cart/')}" aria-label="Cart" data-open-cart>${ico.bag}<span class="n" data-cart-n></span></a>
       </div>
     </div>
     <nav class="nav" aria-label="Main"><div class="wrap"><ul>${navHtml}</ul></div></nav>
@@ -204,7 +205,12 @@
     const w = e.target.closest('[data-wish]');
     if (w) { const id = w.dataset.wish; wish = wish.includes(id) ? wish.filter(x => x !== id) : [...wish, id]; save('wish', wish); $$(`[data-wish="${id}"]`).forEach(b => b.setAttribute('aria-pressed', String(wish.includes(id)))); counts(); toast(wish.includes(id) ? 'Saved to your wishlist' : 'Removed from your wishlist'); document.dispatchEvent(new Event('wish:change')); }
     const a = e.target.closest('[data-add]');
-    if (a) { Cart.add(a.dataset.add, +(a.dataset.qty || $('#qty')?.value || 1)); toast('Added to cart'); }
+    if (a) { Cart.add(a.dataset.add, +(a.dataset.qty || $('#qty')?.value || 1)); openCart(a.dataset.add); }
+    if (e.target.closest('[data-open-cart]') && !e.ctrlKey && !e.metaKey) { e.preventDefault(); openCart(); }
+    if (e.target.closest('#cartDrawer [data-close]') || e.target.matches('#cartDrawer')) closeCart();
+    const cs = e.target.closest('#cartDrawer [data-set]'); if (cs) { Cart.set(cs.dataset.set, +cs.dataset.v); openCart(); }
+    if (e.target.closest('[data-express]')) { e.preventDefault(); toast('Express checkout opens Apple Pay / Google Pay / PayPal here (prototype)'); }
+    const vt = e.target.closest('[data-video-toggle]'); if (vt) { const v = $('[data-hero-video]'); if (v) { v.paused ? v.play() : v.pause(); } }
     const q = e.target.closest('[data-inq]');
     if (q) { const p = product(q.dataset.inq) || {}, m = $('#inq'); $('.prod', m).hidden = !p.n; $('.prod img', m).src = p.img || p.imgs?.[0] || ''; $('[data-n]', m).textContent = p.n || ''; $('[data-b]', m).textContent = p.b || ''; open(m); }
     const v = e.target.closest('[data-video]');
@@ -227,15 +233,52 @@
     go(0); run();
   };
 
+  /* ---------- hero video (Kohler style): plays muted, starts after the storefront shot, poster for reduced motion ---------- */
+  const initVideo = () => {
+    const v = $('[data-hero-video]'); if (!v) return;
+    const start = +v.dataset.start || 0, btn = $('[data-video-toggle]');
+    const icon = () => { if (!btn) return; btn.innerHTML = v.paused ? '<svg viewBox="0 0 14 14"><path d="M3 1l10 6-10 6z"/></svg>' : '<svg viewBox="0 0 14 14"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>'; btn.setAttribute('aria-label', v.paused ? 'Play video' : 'Pause video'); };
+    v.addEventListener('loadedmetadata', () => { if (start) v.currentTime = start; });
+    v.addEventListener('ended', () => { v.currentTime = start; v.play(); });
+    v.addEventListener('play', icon); v.addEventListener('pause', icon);
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { v.preload = 'auto'; v.play().catch(icon); } else icon();
+    icon();
+  };
+
+  /* ---------- Instagram row (@bathempcastlekitchens) ---------- */
+  const initIg = () => $$('[data-ig]').forEach(el => {
+    el.innerHTML = (C.ig || []).slice().sort((a, b) => (Math.abs(a[1] / a[2] - 1) > .05) - (Math.abs(b[1] / b[2] - 1) > .05)).slice(0, 8).map(([src, w, h]) => `<a href="#" onclick="G.toast('Opens the post on Instagram (prototype)');return false" aria-label="Instagram post"><img src="${src}" alt="" loading="lazy" width="${w}" height="${h}"${Math.abs(w / h - 1) > .05 ? ' style="object-fit:contain"' : ''}></a>`).join('');
+  });
+
+  /* ---------- cart drawer: opens on Add to cart and from the header bag ---------- */
+  document.body.insertAdjacentHTML('beforeend', '<div class="cdrawer" id="cartDrawer" aria-hidden="true"><aside class="cpanel" role="dialog" aria-label="Your cart" tabindex="-1"></aside></div>');
+  const openCart = addedId => {
+    const d = $('#cartDrawer'), items = Cart.items(), added = addedId && product(addedId), sub = Cart.subtotal();
+    const ups = (S.products || []).filter(p => p.p && !items.some(i => i.id === p.id)).slice(0, 2);
+    $('.cpanel', d).innerHTML = `<div class="ch"><h2>${added ? 'Added to your cart' : 'Your cart'} <small>(${Cart.count()})</small></h2><button class="x" data-close aria-label="Close cart">${ico.x}</button></div>
+      ${items.length ? `<div class="cb">${be() ? '<div class="perk">✓ Free shipping on items under 70 lb · free showroom pickup</div>' : '<div class="perk">✓ Ontario delivery · free showroom pickup in Markham</div>'}
+        <ul class="clist">${items.map(i => `<li${i.id === addedId ? ' class="new"' : ''}><a href="${url(i.p.live)}"><img src="${i.p.img}" alt=""></a><div><a href="${url(i.p.live)}">${esc(i.p.n)}</a><small>${esc(i.p.b)}</small><div class="qty"><button data-set="${i.id}" data-v="${i.qty - 1}" aria-label="Fewer">−</button><input value="${i.qty}" readonly aria-label="Quantity"><button data-set="${i.id}" data-v="${i.qty + 1}" aria-label="More">+</button></div></div><b>${money(i.p.p * i.qty)}</b></li>`).join('')}</ul>
+        ${ups.length ? `<div class="cup"><h3>Complete the look</h3>${ups.map(p => `<div class="up"><img src="${p.img}" alt=""><div><small>${esc(p.b)}</small>${esc(p.n)}<b>${money(p.p)}</b></div><button class="btn line sm" data-add="${p.id}">Add</button></div>`).join('')}</div>` : ''}</div>
+        <div class="cf"><div class="tot"><span>Subtotal</span><b>${money(sub)}</b></div><p class="note">Taxes and freight (if any) are calculated at checkout.</p>
+          <a class="btn dark full" href="${url('/checkout/')}">Checkout securely ${ico.arrow}</a>
+          <div class="express"><button data-express>Apple Pay</button><button data-express>G Pay</button><button data-express class="pp2">PayPal</button></div>
+          <a class="more" href="${url('/cart/')}">View cart</a></div>`
+      : `<div class="cb empty"><p class="lead">Your cart is empty.</p><a class="btn dark" href="${S.home}">Start shopping</a></div>`}`;
+    d.classList.add('on'); d.setAttribute('aria-hidden', 'false'); document.body.classList.add('noscroll'); $('.cpanel', d).focus();
+  };
+  const closeCart = () => { const d = $('#cartDrawer'); d.classList.remove('on'); d.setAttribute('aria-hidden', 'true'); document.body.classList.remove('noscroll'); };
+  const be = () => S.pre === 'be';
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+
   /* links written in page HTML as data-live="/live/address/" */
   const hydrate = (root = document) => $$('a[data-live]', root).forEach(a => { a.href = url(a.dataset.live); });
 
-  window.G = { $, $$, esc, url, qs, live, route, ico, money, card, product, all, Cart, toast, open, closeAll, hydrate, renderCards,
+  window.G = { $, $$, esc, url, qs, live, route, ico, money, card, product, all, Cart, toast, open, closeAll, hydrate, renderCards, openCart,
     wish: () => wish, cur: () => cur, S, C };
   document.title = document.title || S.name;
   window.addEventListener('DOMContentLoaded', () => {
     if (window.PAGE) window.PAGE();
-    hydrate(); initHero();
+    hydrate(); initHero(); initVideo(); initIg();
     if (S.usd) setCur(cur); else renderCards();
     counts();
   });

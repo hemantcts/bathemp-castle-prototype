@@ -7,20 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Inter:wght@400;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="img/ck-favicon.svg" type="image/svg+xml"><link rel="icon" href="img/ck-favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="img/ck-favicon-180.png">
 <link rel="stylesheet" href="assets/group.css"><link rel="stylesheet" href="assets/pages.css">
-<link rel="preload" as="image" href="img/kit-white-1800.webp" imagesrcset="img/kit-white-900.webp 900w, img/kit-white-1800.webp 1800w" imagesizes="100vw">
+<link rel="preload" as="image" href="img/castle-video-poster.webp">
 </head><body data-page="home" data-live="/">
 <div id="hdr"></div>
 
 <main>
-  <section class="hero" aria-roledescription="carousel" aria-label="Featured">
-    <div class="slide on">
-      <img src="img/kit-white-1800.webp" srcset="img/kit-white-900.webp 900w, img/kit-white-1800.webp 1800w" sizes="100vw" alt="White custom kitchen with a large island and black range hood">
-    </div>
-    <div class="slide">
-      <img src="img/kit-aitken-1800.webp" srcset="img/kit-aitken-900.webp 900w, img/kit-aitken-1800.webp 1800w" sizes="100vw" alt="Fluted cabinets and a waterfall peninsula in a modern kitchen" loading="lazy">
-    </div>
-    <div class="slide">
-      <img src="img/app-oak-1800.webp" srcset="img/app-oak-900.webp 900w, img/app-oak-1800.webp 1800w" sizes="100vw" alt="Thermador built-in refrigerator in a light oak kitchen" loading="lazy">
+  <section class="hero" aria-label="Showroom video">
+    <div class="slide on video">
+      <video data-hero-video data-start="3.2" muted playsinline preload="metadata" poster="img/castle-video-poster.webp" aria-label="A walk through the Castle Kitchens showroom: full kitchen displays with premium appliances"><source src="video/castle-kitchens.mp4" type="video/mp4"></video>
     </div>
     <div class="copy"><div class="wrap">
       <span class="eyebrow">Castle Kitchens · Castle Appliances</span>
@@ -29,7 +23,7 @@
       <a class="btn light" href="#appliances">Shop appliances <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a>
       &nbsp;<a class="btn light" href="#" data-live="/kitchen-remodeling-toronto/">Plan your kitchen</a>
     </div></div>
-    <div class="ctrl"><div class="dots"></div><button class="pp"></button></div>
+    <div class="ctrl"><button class="pp" data-video-toggle aria-label="Pause video"></button></div>
   </section>
 
   <section class="sec">
@@ -100,6 +94,14 @@
     <div><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 12h6M9 16h6"/></svg><p style="margin:0"><b>Our own factory</b><span>Cabinetry made for your space</span></p></div>
     <div><svg viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg><p style="margin:0"><b>Free pickup</b><span>From our Markham showroom</span></p></div>
   </div></section>
+
+  <!-- Instagram: @bathempcastlekitchens (shared by both sites) -->
+  <section class="sec tight igsec">
+    <div class="wrap">
+      <div class="sh center-sh"><div><span class="eyebrow" style="color:#6e6a66">@bathempcastlekitchens</span><h2>Inspiration lives here</h2><p>Real projects and showroom moments. Follow us on Instagram.</p></div></div>
+      <div class="igrail" data-ig></div>
+    </div>
+  </section>
 
   <section class="visit" id="visit">
     <div class="body">

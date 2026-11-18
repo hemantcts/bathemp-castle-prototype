@@ -44,6 +44,7 @@ PAGES = {
         ('ck-promotion.html', 'promotion', '/thermador-promotion/', 'Brand promotion', '/thermador-promotion/, /miele-appliances/, /special-offers-promotions/ …', '19'),
         ('ck-outdoor.html', 'outdoor', '/outdoor-kitchens-toronto/', 'Outdoor kitchens landing', '/outdoor-kitchens-toronto/, /backyard-kitchens/, /lynx-grills-toronto-canada/ …', '8'),
         ('ck-service.html', 'service', '/kitchen-remodeling-toronto/', 'Kitchen service page', '/kitchen-remodeling-toronto/, /white-kitchen-cabinets/, /kitchen-countertops/ …', '6'),
+        ('ck-materials.html', 'materials', '/door-styles/', 'Door styles / countertops / accessories', '/door-styles/, /maple/, /oak/, /mdf/ …, /kitchen-countertops/, /quartz/, /granite/, /marble/, /edge-profiles/, /kitchen-accessories-and-organizers/ …', '19'),
         ('ck-gallery.html', 'gallery', '/modern-kitchens/', 'Portfolio gallery', '/modern-kitchens/, /transitional-kitchens/, /kitchen-islands/ …', '7'),
         ('ck-projects.html', 'projects', '/projects/', 'Projects', '/projects/, /kitchen-bathroom-project-videos/', '2'),
         ('ck-project.html', 'project', '/projects/mcvean-manor-project/', 'Single project', '/projects/{project}/ (new)', 'new'),
@@ -69,7 +70,7 @@ def scripts(site): return f'<script src="assets/site-{site}.js"></script><script
 
 import json as _j
 for _pre, _site in (('be','bathemp'),('ck','castle')):
-    _t=(R/f'assets/content-{_site}.js').read_text(encoding='utf-8'); _d=_j.loads(_t[_t.index('{'):_t.rindex('}')+1])
+    _t=(R/f'assets/content-{_site}.js').read_text(encoding='utf-8'); _d=_j.JSONDecoder().raw_decode(_t[_t.index('{'):])[0]
     PAGES[_pre]=[(a,b,(_d['posts'][0]['live'] if b=='post' else c),*rest) for a,b,c,*rest in PAGES[_pre]]
 for pre, pages in PAGES.items():
     s = SITES[pre]

@@ -94,7 +94,7 @@
         ${finishes.length ? `<div class="opt"><b>Finish: <span data-fin>${esc(finishes[0])}</span></b><div class="sw">${finishes.map((f, i) => `<button aria-pressed="${!i}" data-finish="${esc(f)}">${esc(f)}</button>`).join('')}</div></div>` : ''}
         <div class="buy">${price ? `<div class="qty"><button aria-label="Fewer" data-q="-1">−</button><input id="qty" value="1" inputmode="numeric" aria-label="Quantity"><button aria-label="More" data-q="1">+</button></div><button class="btn dark" data-add="${d.id}">Add to cart</button>` : ''}
           <button class="btn ${price ? 'line' : 'dark'}" data-inq="${d.id}">Inquire now</button><button class="wish static" data-wish="${d.id}" aria-pressed="${G.wish().includes(d.id)}" aria-label="Save to wishlist">${ico.heart}</button></div>
-        <ul class="perks"><li><b>Delivery</b> ${esc(S.shipping)}</li><li><b>Authorized dealer</b> Full manufacturer warranty.</li><li><b>See it first</b> On display in our Markham showroom — <a href="${url('/experience-centre/')}">plan a visit</a>.</li></ul>
+        ${be ? '' : `<div class="pkg"><b>Building a full kitchen?</b><p>Get one quote for a complete appliance package (range, refrigeration, dishwasher, ventilation) — package savings and one delivery.</p><button class="btn line sm" data-inq="${d.id}">Request a package quote</button></div>`}<ul class="perks"><li><b>Delivery</b> ${esc(S.shipping)}</li><li><b>Authorized dealer</b> Full manufacturer warranty.</li><li><b>See it first</b> On display in our Markham showroom — <a href="${url('/experience-centre/')}">plan a visit</a>.</li></ul>
         ${d.short ? `<div class="prose small">${clean(d.short)}</div>` : ''}
       </div>
     </section>
@@ -110,6 +110,8 @@
       const tb = e.target.closest('[data-tab]'); if (tb) { $$('[data-tab]').forEach(b => b.setAttribute('aria-selected', String(b === tb))); $$('[data-panel]').forEach(p => p.hidden = p.dataset.panel !== tb.dataset.tab); }
     });
     document.addEventListener('cur:change', () => { const pr = $('.pdp .price'); if (price) pr.innerHTML = money(price); });
+    document.body.insertAdjacentHTML('beforeend', `<div class="stickybar" aria-hidden="true"><div class="wrap"><img src="${d.imgs[0]}" alt=""><div><b>${esc(d.n)}</b><span>${price ? money(price) : 'Price on request'}</span></div>${price ? `<button class="btn dark" data-add="${d.id}" data-qty="1">Add to cart</button>` : ''}<button class="btn ${price ? 'line' : 'dark'}" data-inq="${d.id}">Inquire now</button></div></div>`);
+    const bar = $('.stickybar'); new IntersectionObserver(([en]) => { const show = !en.isIntersecting && en.boundingClientRect.top < 0; bar.classList.toggle('on', show); bar.setAttribute('aria-hidden', String(!show)); }).observe($('.pdp .buy'));
   };
 
   R.brands = () => {
@@ -158,7 +160,7 @@
     const items = Cart.items();
     if (!items.length) { main().innerHTML = pagehead('Checkout', 'Your cart is empty.', [['Checkout']]) + `<div class="wrap center sec"><a class="btn dark" href="${S.home}">Start shopping</a></div>`; return; }
     const provs = [['ON', 'Ontario'], ['QC', 'Quebec'], ['BC', 'British Columbia'], ['AB', 'Alberta'], ['MB', 'Manitoba'], ['SK', 'Saskatchewan'], ['NS', 'Nova Scotia'], ['NB', 'New Brunswick'], ['NL', 'Newfoundland and Labrador'], ['PE', 'Prince Edward Island']];
-    main().innerHTML = pagehead('Checkout', '', [['Cart', '/cart/'], ['Checkout']]) + `<section class="sec tight"><div class="wrap cartgrid"><form class="pform co" id="co">
+    main().innerHTML = pagehead('Checkout', '', [['Cart', '/cart/'], ['Checkout']]) + `<div class="wrap"><ol class="costeps"><li class="done">Cart</li><li class="on">Details &amp; delivery</li><li>Payment</li><li>Confirmation</li></ol></div><section class="sec tight"><div class="wrap cartgrid"><form class="pform co" id="co"><div class="expressbox"><span>Express checkout</span><div class="express"><button type="button" data-express>Apple Pay</button><button type="button" data-express>G Pay</button><button type="button" data-express class="pp2">PayPal</button></div><span class="or">or continue below</span></div>
       <h2>Contact</h2><div class="row2">${field('em', 'Email', 'email', 'required autocomplete="email"')}${field('ph', 'Phone', 'tel', 'autocomplete="tel"')}</div>
       <h2>Delivery address</h2><div class="row2">${field('fn', 'First name', 'text', 'required')}${field('ln', 'Last name', 'text', 'required')}</div>${field('ad', 'Address', 'text', 'required autocomplete="address-line1"')}
       <div class="row3">${field('ci', 'City', 'text', 'required')}${field('pv', be ? 'Province / State' : 'Province', 'select', provs.map(([v, t]) => `<option value="${v}">${t}</option>`).join('') + (be ? '<option value="US">United States (state)</option>' : ''))}${field('pc', 'Postal / ZIP code', 'text', 'required')}</div>
@@ -167,7 +169,7 @@
       <h2>Payment</h2><div class="radios pay"><label><input type="radio" name="pm" checked> Credit / debit card <small>Visa, Mastercard, Amex, Apple Pay, Google Pay</small></label><div class="cardbox">Card fields appear here (Stripe) — prototype, no payment is taken.</div><label><input type="radio" name="pm"> PayPal</label></div>
       <label class="chk"><input type="checkbox" required><span>I agree to the <a href="${url('/terms/')}">terms</a> and <a href="${url('/returns/')}">return policy</a>.</span></label>
       <button class="btn dark full">Place order ${arrow}</button></form>
-      <aside class="summary"><h2>Your order</h2><ul class="mini">${items.map(i => `<li><img src="${i.p.img}" alt=""><span>${esc(i.p.n)} <small>× ${i.qty}</small></span><b>${money(i.p.p * i.qty)}</b></li>`).join('')}</ul><dl data-tot></dl><p class="note" data-curnote></p></aside></div></section>`;
+      <aside class="summary"><h2>Your order</h2><ul class="mini">${items.map(i => `<li><img src="${i.p.img}" alt=""><span>${esc(i.p.n)} <small>× ${i.qty}</small></span><b>${money(i.p.p * i.qty)}</b></li>`).join('')}</ul><dl data-tot></dl><p class="note" data-curnote></p><ul class="assure"><li>Secure checkout, encrypted card payments</li><li>Authorized dealer · full manufacturer warranty</li><li>Questions? (905) 944-0060 or Inquire now</li></ul></aside></div></section>`;
     const tot = () => {
       const pv = $('#pv').value, us = be && ($('#co2')?.value === 'US' || pv === 'US'), sub = Cart.subtotal(), pick = $$('[name=sh]')[1].checked;
       const ship = pick ? 0 : shipCost(items), rate = us ? 0 : (TAX[pv] ?? 0.05), tax = (sub + ship) * rate, c = us ? 'USD' : 'CAD';
@@ -355,6 +357,33 @@
       rail(`Shop ${B}`, items.length ? items : (C.priced || []).slice(0, 4)) + `<section class="sec"><div class="wrap narrow prose"><p>${esc(sentences(p.x, 6))}</p><p class="note">Offer terms as published by the manufacturer. Prototype text from the current promotion page.</p></div></section>` + cta();
   };
 
+
+  R.materials = () => {
+    const groups = { door: /door-styles|maple|birch|oak|walnut|mdf|melemine|high-gloss|thermo|etc/, counter: /countertops|quartz|granite|marble|edge-profiles/, acc: /accessories|spice|drawer|corner|island/ };
+    const kind = Object.keys(groups).find(k => groups[k].test(live)) || 'door';
+    const tabs = { door: [['All door styles', '/door-styles/'], ['Maple', '/maple/'], ['Birch', '/birch/'], ['Oak', '/oak/'], ['Walnut', '/walnut/'], ['MDF / painted', '/mdf/'], ['Melamine', '/melemine/'], ['High gloss', '/high-gloss/'], ['Thermo', '/thermo/']], counter: [['Countertops', '/kitchen-countertops/'], ['Quartz', '/quartz/'], ['Granite', '/granite/'], ['Marble', '/marble/'], ['Edge profiles', '/edge-profiles/']], acc: [['Accessories & organizers', '/kitchen-accessories-and-organizers/'], ['Spice racks', '/spice-racks/'], ['Drawer organizers', '/drawer-organizers/'], ['Corner solutions', '/corner-solutions/'], ['Kitchen islands', '/kitchen-island/']] }[kind];
+    const cur = (tabs.find(([, u]) => u === live) || tabs[0])[0];
+    const mat = (live.match(/^\/([a-z-]+)\/$/) || [])[1];
+    const pick = (C.doors || []).filter(d => !mat || mat === 'door-styles' || d.mat === mat || (mat === 'mdf' && d.mat === 'painted'));
+    const doors = pick.length ? pick : (C.doors || []);
+    const ex = C.extra || {};
+    const head = { door: ['Door styles', 'Choose the door that sets the tone: shaker, raised panel, slab or high gloss, in maple, oak, walnut, painted MDF and more. Every door is made to order in our own factory.'],
+      counter: ['Countertops', 'Quartz, granite and marble, fabricated and installed with your cabinets. See full slabs and edge profiles in our Markham showroom.'],
+      acc: ['Accessories & organizers', 'Pull-outs, spice racks, drawer organizers and corner solutions that make every cabinet work harder.'] }[kind];
+    const cap = m => m === 'painted' ? 'Painted MDF' : m.charAt(0).toUpperCase() + m.slice(1);
+    const grid = kind === 'door'
+      ? doors.map(d => `<figure class="door"><a href="#" data-lb="${d.img}"><img src="${d.img}" alt="${esc(d.name)} door" loading="lazy"></a><figcaption><b>${esc(d.name)}</b><span>${esc(cap(d.mat))}${d.code ? ' · ' + esc(d.code) : ''}</span></figcaption></figure>`).join('')
+      : (kind === 'counter' ? [...(ex['kitchen-countertops'] || []), ...(ex['edge-profiles'] || [])] : (ex['kitchen-island'] || [])).map(im => `<figure class="door wide"><a href="#" data-lb="${im}"><img src="${im}" alt="" loading="lazy"></a></figure>`).join('');
+    const title = cur === tabs[0][0] ? head[0] : `${cur}${kind === 'door' ? ' kitchen cabinets' : ''}`;
+    main().innerHTML = pagehead(title, head[1], [['Custom kitchens', '/modern-kitchen-cabinets-toronto/'], [cur]], 'Castle Kitchens · made in our factory') +
+      `<div class="wrap"><div class="chips">${tabs.map(([t, u]) => `<a href="${url(u)}" ${u === live ? 'aria-current="page"' : ''}>${esc(t)}</a>`).join('')}</div></div>
+      <section class="sec tight"><div class="wrap"><div class="doors${kind === 'door' ? '' : ' big'}">${grid}</div>
+      ${kind === 'door' ? (pick.length ? '' : '<p class="note">Prototype: photos for this material come from the client; maple and painted doors shown.</p>') + '<p class="note">Door photos from the current door-style pages. Each style comes in more colours and finishes; choose yours with a designer.</p>' : ''}</div></section>
+      <section class="sec stone"><div class="wrap two"><div><h2 class="h2">Design it with us</h2><p>Book a design consultation: our designers draw your kitchen, help you pick doors, countertops and hardware, and plan the appliances from Castle Appliances at the same time.</p>
+      <ol class="howto"><li><b>Consultation</b>In the showroom or on a call.</li><li><b>Design &amp; quote</b>Layouts, materials and one clear quote.</li><li><b>Made in our factory</b>Cabinets built to your measurements.</li><li><b>Installation</b>Delivered and installed by our team.</li></ol></div>
+      <div class="panel">${form(`<div class="row2">${field('dn', 'Name', 'text', 'required')}${field('dp', 'Phone', 'tel')}</div>${field('de', 'Email', 'email', 'required')}${field('dr', 'Project', 'select', '<option>New kitchen</option><option>Kitchen renovation</option><option>Closet / home office</option><option>Bar / media centre</option><option>Bathroom vanity</option>')}${field('dm', 'Tell us about your space', 'textarea')}`, 'Book a design consultation')}</div></div></section>`;
+  };
+
   R.outdoor = () => {
     const p = C.pages['outdoor-kitchens-toronto'];
     main().innerHTML = banner('img/out-kitchen-1800.webp', p.t, esc(sentences(p.x, 2)), 'Outdoor living', `<a class="btn light" href="${url('/contact/')}">Design my outdoor kitchen ${arrow}</a>`) +
@@ -363,7 +392,7 @@
       `<section class="sec stone"><div class="wrap"><div class="promos">${p.heads.slice(0, 6).map(h => `<div><b>${esc(h)}</b></div>`).join('')}</div></div></section>` + cta('See outdoor kitchens in person', 'Grills, pizza ovens and outdoor cabinets on display.');
   };
 
-  const map = { shop: 'shop', category: 'category', product: 'product', brands: 'brands', brand: 'brand', search: 'search', cart: 'cart', checkout: 'checkout', order: 'order', account: 'account', wishlist: 'wishlist', blog: 'blog', post: 'post', city: 'city', projects: 'projects', project: 'project', gallery: 'gallery', service: 'service', about: 'about', testimonials: 'testimonials', contact: 'contact', quote: 'quote', experience: 'experience', policy: 'policy', '404': 'notfound', appliances: 'appliances', promotion: 'promotion', outdoor: 'outdoor' };
+  const map = { materials: 'materials', shop: 'shop', category: 'category', product: 'product', brands: 'brands', brand: 'brand', search: 'search', cart: 'cart', checkout: 'checkout', order: 'order', account: 'account', wishlist: 'wishlist', blog: 'blog', post: 'post', city: 'city', projects: 'projects', project: 'project', gallery: 'gallery', service: 'service', about: 'about', testimonials: 'testimonials', contact: 'contact', quote: 'quote', experience: 'experience', policy: 'policy', '404': 'notfound', appliances: 'appliances', promotion: 'promotion', outdoor: 'outdoor' };
   const page = document.body.dataset.page;
   if (map[page]) window.PAGE = () => { R[map[page]](); document.title = `${($('#main h1') || {}).textContent || S.name} — ${S.name} (prototype)`; };
 })();

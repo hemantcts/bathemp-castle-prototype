@@ -5,7 +5,8 @@ window.SITE = {
   util: 'CAD pricing · Delivery across Ontario',
   menu: [
     { label: 'Custom kitchens', mega: [
-      { h: 'Kitchens', links: [['Modern kitchen cabinets','/modern-kitchen-cabinets-toronto/'],['White kitchen cabinets','/white-kitchen-cabinets/'],['Kitchen remodeling','/kitchen-remodeling-toronto/'],['Kitchen renovation','/kitchen-renovation-in-toronto/'],['Kitchen countertops','/kitchen-countertops/'],['Storage solutions','/storage-solutions/']] },
+      { h: 'Kitchens', links: [['Modern kitchen cabinets','/modern-kitchen-cabinets-toronto/'],['White kitchen cabinets','/white-kitchen-cabinets/'],['Kitchen remodeling','/kitchen-remodeling-toronto/'],['Kitchen renovation','/kitchen-renovation-in-toronto/'],['Storage solutions','/storage-solutions/']] },
+      { h: 'Design &amp; materials', links: [['Door styles','/door-styles/'],['Maple','/maple/'],['Painted MDF','/mdf/'],['Countertops','/kitchen-countertops/'],['Quartz','/quartz/'],['Accessories &amp; organizers','/kitchen-accessories-and-organizers/']] },
       { h: 'Portfolio', links: [['Modern kitchens','/modern-kitchens/'],['Transitional kitchens','/transitional-kitchens/'],['Traditional kitchens','/traditional-kitchens/'],['Kitchen islands','/kitchen-islands/'],['Closets &amp; home office','/closets-home-office-home-library/'],['Bars &amp; media centres','/bars-media-centers-fire-places/']] },
       { h: 'Who we are', links: [['Our factory','/our-factory/'],['Our process','/our-process/'],['Our standards','/our-standards/'],['What makes us different','/what-makes-us-different/'],['Testimonials','/testimonials/']] },
       { h: 'Trades', links: [['Architects &amp; designers','/custom-kitchens-for-architects-and-designers/'],['Multi-housing projects','/multi-housing-projects/'],['New dealer','/new-dealer/']] },

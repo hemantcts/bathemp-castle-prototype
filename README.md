@@ -10,3 +10,4 @@ robots.txt blocks crawling, and no link leads to bathemp.ca or castlekitchens.ca
 - `assets/group.js`: header, mega menu, footer, address map (live address -> template), cart / wishlist in this browser,
   pop-ups. `assets/pages.js`: the page templates. `assets/content-*.js`: real content exported from the live sites.
 - Run locally: `python -m http.server 5174` in this folder.
+- `video/`: the showroom hero videos from both live sites (Bath-Homepage_new.mp4, Kit-Homepage1.mp4 starting after the storefront shot). Instagram row = cached posts of @bathempcastlekitchens; the real sites get the same hourly feed as Bliss once a token for that account is created.
