@@ -292,7 +292,7 @@
     const opt = (pre, label) => `<optgroup label="${label}">${T[pre].map(([f, n, l]) => `<option value="${f}${l && l !== '/' ? `?live=${encodeURIComponent(l)}` : ''}"${f === here ? ' selected' : ''}>${esc(n)}</option>`).join('')}</optgroup>`;
     document.body.insertAdjacentHTML('beforeend', `<div class="tswitch" id="tswitch"><button class="tsbtn" aria-expanded="false" aria-controls="tspanel"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Prototype pages</span></button>
       <div class="tspanel" id="tspanel" hidden><p class="tsnow"><b>${esc(tpl)}</b> template<br>Live address kept: <code>${esc(live)}</code></p><label for="tsel">Jump to a template</label><select id="tsel">${S.pre === 'be' ? opt('be', 'Bath Emporium') + opt('ck', 'Castle Kitchens') : opt('ck', 'Castle Kitchens') + opt('be', 'Bath Emporium')}</select>
-        <div class="tsrow"><button data-ts="-1">← Previous</button><a href="index.html">All templates</a><button data-ts="1">Next →</button></div></div></div>`);
+        <div class="tsrow"><button data-ts="-1">← Previous</button><button data-ts="1">Next →</button></div></div></div>`);
     const sel = $('#tsel'), btn = $('.tsbtn'), panel = $('#tspanel');
     btn.addEventListener('click', () => { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); if (!panel.hidden) sel.focus(); });
     sel.addEventListener('change', () => { location.href = sel.value; });

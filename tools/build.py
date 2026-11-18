@@ -117,23 +117,9 @@ import json as _json
 
 # index: template list + SEO address map
 rows = lambda pre: ''.join(f'<tr><td><a href="{f}">{html.escape(n)}</a></td><td><code>{html.escape(c)}</code></td><td class="r">{k}</td></tr>' for f, _, _, n, c, k in PAGES[pre])
-(R / 'index.html').write_text(f'''<!doctype html>
-<html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bath Emporium · Castle Kitchens — prototype templates</title><meta name="robots" content="noindex,nofollow">
-<link rel="icon" href="img/be-favicon-32.png" sizes="32x32">
-{FONTS}
-<style>body{{margin:0;background:#0b0b0b;color:#eee;font:15px/1.55 Inter,system-ui,sans-serif}}main{{max-width:1180px;margin:0 auto;padding:48px 20px 80px}}
-h1{{font:500 clamp(22px,3vw,32px) Cinzel,serif;letter-spacing:.1em;text-transform:uppercase;margin:0 0 8px}}h2{{font:600 13px Montserrat,sans-serif;letter-spacing:.18em;text-transform:uppercase;margin:44px 0 12px;color:#fff}}
-p{{color:#aaa;max-width:80ch}}.home{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0}}.home a{{border:1px solid #333;padding:22px;display:flex;gap:14px;align-items:center;font:600 13px Montserrat;letter-spacing:.14em;text-transform:uppercase}}.home a:hover{{background:#fff;color:#000}}.home img{{width:40px;border-radius:7px}}
-a{{color:inherit}}table{{width:100%;border-collapse:collapse;font-size:14px}}th,td{{text-align:left;border-bottom:1px solid #262626;padding:10px 8px;vertical-align:top}}th{{font:600 11px Montserrat;letter-spacing:.14em;text-transform:uppercase;color:#888}}
-td a{{color:#fff;font-weight:600}}code{{color:#c9d3df;font-size:13px;word-break:break-word}}.r{{text-align:right;white-space:nowrap}}.k{{background:#151515;border:1px solid #262626;padding:18px 22px;margin-top:22px}}.k li{{margin:4px 0;color:#bbb}}
-@media(max-width:640px){{.home{{grid-template-columns:1fr}}td:nth-child(2){{display:none}}}}</style></head>
-<body><main><h1>Prototype templates</h1><p>Bath Emporium and Castle Kitchens / Castle Appliances · new design and online store, for client approval. Not the live sites: every link stays inside the prototype, and every page is marked "noindex".</p>
-<div class="home"><a href="bathemp.html"><img src="img/be-favicon-180.png" alt="">Bath Emporium homepage</a><a href="castle.html"><img src="img/ck-favicon-180.png" alt="">Castle Kitchens homepage</a></div>
-<div class="k"><b>How SEO is kept</b><ul><li>Each template replaces the design only. The live address in the second column stays exactly the same, with the same page title, description, heading and text.</li><li>Every page of the prototype shows, in the bar at the top, which live address it stands for.</li><li>The menus carry every link the live menus have today, so no page loses its internal links.</li><li>"New" pages are added by the online store (cart, checkout, account) or by the brief (Experience Centre).</li></ul></div>
-<h2>Bath Emporium · bathemp.ca</h2><table><tr><th>Template</th><th>Live addresses it keeps</th><th class="r">Pages today</th></tr>{rows('be')}</table>
-<h2>Castle Kitchens · castlekitchens.ca</h2><table><tr><th>Template</th><th>Live addresses it keeps</th><th class="r">Pages today</th></tr>{rows('ck')}</table>
-<p style="margin-top:30px">Content, products and photos are real, exported from the live sites on 18 Nov 2026. Prices on Bath Emporium follow Bliss; Castle shows real display-clearance prices and "Inquire now" for the rest until the price list arrives.</p>
-</main></body></html>
-''', encoding='utf-8')
+(R / 'index.html').write_text('''<!doctype html>
+<html lang="en-CA"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<title>Bath Emporium</title><meta http-equiv="refresh" content="0; url=bathemp.html"><link rel="canonical" href="bathemp.html"></head>
+<body><script>location.replace('bathemp.html')</script><a href="bathemp.html">Bath Emporium</a> · <a href="castle.html">Castle Kitchens</a></body></html>
+''', encoding='utf-8')  # no overview page: the client gets the two homepage links
 print('ok', sum(1 for pages in PAGES.values() for p in pages if p[1]), 'templates')
