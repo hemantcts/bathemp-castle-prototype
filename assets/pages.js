@@ -219,7 +219,7 @@
     if (!signed) {
       main().innerHTML = pagehead('My account', 'Track orders, save addresses and keep your wishlist on every device.', [['My account']]) + `<section class="sec tight"><div class="wrap two">
         <div class="panel"><h2>Sign in</h2>${form(field('le', 'Email', 'email', 'required') + field('lp', 'Password', 'password', 'required') + '<label class="chk"><input type="checkbox"> Remember me</label>', 'Sign in', '<a href="#" onclick="return false">Forgot your password?</a>')}</div>
-        <div class="panel"><h2>Create an account</h2>${form(field('re', 'Email', 'email', 'required') + field('rp', 'Password', 'password', 'required'), 'Create account', 'Trade customers: apply for a trade account after signing up.')}</div></div></section>`;
+        <div class="panel"><h2>Create an account</h2>${form(field('re', 'Email', 'email', 'required') + field('rp', 'Password', 'password', 'required'), 'Create account')}</div></div></section>`;
       $$('[data-demo-form]').forEach(f => { f.removeAttribute('data-demo-form'); f.addEventListener('submit', e => { e.preventDefault(); sessionStorage.setItem(`${S.id}_in`, '1'); R.account(); }); });
       return;
     }
@@ -326,7 +326,7 @@
 
   R.contact = () => {
     main().innerHTML = pagehead('Contact us', 'Call, email or visit our Markham showroom. A specialist will reply within business hours.', [['Contact']]) + `<section class="sec tight"><div class="wrap two">
-      <div class="panel">${form(`<div class="row2">${field('cn', 'Name', 'text', 'required')}${field('cp', 'Phone', 'tel')}</div>${field('ce', 'Email', 'email', 'required')}${field('cs', 'Topic', 'select', '<option>Product question</option><option>Order status</option><option>Design consultation</option><option>Trade account</option><option>Returns</option>')}${field('cm', 'Message', 'textarea')}`, 'Send message')}</div>
+      <div class="panel">${form(`<div class="row2">${field('cn', 'Name', 'text', 'required')}${field('cp', 'Phone', 'tel')}</div>${field('ce', 'Email', 'email', 'required')}${field('cs', 'Topic', 'select', '<option>Product question</option><option>Order status</option><option>Design consultation</option><option>Returns</option>')}${field('cm', 'Message', 'textarea')}`, 'Send message')}</div>
       <div><div class="facts col"><div><b>Showroom</b>5 Shields Court, Unit 100, Markham, ON L3R 0G3</div><div><b>Call</b>(905) 944-0060</div><div><b>Hours</b><span class="nw">Mon–Fri 9–7</span> · <span class="nw">Sat 9–5</span> · <span class="nw">Sun 12–5</span></div></div><img class="rounded" src="img/store-${be ? 'bath' : 'castle'}-900.webp" alt="The showroom at 5 Shields Court, Markham" loading="lazy"></div></div></section>`;
   };
 

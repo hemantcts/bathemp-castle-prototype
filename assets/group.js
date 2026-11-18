@@ -144,7 +144,7 @@
       <div class="mbar"><div class="wrap">${m.feat ? `<a href="${url(m.feat.u)}">View all ${esc(m.label.toLowerCase())} →</a>` : ''}<span>Need help choosing? <a href="${url('/experience-centre/')}">Book a showroom visit</a> · (905) 944-0060</span></div></div></div></li>`
     : `<li><a href="${url(m.u)}"${m.sale ? ' class="sale"' : ''}>${m.label}${m.badge ? `<em class="nbadge" aria-label="up to ${esc(m.badge)}"><small>up to</small> ${esc(m.badge)}</em>` : ''}</a></li>`).join('');
   $('#hdr').outerHTML = `
-  <div class="util"><div class="wrap"><span class="l">${S.util}</span><div class="r"><a href="#" onclick="return false">(905) 944-0060</a><a href="${url(S.showroomLive)}">Visit the showroom</a><a href="${url('/my-account/')}">Trade program</a>${S.usd ? `<div class="cur" role="group" aria-label="Currency"><button data-cur="CAD">CAD</button><button data-cur="USD">USD</button></div>` : ''}</div></div></div>
+  <div class="util"><div class="wrap"><span class="l">${S.util}</span><div class="r"><a href="#" onclick="return false">(905) 944-0060</a><a href="${url(S.showroomLive)}">Visit the showroom</a>${S.usd ? `<div class="cur" role="group" aria-label="Currency"><button data-cur="CAD">CAD</button><button data-cur="USD">USD</button></div>` : ''}</div></div></div>
   <header class="hdr" id="top">
     <div class="wrap brands-row">
       <button class="tool burger" aria-label="Menu" data-open-drawer>${ico.menu}</button>
