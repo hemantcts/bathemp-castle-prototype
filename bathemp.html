@@ -12,10 +12,23 @@
 <div id="hdr"></div>
 
 <main>
+  <!-- Option B: shop-first header (photo slideshow + category shortcuts), shown with ?hero=b -->
+  <section class="hero heroB" aria-label="Featured" hidden>
+    <div class="slide on"><img src="img/bath-hero-1800.webp" srcset="img/bath-hero-900.webp 900w, img/bath-hero-1800.webp 1800w" sizes="100vw" alt="Freestanding tub and custom vanity in a dark marble bathroom">
+      <div class="copy"><div class="wrap"><span class="eyebrow">New season · Bath</span><h1 class="h1x">The art of the bath</h1><p>Freestanding tubs, faucets and showers from Riobel, TOTO, Victoria + Albert and more. Free shipping on most items.</p><a class="btn light" href="#" data-live="/bathroom-products-categories/">Shop bathroom <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a> <a class="btn light" href="#" data-live="/brands/riobel/">Shop Riobel</a></div></div></div>
+    <div class="slide"><img src="img/bath-tub-1800.webp" srcset="img/bath-tub-900.webp 900w, img/bath-tub-1800.webp 1800w" sizes="100vw" alt="Marble bathroom with a freestanding tub" loading="lazy">
+      <div class="copy"><div class="wrap"><span class="eyebrow">Display clearance</span><h2 class="h1x">Up to 74% off showroom models</h2><p>One-of-a-kind display pieces from our Markham showroom, while they last.</p><a class="btn light" href="#" data-live="/product-category/display-clearance/">Shop clearance <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a> <a class="btn light" href="#" data-live="/product-category/sale-items/">Shop sale</a></div></div></div>
+    <div class="slide"><img src="img/kit-island-1800.webp" srcset="img/kit-island-900.webp 900w, img/kit-island-1800.webp 1800w" sizes="100vw" alt="Warm wood custom kitchen with a marble island" loading="lazy">
+      <div class="copy"><div class="wrap"><span class="eyebrow">Visit us</span><h2 class="h1x">Bath, kitchen and appliances under one roof</h2><p>See it all in person at our Markham showroom, then order online or with a designer.</p><a class="btn light" href="#" data-live="/showroom/">Plan your visit <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a> <a class="btn light" href="#" data-live="/kitchen-products-categories/">Kitchen products</a></div></div></div>
+    <div class="ctrl"><div class="dots"></div><button class="pp"></button></div>
+  </section>
+  <nav class="catbar heroB" aria-label="Shop by category" hidden><div class="wrap"><span>Shop by category</span><a href="#" data-live="/product-category/bathtubs/">Bathtubs</a><a href="#" data-live="/product-category/bathroom-faucet/">Bathroom faucets</a><a href="#" data-live="/product-category/bathroom-vanities/">Vanities</a><a href="#" data-live="/product-category/bathroom-toilets/">Toilets</a><a href="#" data-live="/product-category/bathroom-faucet/bath-shower-kit-geo/">Shower kits</a><a href="#" data-live="/product-category/kitchen-faucets-geo/">Kitchen faucets</a><a href="#" data-live="/product-category/kitchen/kitchen-sink-geo/">Kitchen sinks</a></div></nav>
+  <!-- /Option B -->
+
   <!-- Oversized hero, Kohler style -->
-  <section class="hero" aria-label="Showroom video">
+  <section class="hero heroA" aria-label="Showroom video">
     <div class="slide on video">
-      <video data-hero-video data-start="0" muted playsinline preload="metadata" poster="img/bath-video-poster.webp" aria-label="A walk through the Bath Emporium showroom: freestanding tubs, showers and faucet walls"><source src="video/bath-showroom.mp4" type="video/mp4"></video>
+      <video data-hero-video data-start="1.8" muted playsinline preload="metadata" poster="img/bath-video-poster.webp" aria-label="A walk through the Bath Emporium showroom: freestanding tubs, showers and faucet walls"><source src="video/bath-tour.mp4" type="video/mp4"></video>
     </div>
     <div class="copy"><div class="wrap">
       <span class="eyebrow">Bath Emporium · Markham showroom</span>
@@ -64,12 +77,12 @@
   <!-- Showroom experience + video -->
   <section class="split" id="experience">
     <div class="media"><img src="img/bath-showroom-1800.webp" srcset="img/bath-showroom-900.webp 900w, img/bath-showroom-1800.webp 1800w" sizes="(max-width:820px) 100vw, 56vw" alt="Bathroom display at the Bath Emporium showroom" loading="lazy">
-      <a class="play" href="#" data-video="video/bath-tour.mp4" aria-label="Watch the showroom tour"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></a></div>
+      <a class="play" href="#" data-video="video/bath-showroom.mp4" aria-label="Watch the showroom tour"><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></a></div>
     <div class="body">
       <span class="eyebrow" style="color:#999999">The Experience Centre</span>
       <h2>See, touch &amp; experience design</h2>
       <p>Walk through working bathrooms and kitchens, feel the finishes, and try the smart toilets and showers before you choose.</p>
-      <div class="acts"><a class="btn light" href="#visit">Plan your visit <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a><a class="btn light" href="#" data-video="video/bath-tour.mp4">Watch the tour</a></div>
+      <div class="acts"><a class="btn light" href="#visit">Plan your visit <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg></a><a class="btn light" href="#" data-video="video/bath-showroom.mp4">Watch the tour</a></div>
     </div>
   </section>
 
