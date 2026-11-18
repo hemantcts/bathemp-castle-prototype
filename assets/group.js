@@ -116,13 +116,23 @@
     subtotal() { return this.items().reduce((s, i) => s + (i.p.p || 0) * i.qty, 0); },
   };
 
-  const card = p => `<article class="card">
+  /* finish name -> swatch colour (Kohler-style finish chips) */
+  const FIN = [[/matte black|black/i, '#1d1d1d'], [/brushed gold|gold|brass|champagne/i, '#c9a25e'], [/rose/i, '#c99a86'], [/polished nickel/i, '#d9d3c7'], [/brushed nickel|satin nickel|nickel/i, '#b8b2a7'],
+    [/stainless|steel/i, '#c3c6c9'], [/bronze|oil rubbed/i, '#5e4632'], [/copper/i, '#b87348'], [/white/i, '#f7f7f5'], [/grey|gray|graphite|anthracite/i, '#6f7173'], [/chrome|polished/i, '#e4e7ea']];
+  const swatch = f => (FIN.find(([re]) => re.test(f)) || [, '#ddd'])[1];
+  const finishes = p => Object.entries(p.atts || {}).find(([k]) => /finish|colou?r/i.test(k))?.[1] || [];
+  const model = n => (String(n || '').match(/\b(?=[A-Z0-9-]*\d)[A-Z0-9][A-Z0-9-]{3,}\b/) || [''])[0];
+  const card = p => {
+    const fs = finishes(p), m = model(p.n);
+    return `<article class="card">
       <a class="im" href="${url(p.live)}">${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ''}<img src="${p.img}" alt="${esc(p.n)}" loading="lazy" width="640" height="640"></a>
       <button class="wish" data-wish="${p.id}" aria-pressed="${wish.includes(p.id)}" aria-label="Save ${esc(p.n)} to wishlist">${ico.heart}</button>
-      <div class="br">${esc(p.b)}</div><h3><a href="${url(p.live)}">${esc(p.n)}</a></h3>
+      ${fs.length ? `<div class="dots" aria-label="${fs.length} finishes">${fs.slice(0, 5).map(f => `<i style="background:${swatch(f)}" title="${esc(f)}"></i>`).join('')}${fs.length > 5 ? `<small>+${fs.length - 5}</small>` : ''}</div>` : '<div class="dots"></div>'}
+      <div class="br">${esc(p.b)}</div><h3><a href="${url(p.live)}">${esc(p.n)}</a></h3>${m ? `<div class="mdl">${esc(m)}</div>` : ''}
       <div class="pr">${p.p ? money(p.p) : '<small>Price on request</small>'}</div>
       <div class="acts">${p.p ? `<button class="btn dark" data-add="${p.id}">Add to cart</button><button class="ilink" data-inq="${p.id}">Inquire now</button>` : `<button class="btn line" data-inq="${p.id}">Inquire now</button>`}</div>
     </article>`;
+  };
 
   /* ---------- header ---------- */
   const tpl = route(live)[2];
@@ -168,7 +178,7 @@
     <div class="top">
       <div class="news"><h4>Stay inspired</h4><p>New collections, showroom events and offers from Bath Emporium, Castle Kitchens and Castle Appliances.</p><form onsubmit="event.preventDefault();G.toast('Thanks for signing up (prototype: nothing was sent)')"><label class="sr" for="nl">Email</label><input id="nl" type="email" placeholder="Your email address"><button>Sign up</button></form></div>
       ${S.footer.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}
-      <div><h4>Showroom</h4><ul><li>5 Shields Court, Unit 100<br>Markham, ON L3R 0G3</li><li>(905) 944-0060</li><li>1-866-880-5446</li><li>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</li><li><a href="${url('/experience-centre/')}">Plan your visit</a></li></ul></div>
+      <div><h4>Showroom</h4><ul><li>5 Shields Court, Unit 100<br>Markham, ON L3R 0G3</li><li>(905) 944-0060</li><li>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</li><li><a href="${url('/experience-centre/')}">Plan your visit</a></li></ul></div>
     </div>
     <div class="bot"><span>© 2026 ${S.legal}</span><span><a href="${url('/privacy-policy/')}">Privacy</a> · <a href="${url('/terms/')}">Terms</a> · <a href="${url('/shipping-policy/')}">Shipping</a> · <a href="${url('/returns/')}">Returns</a></span></div>
   </div></footer>`;
@@ -273,7 +283,7 @@
   /* links written in page HTML as data-live="/live/address/" */
   const hydrate = (root = document) => $$('a[data-live]', root).forEach(a => { a.href = url(a.dataset.live); });
 
-  window.G = { $, $$, esc, url, qs, live, route, ico, money, card, product, all, Cart, toast, open, closeAll, hydrate, renderCards, openCart,
+  window.G = { $, $$, esc, url, qs, live, route, ico, money, card, swatch, finishes, model, product, all, Cart, toast, open, closeAll, hydrate, renderCards, openCart,
     wish: () => wish, cur: () => cur, S, C };
   document.title = document.title || S.name;
   window.addEventListener('DOMContentLoaded', () => {

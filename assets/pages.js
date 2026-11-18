@@ -1,7 +1,7 @@
 /* Page templates for both sites. <body data-page="…"> picks the renderer; content comes from CONTENT (real, exported
    from the live sites) and SITE. Every link goes through G.url(live address) so it stays inside the prototype. */
 (() => {
-  const { $, $$, esc, url, qs, live, money, card, product, all, Cart, toast, ico, S, C } = window.G;
+  const { $, $$, esc, url, qs, live, money, card, swatch, finishes, model, product, all, Cart, toast, ico, S, C } = window.G;
   const main = () => $('#main');
   const be = S.pre === 'be';
   const arrow = ico.arrow;
@@ -41,37 +41,48 @@
     const c = catOf(live) || { n: C.cat.n, live: C.cat.live, id: 0 };
     const parent = (C.cats || []).find(x => x.id === c.parent);
     const kids = (C.cats || []).filter(x => x.parent === c.id && x.count);
+    const sibs = !kids.length && parent ? (C.cats || []).filter(x => x.parent === parent.id && x.count && x.id !== c.id) : [];
+    const tiles = (kids.length ? kids : sibs).filter(x => x.img).slice(0, 5);
     const sample = c.live !== C.cat.live;
-    let list = products().slice();
-    const facets = {}; list.forEach(p => { facets.Brand = facets.Brand || {}; facets.Brand[p.b] = (facets.Brand[p.b] || 0) + 1; Object.entries(p.atts || {}).forEach(([k, v]) => { if (/brand/i.test(k)) return; (facets[k] = facets[k] || {}); v.forEach(x => facets[k][x] = (facets[k][x] || 0) + 1); }); });
+    const list = products().slice();
+    const facets = {};
+    if (be) facets['Price range'] = { 'Under $500': 0, '$500 – $1,000': 0, '$1,000 – $2,500': 0, '$2,500 and up': 0 };
+    list.forEach(p => { (facets.Brand = facets.Brand || {})[p.b] = (facets.Brand[p.b] || 0) + 1; Object.entries(p.atts || {}).forEach(([k, v]) => { if (/brand/i.test(k)) return; const key = /finish|colou?r/i.test(k) ? 'Finish' : k; (facets[key] = facets[key] || {}); v.forEach(x => facets[key][x] = (facets[key][x] || 0) + 1); }); });
+    if (!be) facets.Availability = { 'Buy online now': 0, 'Display clearance': 0 };
     const desc = C.cat.desc || '';
-    main().innerHTML = pagehead(c.n, esc(sentences(desc, 2)) || `Shop ${esc(c.n.toLowerCase())} online.`, [...(parent ? [[parent.n, parent.live]] : []), [c.n]]) +
-      (kids.length ? `<div class="wrap"><div class="chips">${kids.map(k => `<a href="${url(k.live)}">${esc(k.n)} <small>${k.count}</small></a>`).join('')}</div></div>` : '') +
-      `<section class="sec tight listing"><div class="wrap lgrid">
-        <aside class="filters" aria-label="Filters"><div class="fh"><b>Filters</b><button class="ilink" data-clear>Clear all</button></div>
-          ${be ? `<details open><summary>Price</summary><div class="opts">${['Under $500', '$500 – $1,000', '$1,000 – $2,500', '$2,500 and up'].map((t, i) => `<label><input type="checkbox" data-price="${i}"> ${t}</label>`).join('')}</div></details>` : `<details open><summary>Availability</summary><div class="opts"><label><input type="checkbox" data-priced> Buy online now</label><label><input type="checkbox" data-clear-only> Display clearance</label></div></details>`}
-          ${Object.entries(facets).slice(0, 6).map(([k, v]) => `<details ${k === 'Brand' ? 'open' : ''}><summary>${esc(k)}</summary><div class="opts">${Object.entries(v).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([o, n]) => `<label><input type="checkbox" data-f="${esc(k)}" value="${esc(o)}"> ${esc(o)} <small>${n}</small></label>`).join('')}</div></details>`).join('')}
-        </aside>
-        <div><div class="toolbar"><span data-count></span><label>Sort <select data-sort><option value="">Featured</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option><option value="az">Name A–Z</option></select></label><button class="btn line sm" data-filters-open>Filters</button></div>
-          ${sample ? `<p class="note">Prototype: products shown are a sample (Freestanding Bathtubs / Refrigerators); the live category keeps its own products and address.</p>` : ''}
-          <div class="rail three" data-grid></div>
-          <nav class="pager" aria-label="Pages"><span aria-current="page">1</span><a href="#" onclick="return false">2</a><a href="#" onclick="return false">3</a><a href="#" onclick="return false">Next →</a></nav></div>
+    main().innerHTML = `<section class="plphead"><div class="wrap">${crumbs([...(parent ? [[parent.n, parent.live]] : []), [c.n]])}
+        <h1>${esc(c.n)}</h1><div class="intro"><p>${esc(sentences(desc, 2)) || `Shop ${esc(c.n.toLowerCase())} online.`}</p>${desc ? '<a class="btn line sm" href="#guide">Buying guide</a>' : ''}</div>
+        ${tiles.length ? `<div class="subtiles">${tiles.map(k => `<a href="${url(k.live)}"><span><img src="${k.img}" alt="" loading="lazy"></span>${esc(k.n)}</a>`).join('')}</div>` : (kids.length ? `<div class="chips">${kids.map(k => `<a href="${url(k.live)}">${esc(k.n)}</a>`).join('')}</div>` : '')}
       </div></section>
-      <section class="sec guide"><div class="wrap narrow"><span class="eyebrow">Buying guide</span><div class="prose">${clean(desc)}</div></div></section>` + faq(C.cat.faq || []) + cta();
-    const grid = $('[data-grid]'), cnt = $('[data-count]');
+      <section class="sec tight listing"><div class="wrap">
+        <div class="toolbar"><b data-count></b><div><button class="tbtn" data-toggle-filters aria-expanded="true">${ico.menu.replace('<svg', '<svg class="fi"')}<span>Hide filters</span></button><label class="sortby">Sort by: <select data-sort><option value="">Featured</option><option value="lo">Price: low to high</option><option value="hi">Price: high to low</option><option value="az">Name A–Z</option></select></label></div></div>
+        ${sample ? '<p class="note">Prototype: products shown are a sample (Freestanding Bathtubs / Refrigerators); the live category keeps its own products and address.</p>' : ''}
+        <div class="lgrid">
+          <aside class="filters" aria-label="Filters"><div class="fh"><b>Filters</b><button class="ilink" data-clear>Clear all</button><button class="x mobonly" data-filters-close aria-label="Close filters">${ico.x}</button></div>
+            ${Object.entries(facets).slice(0, 8).map(([k, v], i) => `<details${i < 2 ? ' open' : ''}><summary>${esc(k)}</summary><div class="opts">${Object.entries(v).sort((x, y) => y[1] - x[1]).slice(0, 10).map(([o, n]) => k === 'Finish' ? `<label class="fin"><input type="checkbox" data-f="Finish" value="${esc(o)}"><i style="background:${swatch(o)}"></i>${esc(o)} <small>${n}</small></label>` : `<label><input type="checkbox" data-f="${esc(k)}" value="${esc(o)}"> ${esc(o)}${n ? ` <small>${n}</small>` : ''}</label>`).join('')}</div></details>`).join('')}
+            <button class="btn dark full mobonly" data-filters-close>Show results</button>
+          </aside>
+          <div><div class="active" data-active></div><div class="rail three" data-grid></div>
+            <nav class="pager" aria-label="Pages"><span aria-current="page">1</span><a href="#" onclick="return false">2</a><a href="#" onclick="return false">3</a><a href="#" onclick="return false">Next →</a></nav></div>
+        </div>
+      </div></section>
+      <section class="sec guide" id="guide"><div class="wrap narrow"><span class="eyebrow">Buying guide</span><div class="prose">${clean(desc)}</div></div></section>` + faq(C.cat.faq || []) + cta();
+    const grid = $('[data-grid]'), cnt = $('[data-count]'), ranges = { 'Under $500': [0, 500], '$500 – $1,000': [500, 1000], '$1,000 – $2,500': [1000, 2500], '$2,500 and up': [2500, 1e9] };
     const apply = () => {
       const f = $$('[data-f]:checked').reduce((a, i) => ((a[i.dataset.f] = a[i.dataset.f] || []).push(i.value), a), {});
-      const pr = $$('[data-price]:checked').map(i => +i.dataset.price), ranges = [[0, 500], [500, 1000], [1000, 2500], [2500, 1e9]];
-      let out = list.filter(p => Object.entries(f).every(([k, v]) => k === 'Brand' ? v.includes(p.b) : v.some(x => (p.atts?.[k] || []).includes(x))))
-        .filter(p => !pr.length || (p.p && pr.some(i => p.p >= ranges[i][0] && p.p < ranges[i][1])));
-      if ($('[data-priced]')?.checked) out = out.filter(p => p.p);
+      let out = list.filter(p => Object.entries(f).every(([k, v]) => k === 'Brand' ? v.includes(p.b) : k === 'Price range' ? (p.p && v.some(r => p.p >= ranges[r][0] && p.p < ranges[r][1])) : k === 'Availability' ? v.every(x => x === 'Buy online now' ? p.p : /clearance/i.test(p.n + (p.badge || ''))) : k === 'Finish' ? v.some(x => finishes(p).includes(x)) : v.some(x => (p.atts?.[k] || []).includes(x))));
       const s = $('[data-sort]').value;
       if (s) out.sort((a, b) => s === 'az' ? a.n.localeCompare(b.n) : ((a.p || 1e9) - (b.p || 1e9)) * (s === 'lo' ? 1 : -1));
-      grid._list = out; grid.innerHTML = out.map(card).join('') || '<p class="note">No products match these filters.</p>'; cnt.textContent = `${out.length} products`;
+      grid._list = out; grid.innerHTML = out.map(card).join('') || '<p class="note">No products match these filters.</p>'; cnt.textContent = `${out.length} Results`;
+      $('[data-active]').innerHTML = Object.entries(f).flatMap(([k, v]) => v.map(x => `<button data-unf="${esc(k)}|${esc(x)}">${esc(x)} ×</button>`)).join('');
     };
     main().addEventListener('change', e => { if (e.target.closest('.filters,[data-sort]')) apply(); });
+    main().addEventListener('click', e => {
+      const u = e.target.closest('[data-unf]'); if (u) { const [k, v] = u.dataset.unf.split('|'); $$('[data-f]').forEach(i => { if (i.dataset.f === k && i.value === v) i.checked = false; }); apply(); }
+      const t = e.target.closest('[data-toggle-filters]'); if (t) { const wide = innerWidth > 1100; if (wide) { const off = $('.lgrid').classList.toggle('nofilters'); t.querySelector('span').textContent = off ? 'Show filters' : 'Hide filters'; t.setAttribute('aria-expanded', String(!off)); } else $('.filters').classList.add('open'); }
+      if (e.target.closest('[data-filters-close]')) $('.filters').classList.remove('open');
+    });
     $('[data-clear]').onclick = () => { $$('.filters input').forEach(i => i.checked = false); apply(); };
-    $('[data-filters-open]').onclick = () => $('.filters').classList.toggle('open');
     document.addEventListener('cur:change', apply);
     apply();
   };
@@ -79,39 +90,49 @@
   R.product = () => {
     const d = findDetail(live) || (C.detail || [])[0], p = product(d.id) || d;
     const price = p.p || d.p;
-    const finishes = Object.entries(d.atts || {}).find(([k]) => /finish/i.test(k))?.[1] || [];
+    const fins = Object.entries(d.atts || {}).find(([k]) => /finish|colou?r/i.test(k))?.[1] || [];
     const specs = Object.entries(d.atts || {}).filter(([k]) => !/finish/i.test(k));
-    const sku = (d.n.match(/\b[A-Z]{2,}[A-Z0-9-]{3,}\b/) || [''])[0];
+    const sku = model(d.n);
     const cat = (C.cats || []).find(c => d.cats?.includes(c.n));
     const related = products().filter(x => x.id !== d.id).slice(0, 4);
+    const imgs = d.imgs.filter(Boolean);
+    const short = strip(d.short || d.desc);
+    const acc = (t, body, open = false) => `<details class="pacc"${open ? ' open' : ''}><summary>${t}</summary><div class="accb">${body}</div></details>`;
     main().innerHTML = `<div class="wrap">${crumbs([...(cat ? [[cat.n, cat.live]] : []), [d.n]])}</div>
     <section class="pdp wrap">
-      <div class="gal"><div class="main"><img src="${d.imgs[0]}" alt="${esc(d.n)}" data-main></div><div class="thumbs">${d.imgs.filter(Boolean).map((im, i) => `<button aria-label="Photo ${i + 1}" ${i ? '' : 'aria-current="true"'} data-thumb="${im}"><img src="${im}" alt=""></button>`).join('')}</div></div>
+      <div class="gal"><div class="thumbs">${imgs.map((im, i) => `<button aria-label="Photo ${i + 1}" ${i ? '' : 'aria-current="true"'} data-thumb="${im}"><img src="${im}" alt=""></button>`).join('')}</div>
+        <div class="main"><img src="${imgs[0]}" alt="${esc(d.n)}" data-main><button class="zoom" data-lb="${imgs[0]}" aria-label="Enlarge photo"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M10.5 7.5v6M7.5 10.5h6"/></svg></button></div></div>
       <div class="info">
-        <div class="br">${esc(d.b)}</div><h1>${esc(d.n)}</h1>${sku ? `<p class="sku">Model ${esc(sku)}</p>` : ''}
+        <h1>${esc(d.n.replace(new RegExp('^' + d.b + '\\s*-?\\s*', 'i'), ''))}</h1>
+        <p class="sub">${esc(d.b)}${cat ? ' · ' + esc(cat.n.toLowerCase().replace(/^\w/, x => x.toUpperCase())) : ''}</p>
+        ${sku ? `<p class="sku">${esc(sku)}</p>` : ''}
         <div class="price">${price ? money(price) : '<span class="por">Price on request</span>'}</div>
-        ${be && price ? '<p class="note">Same price as at Bliss Bath and Kitchen: it updates automatically when the Bliss price changes.</p>' : ''}
-        ${finishes.length ? `<div class="opt"><b>Finish: <span data-fin>${esc(finishes[0])}</span></b><div class="sw">${finishes.map((f, i) => `<button aria-pressed="${!i}" data-finish="${esc(f)}">${esc(f)}</button>`).join('')}</div></div>` : ''}
-        <div class="buy">${price ? `<div class="qty"><button aria-label="Fewer" data-q="-1">−</button><input id="qty" value="1" inputmode="numeric" aria-label="Quantity"><button aria-label="More" data-q="1">+</button></div><button class="btn dark" data-add="${d.id}">Add to cart</button>` : ''}
-          <button class="btn ${price ? 'line' : 'dark'}" data-inq="${d.id}">Inquire now</button><button class="wish static" data-wish="${d.id}" aria-pressed="${G.wish().includes(d.id)}" aria-label="Save to wishlist">${ico.heart}</button></div>
-        ${be ? '' : `<div class="pkg"><b>Building a full kitchen?</b><p>Get one quote for a complete appliance package (range, refrigeration, dishwasher, ventilation) — package savings and one delivery.</p><button class="btn line sm" data-inq="${d.id}">Request a package quote</button></div>`}<ul class="perks"><li><b>Delivery</b> ${esc(S.shipping)}</li><li><b>Authorized dealer</b> Full manufacturer warranty.</li><li><b>See it first</b> On display in our Markham showroom — <a href="${url('/experience-centre/')}">plan a visit</a>.</li></ul>
-        ${d.short ? `<div class="prose small">${clean(d.short)}</div>` : ''}
+        ${be && price ? '<p class="note">Same price as at Bliss Bath and Kitchen.</p>' : ''}
+        ${fins.length ? `<div class="opt"><b>Color/Finish <span data-fin>${esc(fins[0])}</span></b><div class="sw">${fins.map((f, i) => `<button aria-pressed="${!i}" data-finish="${esc(f)}" title="${esc(f)}" aria-label="${esc(f)}"><i style="background:${swatch(f)}"></i></button>`).join('')}</div></div>` : ''}
+        <div class="buy">${price ? `<div class="qty"><button aria-label="Fewer" data-q="-1">−</button><input id="qty" value="1" inputmode="numeric" aria-label="Quantity"><button aria-label="More" data-q="1">+</button></div><button class="btn dark grow" data-add="${d.id}">Add to cart</button>` : `<button class="btn dark grow" data-inq="${d.id}">Inquire now</button>`}</div>
+        <div class="minor">${price ? `<button class="ilink" data-inq="${d.id}">Inquire now</button>` : ''}<button class="ilink" data-wish="${d.id}" aria-pressed="${G.wish().includes(d.id)}">${ico.heart} Save to wishlist</button><a class="ilink" href="${url('/experience-centre/')}">See it in the showroom</a></div>
+        ${be ? '' : `<div class="pkg"><b>Building a full kitchen?</b><p>One quote for a complete appliance package — range, refrigeration, dishwasher and ventilation — with package savings and one delivery.</p><button class="btn line sm" data-inq="${d.id}">Request a package quote</button></div>`}
+        <ul class="perks"><li><b>Delivery</b> ${esc(S.shipping)}</li><li><b>Authorized dealer</b> Full manufacturer warranty.</li></ul>
+        ${short ? `<p class="lede">${esc(short.slice(0, 260))}${short.length > 260 ? '… <a href="#details" class="ilink" data-open-acc>Read more</a>' : ''}</p>` : ''}
+        <div class="accs" id="details">
+          ${acc('Features', `<div class="prose small">${clean(d.desc) || '<p>Product description.</p>'}</div>`)}
+          ${acc('Specifications', `<table class="specs">${specs.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v.join(', '))}</td></tr>`).join('')}${fins.length ? `<tr><th>Finishes</th><td>${esc(fins.join(', '))}</td></tr>` : ''}${d.weight ? `<tr><th>Shipping weight</th><td>${esc(d.weight)} lb</td></tr>` : ''}${sku ? `<tr><th>Model</th><td>${esc(sku)}</td></tr>` : ''}</table>`)}
+          ${acc('Documents', '<ul class="docs"><li><a href="#" onclick="return false">Specification sheet (PDF)</a></li><li><a href="#" onclick="return false">Installation guide (PDF)</a></li><li><a href="#" onclick="return false">Warranty (PDF)</a></li></ul>')}
+          ${acc('Delivery &amp; returns', `<p>${esc(S.shipping)}</p><p>Returns within 14 days of delivery on unused, uninstalled items in the original packaging, with approval first. See the <a href="${url('/returns/')}">return policy</a>.</p>`)}
+        </div>
       </div>
     </section>
-    <section class="sec tight"><div class="wrap narrow"><div class="tabs" role="tablist">${['Description', 'Specifications', 'Delivery & returns'].map((t, i) => `<button role="tab" aria-selected="${!i}" data-tab="${i}">${t}</button>`).join('')}</div>
-      <div class="tabp prose" data-panel="0">${clean(d.desc) || '<p>Product description.</p>'}</div>
-      <div class="tabp" data-panel="1" hidden><table class="specs">${specs.map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(v.join(', '))}</td></tr>`).join('')}${finishes.length ? `<tr><th>Finishes</th><td>${esc(finishes.join(', '))}</td></tr>` : ''}${d.weight ? `<tr><th>Shipping weight</th><td>${esc(d.weight)} lb</td></tr>` : ''}</table></div>
-      <div class="tabp prose" data-panel="2" hidden><p>${esc(S.shipping)}</p><p>Returns are accepted within 14 days of delivery on unused, uninstalled items in the original packaging, with approval first. See the <a href="${url('/returns/')}">return policy</a>.</p></div>
-    </div></section>` + rail('You may also like', related) + cta();
+    <section class="sec love"><div class="wrap"><div class="sh"><div><h2 class="thin">Things you'll love</h2><p>Pairs well with your ${esc((cat?.n || 'selection').toLowerCase())}.</p></div></div><div class="rail">${related.map(card).join('')}</div></div></section>` + cta();
     main().addEventListener('click', e => {
-      const t = e.target.closest('[data-thumb]'); if (t) { $('[data-main]').src = t.dataset.thumb; $$('[data-thumb]').forEach(b => b.removeAttribute('aria-current')); t.setAttribute('aria-current', 'true'); }
-      const f = e.target.closest('[data-finish]'); if (f) { $$('[data-finish]').forEach(b => b.setAttribute('aria-pressed', String(b === f))); $('[data-fin]').textContent = f.dataset.finish; }
+      const t = e.target.closest('[data-thumb]'); if (t) { $('[data-main]').src = t.dataset.thumb; $('.zoom').dataset.lb = t.dataset.thumb; $$('[data-thumb]').forEach(b => b.removeAttribute('aria-current')); t.setAttribute('aria-current', 'true'); }
+      const f = e.target.closest('[data-finish]'); if (f) { $$('[data-finish]').forEach(b => b.setAttribute('aria-pressed', String(b === f))); $('[data-fin]').textContent = f.dataset.finish; const sf = $('.stickybar [data-sfin]'); if (sf) sf.textContent = f.dataset.finish; }
       const q = e.target.closest('[data-q]'); if (q) { const i = $('#qty'); i.value = Math.max(1, (+i.value || 1) + +q.dataset.q); }
-      const tb = e.target.closest('[data-tab]'); if (tb) { $$('[data-tab]').forEach(b => b.setAttribute('aria-selected', String(b === tb))); $$('[data-panel]').forEach(p => p.hidden = p.dataset.panel !== tb.dataset.tab); }
+      if (e.target.closest('[data-open-acc]')) $('.pacc').open = true;
     });
     document.addEventListener('cur:change', () => { const pr = $('.pdp .price'); if (price) pr.innerHTML = money(price); });
-    document.body.insertAdjacentHTML('beforeend', `<div class="stickybar" aria-hidden="true"><div class="wrap"><img src="${d.imgs[0]}" alt=""><div><b>${esc(d.n)}</b><span>${price ? money(price) : 'Price on request'}</span></div>${price ? `<button class="btn dark" data-add="${d.id}" data-qty="1">Add to cart</button>` : ''}<button class="btn ${price ? 'line' : 'dark'}" data-inq="${d.id}">Inquire now</button></div></div>`);
-    const bar = $('.stickybar'); new IntersectionObserver(([en]) => { const show = !en.isIntersecting && en.boundingClientRect.top < 0; bar.classList.toggle('on', show); bar.setAttribute('aria-hidden', String(!show)); }).observe($('.pdp .buy'));
+    // Kohler-style sticky bar at the top once the buy button scrolls away (bottom on phones)
+    document.body.insertAdjacentHTML('beforeend', `<div class="stickybar" aria-hidden="true"><div class="wrap"><img src="${imgs[0]}" alt=""><div><b>${esc(d.n)}</b><span>${esc(d.b)}${fins.length ? ' · <span data-sfin>' + esc(fins[0]) + '</span>' : ''}</span></div><strong>${price ? money(price) : 'Price on request'}</strong>${price ? `<button class="btn dark" data-add="${d.id}" data-qty="1">Add to cart</button>` : `<button class="btn dark" data-inq="${d.id}">Inquire now</button>`}</div></div>`);
+    const bar = $('.stickybar'); new IntersectionObserver(([en]) => { const show = !en.isIntersecting && en.boundingClientRect.top < 0; bar.classList.toggle('on', show); document.body.classList.toggle('barup', show); bar.setAttribute('aria-hidden', String(!show)); }).observe($('.pdp .buy'));
   };
 
   R.brands = () => {
@@ -306,7 +327,7 @@
   R.contact = () => {
     main().innerHTML = pagehead('Contact us', 'Call, email or visit our Markham showroom. A specialist will reply within business hours.', [['Contact']]) + `<section class="sec tight"><div class="wrap two">
       <div class="panel">${form(`<div class="row2">${field('cn', 'Name', 'text', 'required')}${field('cp', 'Phone', 'tel')}</div>${field('ce', 'Email', 'email', 'required')}${field('cs', 'Topic', 'select', '<option>Product question</option><option>Order status</option><option>Design consultation</option><option>Trade account</option><option>Returns</option>')}${field('cm', 'Message', 'textarea')}`, 'Send message')}</div>
-      <div><div class="facts col"><div><b>Showroom</b>5 Shields Court, Unit 100, Markham, ON L3R 0G3</div><div><b>Call</b>(905) 944-0060 · Toll free 1-866-880-5446</div><div><b>Hours</b>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</div></div><img class="rounded" src="img/store-${be ? 'bath' : 'castle'}-900.webp" alt="The showroom at 5 Shields Court, Markham" loading="lazy"></div></div></section>`;
+      <div><div class="facts col"><div><b>Showroom</b>5 Shields Court, Unit 100, Markham, ON L3R 0G3</div><div><b>Call</b>(905) 944-0060</div><div><b>Hours</b>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</div></div><img class="rounded" src="img/store-${be ? 'bath' : 'castle'}-900.webp" alt="The showroom at 5 Shields Court, Markham" loading="lazy"></div></div></section>`;
   };
 
   R.quote = () => {
@@ -314,7 +335,7 @@
   };
 
   R.experience = () => {
-    const vid = 'https://bathemp.ca/wp-content/uploads/2020/10/Bath-Emporium-Castle-Kitchens-Showroom-Tour.mp4';
+    const vid = be ? 'video/bath-tour.mp4' : 'video/castle-tour.mp4';
     main().innerHTML = banner(be ? 'img/bath-showroom-1800.webp' : 'img/kit-display-1800.webp', 'The Experience Centre', 'See, touch and experience design: working bathrooms, full kitchens and premium appliances in one Markham showroom.', 'Bath Emporium · Castle Kitchens · Castle Appliances', `<a class="btn light" href="#book">Book your visit ${arrow}</a> <button class="btn light" data-video="${vid}">Watch the tour</button>`) +
       `<section class="sec"><div class="wrap"><div class="tiles">${[['Bath Emporium', 'img/bath-tub-900.webp', 'Freestanding tubs, smart toilets and showers you can try.'], ['Castle Kitchens', 'img/kit-reveal-900.webp', 'Full kitchen displays, door styles and countertops.'], ['Castle Appliances', 'img/app-oak-900.webp', 'Working ranges, ovens and refrigeration.'], ['Outdoor living', 'img/out-kitchen-900.webp', 'Outdoor kitchens, grills and pizza ovens.']].map(([t, im, p]) => `<div class="tile"><img src="${im}" alt="" loading="lazy"><div class="t"><b>${t}</b><p style="margin:6px 0 0;font-size:14px">${p}</p></div></div>`).join('')}</div></div></section>
       <section class="sec stone" id="book"><div class="wrap two"><div><h2 class="h2">Plan your visit</h2><p>Book a time and a designer will be ready for you, with samples for your project. Walk-ins are welcome too.</p><div class="facts col"><div><b>Address</b>5 Shields Court, Unit 100, Markham, ON</div><div><b>Hours</b>Mon–Fri 9–7 · Sat 9–5 · Sun 12–5</div></div></div>
