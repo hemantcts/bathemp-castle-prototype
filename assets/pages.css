@@ -598,3 +598,41 @@ body:has(.drawer.on) :is(.tswitch,.chat),body:has(.cdrawer.on) :is(.tswitch,.cha
 /* visit: real storefront photos, keep the building in frame; space stacked buttons */
 #visit .media img{object-position:50% 20%}
 #visit .btn{margin:0 10px 10px 0}
+
+/* Castle homepage (live castlekitchens.ca structure) */
+.promo-strip{background:var(--ink);color:#fff;border-top:1px solid #2a2a2a}
+.promo-strip .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
+.promo-strip .eyebrow{color:#999}
+.promo-strip b{font:500 clamp(15px,1.6vw,19px) var(--head);text-transform:uppercase;letter-spacing:.06em;flex:1}
+.promo-strip .btn{border-color:#fff;color:#fff;background:transparent}
+.intro{align-items:center;gap:clamp(28px,5vw,72px)}
+.intro h1{font:500 clamp(24px,2.6vw,36px)/1.2 var(--head);text-transform:uppercase;margin:12px 0 18px}
+.intro .acts{margin-top:22px}
+.yt{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;background:#000;cursor:pointer;overflow:hidden}
+.yt img{width:100%;height:100%;object-fit:cover}
+.yt .play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.yt .play svg{width:26px;height:26px;fill:var(--ink);margin-left:4px}
+.ytbox iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.ytcap{margin:12px 0 0;font-size:14px;color:var(--grey)}
+.appcats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.appcats a{background:#fff;display:flex;flex-direction:column;align-items:center;padding:18px 18px 20px;border:1px solid var(--line);transition:border-color .2s}
+.appcats a:hover{border-color:var(--ink)}
+.appcats img{width:100%;aspect-ratio:4/3;object-fit:contain}
+.appcats b{margin-top:12px;font:500 15px var(--head);text-transform:uppercase;letter-spacing:.08em}
+.cquotes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cquotes figure{margin:0;border:1px solid var(--line);padding:30px 28px}
+.cquotes blockquote{margin:0 0 18px;font:400 17px/1.6 Georgia,serif;color:#262626}
+.cquotes blockquote::before{content:"\201C";display:block;font:400 54px/0.6 Georgia,serif;margin-bottom:14px;color:#bbb}
+.cquotes figcaption{font:600 12px var(--head);letter-spacing:.14em;text-transform:uppercase}
+.feat{padding:clamp(40px,6vw,80px) 0;display:grid;gap:clamp(40px,6vw,80px)}
+.feat-row{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.feat-row.rev img{order:2}
+.feat-row img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.feat-row .acts{margin-top:20px}
+.post h3{font:500 18px/1.35 var(--head);margin:8px 0 0}
+.post small{display:block;margin-top:14px}
+.post img{aspect-ratio:3/2;object-fit:cover;width:100%}
+.projlist span{text-transform:none;letter-spacing:0;font:400 13px var(--body);color:#ddd}
+@media (max-width:820px){.appcats,.cquotes{grid-template-columns:1fr 1fr}.cquotes figure:last-child{grid-column:1/-1}.feat-row{grid-template-columns:1fr}.feat-row.rev img{order:0}}
+@media (max-width:520px){.cquotes{grid-template-columns:1fr}.promo-strip b{flex-basis:100%}}
+.appcats img{object-fit:cover}

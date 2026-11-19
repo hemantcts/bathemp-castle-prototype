@@ -50,6 +50,7 @@
       [/^\/(modern-kitchens|transitional-kitchens|traditional-kitchens|kitchen-islands|bathroom-vanities|closets-home-office-home-library|bars-media-centers-fire-places)\/$/, 'ck-gallery.html', 'Portfolio gallery'],
       [/^\/(projects|kitchen-bathroom-project-videos)\/$/, 'ck-projects.html', 'Projects'],
       [/^\/projects\/[a-z0-9-]+\/$/, 'ck-project.html', 'Single project (new)'],
+      [/^\/(project-mcvean|lakeside-kitchen-project|granite-ridge-kitchen-bathroom-project|golden-tulip-project|angus-glen-project|smoothwater-project|sideline-project-pickering|cheiftain-project|white-kitchen-2)\/$/, 'ck-project.html', 'Project'],
       [/^\/(our-factory|our-process|our-standards|what-makes-us-different|custom-kitchens-for-architects-and-designers|multi-housing-projects|new-dealer)\/$/, 'ck-about.html', 'Company / trade page'],
       [/^\/testimonials\/$/, 'ck-testimonials.html', 'Testimonials'],
       [/^\/blog\/$/, 'ck-blog.html', 'Blog'],
@@ -227,6 +228,8 @@
     const vt = e.target.closest('[data-video-toggle]'); if (vt) { const v = $('[data-hero-video]'); if (v) { v.paused ? v.play() : v.pause(); } }
     const q = e.target.closest('[data-inq]');
     if (q) { const p = product(q.dataset.inq) || {}, m = $('#inq'); $('.prod', m).hidden = !p.n; $('.prod img', m).src = p.img || p.imgs?.[0] || ''; $('[data-n]', m).textContent = p.n || ''; $('[data-b]', m).textContent = p.b || ''; open(m); }
+    const yt = e.target.closest('[data-yt]');
+    if (yt) { yt.outerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${yt.dataset.yt}?autoplay=1&rel=0" title="Project video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`; return; }
     const v = e.target.closest('[data-video]');
     if (v) { e.preventDefault(); const m = $('#vid'), vid = $('video', m); if (vid.src !== v.dataset.video) vid.src = v.dataset.video; open(m); vid.play().catch(() => {}); }
     const l = e.target.closest('[data-lb]');
