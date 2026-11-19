@@ -595,3 +595,6 @@ body:has(.drawer.on) :is(.tswitch,.chat),body:has(.cdrawer.on) :is(.tswitch,.cha
 .xsteps b{color:#fff;font-weight:600}
 .xfacade{width:100%;margin-top:28px;aspect-ratio:2.4/1;object-fit:cover}
 .xhero .wrap{z-index:1}
+/* visit: real storefront photos, keep the building in frame; space stacked buttons */
+#visit .media img{object-position:50% 20%}
+#visit .btn{margin:0 10px 10px 0}
