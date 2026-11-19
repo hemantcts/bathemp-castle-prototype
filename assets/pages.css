@@ -583,3 +583,15 @@ body:has(.drawer.on) :is(.tswitch,.chat),body:has(.cdrawer.on) :is(.tswitch,.cha
 .tiles.big .tile .t{left:30px;bottom:26px}
 .tiles.big .tile::after{background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.1) 60%),linear-gradient(transparent 55%,rgba(0,0,0,.45))}
 @media (max-width:820px){.tiles.big{grid-template-columns:1fr}.tiles.big .tile{aspect-ratio:16/9}}
+
+/* experience centre: dark, rich hero + zone tiles with captions + visit steps */
+.xhero{min-height:min(78vh,720px)}
+.xhero img{opacity:1}
+.xhero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.75),rgba(0,0,0,.1) 70%)}
+.tiles.big .tile .t p{margin:8px 0 0;font-size:14px;max-width:34ch;min-height:0;color:rgba(255,255,255,.85)}
+.xsteps{list-style:none;counter-reset:x;margin:26px 0 0;padding:0;display:grid;gap:16px}
+.xsteps li{counter-increment:x;display:grid;grid-template-columns:42px 1fr;column-gap:12px;color:#bbb;font-size:14px}
+.xsteps li::before{content:"0" counter(x);grid-row:span 2;font:600 22px var(--head);color:#fff}
+.xsteps b{color:#fff;font-weight:600}
+.xfacade{width:100%;margin-top:28px;aspect-ratio:2.4/1;object-fit:cover}
+.xhero .wrap{z-index:1}
