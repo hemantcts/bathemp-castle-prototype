@@ -575,3 +575,11 @@ body:has(.drawer.on) :is(.tswitch,.chat),body:has(.cdrawer.on) :is(.tswitch,.cha
 .btxt small{font:500 12px var(--body);color:var(--grey)}
 .pdp-dealer{display:flex;align-items:center;gap:7px;margin:0 0 14px;font-size:13px;font-weight:500;letter-spacing:.02em;color:#4a4a4a}
 .pdp-dealer svg{width:16px;height:16px;fill:none;stroke:var(--accent);stroke-width:1.8;flex:none}
+
+/* collections: 2x2 wide tiles like the client mockup; one consistent warm, rich grade on mood images */
+.tiles.big{grid-template-columns:repeat(2,1fr);gap:18px}
+.tiles.big .tile{aspect-ratio:2.3/1}
+.tiles.big .tile b{font-size:clamp(22px,2.4vw,34px)}
+.tiles.big .tile .t{left:30px;bottom:26px}
+.tiles.big .tile::after{background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.1) 60%),linear-gradient(transparent 55%,rgba(0,0,0,.45))}
+@media (max-width:820px){.tiles.big{grid-template-columns:1fr}.tiles.big .tile{aspect-ratio:16/9}}
