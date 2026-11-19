@@ -103,7 +103,7 @@
       <div class="gal"><div class="thumbs">${imgs.map((im, i) => `<button aria-label="Photo ${i + 1}" ${i ? '' : 'aria-current="true"'} data-thumb="${im}"><img src="${im}" alt=""></button>`).join('')}</div>
         <div class="main"><img src="${imgs[0]}" alt="${esc(d.n)}" data-main><button class="zoom" data-lb="${imgs[0]}" aria-label="Enlarge photo"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M10.5 7.5v6M7.5 10.5h6"/></svg></button></div></div>
       <div class="info">
-        ${d.b ? (() => { const logo = (S.logos || []).find(([n]) => n.toLowerCase().replace(/[^a-z]/g, '') === d.b.toLowerCase().replace(/[^a-z]/g, '')); const bl = be ? `/brands/${d.b.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/` : (logo ? logo[2] : '/our-brands/');
+        ${d.b ? (() => { const logo = (S.logos || []).find(([n]) => n.toLowerCase().replace(/[^a-z]/g, '') === d.b.toLowerCase().replace(/[^a-z]/g, '')); const bl = (C.brands || []).find(x => x.n.toLowerCase() === d.b.toLowerCase() && x.live)?.live || `/${be ? 'brands' : 'brand'}/${d.b.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/`;
           return `<a class="brand-chip" href="${url(bl)}"><span class="bmark">${logo ? `<img src="${logo[1]}" alt="">` : esc(d.b)}</span><span class="btxt">${esc(d.b)}<small>Shop the brand →</small></span></a>
         <p class="pdp-dealer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg> Authorized ${esc(d.b)} Dealer</p>`; })() : ''}
         <h1>${esc(d.n.replace(new RegExp('^' + d.b + '\\s*-?\\s*', 'i'), ''))}</h1>
@@ -143,14 +143,14 @@
     const groups = list.reduce((g, b) => ((g[b.n[0].toUpperCase()] = g[b.n[0].toUpperCase()] || []).push(b), g), {});
     main().innerHTML = pagehead('Our brands', `${list.length} brands, all from authorized Canadian distributors with full manufacturer warranty.`) +
       `<section class="sec tight"><div class="wrap"><div class="logos big" data-logos></div>
-      <div class="az">${Object.entries(groups).map(([l, bs]) => `<div><h3>${l}</h3><ul>${bs.map(b => `<li><a href="${url(b.live || (be ? `/brands/${b.n.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/` : '/our-brands/'))}">${esc(b.n)}</a> <small>${b.count}</small></li>`).join('')}</ul></div>`).join('')}</div></div></section>` + cta();
+      <div class="az">${Object.entries(groups).map(([l, bs]) => `<div><h3>${l}</h3><ul>${bs.map(b => `<li><a href="${url(b.live || (be ? `/brands/${b.n.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/` : `/brand/${b.n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '')}/`))}">${esc(b.n)}</a> <small>${b.count}</small></li>`).join('')}</ul></div>`).join('')}</div></div></section>` + cta();
   };
 
   R.brand = () => {
-    const slug = (live.match(/brands\/([^/]+)/) || [])[1] || 'riobel';
-    const b = (C.brands || []).find(x => x.live === live) || { n: slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), count: '' };
+    const slug = (live.match(/brands?\/([^/]+)/) || [])[1] || (be ? 'riobel' : 'thermador');
+    const b = (C.brands || []).find(x => x.live === live || x.n.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug) || { n: slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), count: '' };
     const mine = all().filter(p => p.b && p.b.toLowerCase() === b.n.toLowerCase()).filter((p, i, a) => a.findIndex(x => x.id === p.id) === i);
-    main().innerHTML = banner('img/bath-hero-1800.webp', b.n, `Authorized ${esc(b.n)} dealer. ${b.count ? `${b.count} products, ` : ''}shop online or see them in our Markham showroom.`, 'Brand') +
+    main().innerHTML = banner(be ? 'img/bath-hero-1800.webp' : 'img/kit-white-1800.webp', b.n, `Authorized ${esc(b.n)} dealer. ${b.count ? `${b.count} products, ` : ''}shop online or see them in our Markham showroom.`, 'Brand') +
       `<div class="wrap">${crumbs([['Our brands', '/our-brands/'], [b.n]])}</div>` + rail(`Shop ${esc(b.n)}`, (mine.length ? mine : products()).slice(0, 8)) + cta();
   };
 

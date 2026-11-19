@@ -42,6 +42,7 @@ PAGES = {
         ('ck-category.html', 'category', '/product-category/appliances/refrigerators/', 'Product category', '/product-category/…/', '49'),
         ('ck-product.html', 'product', '/product/thermador-prd606wcsg/', 'Product', '/product/…/', '858'),
         ('ck-brands.html', 'brands', '/our-brands/', 'All brands', '/our-brands/', '1'),
+        ('ck-brand.html', 'brand', '/brand/thermador/', 'Brand', '/brand/…/', '49'),
         ('ck-promotion.html', 'promotion', '/thermador-promotion/', 'Brand promotion', '/thermador-promotion/, /miele-appliances/, /special-offers-promotions/ …', '19'),
         ('ck-outdoor.html', 'outdoor', '/outdoor-kitchens-toronto/', 'Outdoor kitchens landing', '/outdoor-kitchens-toronto/, /backyard-kitchens/, /lynx-grills-toronto-canada/ …', '8'),
         ('ck-service.html', 'service', '/kitchen-remodeling-toronto/', 'Kitchen service page', '/kitchen-remodeling-toronto/, /white-kitchen-cabinets/, /kitchen-countertops/ …', '6'),

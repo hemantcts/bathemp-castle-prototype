@@ -40,7 +40,7 @@ window.SITE = {
     { id: '14560', b: 'Monogram', n: 'Monogram ZTS90DPSNSS 30" Statement Built-In Single Oven', p: 4999, badge: 'Display clearance', img: 'img/p/ck-14560.webp', live: '/product/monogram-30-inch-oven/' },
   ],
   featuredBrands: ['Thermador','Gaggenau','Miele','Bertazzoni','Liebherr','Viking','Hestan'],
-  logos: [['Thermador','img/logos/thermador.webp','/thermador-promotion/'],['Gaggenau','img/logos/gaggenau.webp','/our-brands/'],['Miele','img/logos/miele.webp','/miele-appliances/'],['Bertazzoni','img/logos/bertazzoni.webp','/bertazzoni-canada-promotion/'],['Liebherr','img/logos/liebherr.webp','/liebherr-promotion/'],['Viking','img/logos/viking.webp','/viking-range-canada-promotion/'],['Hestan','img/logos/hestan.webp','/our-brands/']], // real brand logos (Bliss brand logos / Castle's brands page)
+  logos: [['Thermador','img/logos/thermador.webp','/brand/thermador/'],['Gaggenau','img/logos/gaggenau.webp','/brand/gaggenau/'],['Miele','img/logos/miele.webp','/brand/miele/'],['Bertazzoni','img/logos/bertazzoni.webp','/brand/bertazzoni/'],['Liebherr','img/logos/liebherr.webp','/brand/liebherr/'],['Viking','img/logos/viking.webp','/brand/viking/'],['Hestan','img/logos/hestan.webp','/brand/hestan/']], // real brand logos (Bliss brand logos / Castle's brands page)
   footer: [
     { h: 'Kitchens', links: [['Custom kitchens','/modern-kitchen-cabinets-toronto/'],['Kitchen remodeling','/kitchen-remodeling-toronto/'],['Projects','/projects/'],['Our factory','/our-factory/']] },
     { h: 'Appliances', links: [['All appliances','/appliances/'],['Brands','/our-brands/'],['Promotions','/special-offers-promotions/'],['Display clearance','/product-category/display-clearance/']] },
