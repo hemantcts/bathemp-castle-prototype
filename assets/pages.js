@@ -103,8 +103,11 @@
       <div class="gal"><div class="thumbs">${imgs.map((im, i) => `<button aria-label="Photo ${i + 1}" ${i ? '' : 'aria-current="true"'} data-thumb="${im}"><img src="${im}" alt=""></button>`).join('')}</div>
         <div class="main"><img src="${imgs[0]}" alt="${esc(d.n)}" data-main><button class="zoom" data-lb="${imgs[0]}" aria-label="Enlarge photo"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M10.5 7.5v6M7.5 10.5h6"/></svg></button></div></div>
       <div class="info">
+        ${d.b ? (() => { const logo = (S.logos || []).find(([n]) => n.toLowerCase().replace(/[^a-z]/g, '') === d.b.toLowerCase().replace(/[^a-z]/g, '')); const bl = be ? `/brands/${d.b.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/` : (logo ? logo[2] : '/our-brands/');
+          return `<a class="brand-chip" href="${url(bl)}"><span class="bmark">${logo ? `<img src="${logo[1]}" alt="">` : esc(d.b)}</span><span class="btxt">${esc(d.b)}<small>Shop the brand →</small></span></a>
+        <p class="pdp-dealer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg> Authorized ${esc(d.b)} Dealer</p>`; })() : ''}
         <h1>${esc(d.n.replace(new RegExp('^' + d.b + '\\s*-?\\s*', 'i'), ''))}</h1>
-        <p class="sub">${esc(d.b)}${cat ? ' · ' + esc(cat.n.toLowerCase().replace(/^\w/, x => x.toUpperCase())) : ''}</p>
+        ${cat ? `<p class="sub">${esc(cat.n.toLowerCase().replace(/^\w/, x => x.toUpperCase()))}</p>` : (d.b ? '' : '')}
         ${sku ? `<p class="sku">${esc(sku)}</p>` : ''}
         <div class="price">${price ? money(price) : '<span class="por">Price on request</span>'}</div>
         ${be && price ? '<p class="note">Same price as at Bliss Bath and Kitchen.</p>' : ''}
@@ -112,7 +115,7 @@
         <div class="buy">${price ? `<div class="qty"><button aria-label="Fewer" data-q="-1">−</button><input id="qty" value="1" inputmode="numeric" aria-label="Quantity"><button aria-label="More" data-q="1">+</button></div><button class="btn dark grow" data-add="${d.id}">Add to cart</button>` : `<button class="btn dark grow" data-inq="${d.id}">Inquire now</button>`}</div>
         <div class="minor">${price ? `<button class="ilink" data-inq="${d.id}">Inquire now</button>` : ''}<button class="ilink" data-wish="${d.id}" aria-pressed="${G.wish().includes(d.id)}">${ico.heart} Save to wishlist</button><a class="ilink" href="${url('/experience-centre/')}">See it in the showroom</a></div>
         ${be ? '' : `<div class="pkg"><b>Building a full kitchen?</b><p>One quote for a complete appliance package — range, refrigeration, dishwasher and ventilation — with package savings and one delivery.</p><button class="btn line sm" data-inq="${d.id}">Request a package quote</button></div>`}
-        <ul class="perks"><li><b>Delivery</b> ${esc(S.shipping)}</li><li><b>Authorized dealer</b> Full manufacturer warranty.</li></ul>
+        <ul class="perks"><li><b>Delivery</b> ${esc(S.shipping)}</li><li><b>Manufacturer warranty</b> Full warranty from the manufacturer, as an authorized dealer.</li></ul>
         ${short ? `<p class="lede">${esc(short.slice(0, 260))}${short.length > 260 ? '… <a href="#details" class="ilink" data-open-acc>Read more</a>' : ''}</p>` : ''}
         <div class="accs" id="details">
           ${acc('Features', `<div class="prose small">${clean(d.desc) || '<p>Product description.</p>'}</div>`)}
