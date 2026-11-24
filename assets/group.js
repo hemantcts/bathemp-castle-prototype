@@ -81,9 +81,9 @@
 
   /* ---------- icons ---------- */
   const ico = {
-    drop: '<svg viewBox="0 0 40 40" aria-hidden="true"><path fill="#fff" d="M20 3c6 9 12 15.5 12 22.5A12 12 0 0 1 8 25.5C8 18.5 14 12 20 3z"/></svg>',
-    castle: '<svg viewBox="0 0 40 40" aria-hidden="true"><path fill="#fff" d="M6 4h6v5h4V4h8v5h4V4h6v13h-3v19H24V27a4 4 0 0 0-8 0v9H9V17H6z"/></svg>',
-    oven: '<svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="#fff" stroke-width="2.6"><rect x="5" y="4" width="30" height="32" rx="1.5"/><path d="M5 12h30M10 8h2M16 8h2M22 8h2M28 8h2"/><rect x="10" y="17" width="20" height="14"/></svg>',
+    drop: '<svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M20 4.5c6 8.4 11 14.6 11 21A11 11 0 0 1 9 25.5c0-6.4 5-12.6 11-21z"/><path d="M14.5 27a5.5 5.5 0 0 0 5.5 5.5"/></svg>',
+    castle: '<svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M8.5 35V15.5H6V5.5h5v4h4.5v-4h9v4H29v-4h5v10h-2.5V35H24v-7a4 4 0 0 0-8 0v7z"/></svg>',
+    oven: '<svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><rect x="6.5" y="5" width="27" height="30" rx="1"/><path d="M6.5 12h27M11 8.5h2M16.5 8.5h2M22 8.5h2"/><rect x="11" y="16.5" width="18" height="13.5"/></svg>',
     search: '<svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>',
     user: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
     heart: '<svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-9-9.6C2 7.5 4.2 4.5 7.5 4.5c2 0 3.6 1.1 4.5 2.7.9-1.6 2.5-2.7 4.5-2.7 3.3 0 5.5 3 4.5 6.4-1.5 5-9 9.6-9 9.6z"/></svg>',
@@ -96,7 +96,7 @@
   };
   const brands = [
     { id: 'bath', icon: 'drop', name: 'Bath', sub: 'Emporium', href: 'bathemp.html' },
-    { id: 'kitchens', icon: 'castle', name: 'Castle', sub: 'Kitchens · CA', href: 'castle.html' },
+    { id: 'kitchens', icon: 'castle', name: 'Castle', sub: 'Kitchens', href: 'castle.html' },
     { id: 'appliances', icon: 'oven', name: 'Castle', sub: 'Appliances', href: 'ck-appliances.html?live=%2Fappliances%2F' },
   ];
 
@@ -140,25 +140,22 @@
 
   /* ---------- header ---------- */
   const tpl = route(live)[2];
-  const brandHtml = brands.map((b, i) => `${i ? '<span class="sep"></span>' : ''}<a class="brand${S.active.includes(b.id) ? ' on' : ''}" href="${b.href}">${ico[b.icon]}<b>${b.name}<small>${b.sub}</small></b></a>`).join('');
   const navHtml = S.menu.map((m, i) => m.mega
     ? `<li><button aria-expanded="false" aria-controls="mega${i}">${m.label}${ico.down}</button><div class="mega" id="mega${i}"><div class="wrap mgrid" style="--cols:${m.mega.length}"><div class="mcols">${m.mega.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}</div>${m.feat ? `<a class="feat" href="${url(m.feat.u)}"><img src="${m.feat.img}" alt="" loading="lazy"><span><small>Explore</small>${m.feat.t} →</span></a>` : ''}</div>
       <div class="mbar"><div class="wrap">${m.feat ? `<a href="${url(m.feat.u)}">View all ${esc(m.label.toLowerCase())} →</a>` : ''}<span>Need help choosing? <a href="${url('/experience-centre/')}">Book a showroom visit</a> · (905) 944-0060</span></div></div></div></li>`
     : `<li><a href="${url(m.u)}"${m.sale ? ' class="sale"' : ''}>${m.label}${m.badge ? `<em class="nbadge" aria-label="up to ${esc(m.badge)}"><small>up to</small> ${esc(m.badge)}</em>` : ''}</a></li>`).join('');
   $('#hdr').outerHTML = `
-  <div class="util"><div class="wrap"><span class="l">${S.util}</span><div class="r"><a href="#" onclick="return false">(905) 944-0060</a><a href="${url(S.showroomLive)}">Visit the showroom</a>${S.usd ? `<div class="cur" role="group" aria-label="Currency"><button data-cur="CAD">CAD</button><button data-cur="USD">USD</button></div>` : ''}</div></div></div>
+  <div class="util"><div class="wrap"><nav class="sisters" aria-label="Our brands">${brands.map(b => `<a href="${b.href}"${S.active.includes(b.id) ? ' aria-current="true"' : ''}>${b.name} ${b.sub}</a>`).join('')}</nav><div class="r"><a href="#" onclick="return false">(905) 944-0060</a><a href="${url(S.showroomLive)}">Visit the showroom</a><a class="uic" href="${url('/my-account/')}" aria-label="My account">${ico.user}</a><a class="uic" href="${url('/wishlist/')}" aria-label="Wishlist">${ico.heart}<span class="n" data-wish-n></span></a>${S.usd ? `<div class="cur" role="group" aria-label="Currency"><button data-cur="CAD">CAD</button><button data-cur="USD">USD</button></div>` : ''}</div></div></div>
   <header class="hdr" id="top">
-    <div class="wrap brands-row">
+    <div class="wrap bar">
       <button class="tool burger" aria-label="Menu" data-open-drawer>${ico.menu}</button>
-      <nav class="brands" aria-label="Our brands">${brandHtml}</nav>
+      ${(() => { const m = brands.find(x => S.active.includes(x.id)); return `<a class="logo" href="${m.href}" aria-label="${m.name} ${m.sub} home">${ico[m.icon].replace(/#fff/g, 'currentColor')}<b>${m.name}<small>${m.sub}</small></b></a>`; })()}
+      <nav class="nav" aria-label="Main"><div class="wrap"><ul>${navHtml}</ul></div></nav>
       <div class="tools">
         <button class="tool" aria-label="Search" data-open-search>${ico.search}</button>
-        <a class="tool hide-sm" href="${url('/my-account/')}" aria-label="My account">${ico.user}</a>
-        <a class="tool" href="${url('/wishlist/')}" aria-label="Wishlist">${ico.heart}<span class="n" data-wish-n></span></a>
         <a class="tool" href="${url('/cart/')}" aria-label="Cart" data-open-cart>${ico.bag}<span class="n" data-cart-n></span></a>
       </div>
     </div>
-    <nav class="nav" aria-label="Main"><div class="wrap"><ul>${navHtml}</ul></div></nav>
     <form class="searchbar" role="search" hidden action="${S.pre}-search.html"><div class="wrap"><label class="sr" for="q">Search</label><input id="q" name="q" placeholder="Search products, brands or model #" autocomplete="off"><input type="hidden" name="live" value="/?s="><button class="btn light">Search</button></div></form>
   </header>
   <div class="drawer" id="drawer"><div class="bg" data-close></div><div class="panel" role="dialog" aria-label="Menu">
@@ -239,7 +236,7 @@
 
   /* ---------- hero slider ---------- */
   const initHero = () => {
-    const hero = $('.hero:not([hidden])'); if (!hero) return;
+    const hero = $('.hero'); if (!hero) return;
     const slides = $$('.slide', hero); if (slides.length < 2) return;
     const dots = $('.dots', hero), pp = $('.pp', hero);
     let i = 0, timer, playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -252,12 +249,9 @@
   };
 
   /* ---------- header option for the client: A = showroom video, B = shop-first slideshow (?hero=a|b) ---------- */
-  const heroOpt = (() => { const q = qs('hero'); if (q === 'a' || q === 'b') { try { localStorage.setItem('hero_opt', q); } catch {} return q; } try { return localStorage.getItem('hero_opt') || 'a'; } catch { return 'a'; } })();
-  if ($('.heroB')) {
-    $$('.heroA').forEach(e => { e.hidden = heroOpt === 'b'; });
-    $$('.heroB').forEach(e => { e.hidden = heroOpt !== 'b'; });
-    if (heroOpt === 'b') $$('.heroA video').forEach(v => { v.removeAttribute('data-hero-video'); v.preload = 'none'; });
-  }
+  // header layout option for the client: a = logos left (default), b = logos centred. ?header=a|b, remembered.
+  const hdrOpt = (() => { const q = qs('header'); if (q === 'a' || q === 'b') { try { localStorage.setItem('hdr_opt', q); } catch {} return q; } try { return localStorage.getItem('hdr_opt') || 'a'; } catch { return 'a'; } })();
+  document.body.classList.toggle('hdr-center', hdrOpt === 'b');
 
   /* ---------- hero video (Kohler style): plays muted, starts after the storefront shot, poster for reduced motion ---------- */
   const initVideo = () => {
@@ -305,7 +299,7 @@
     const here = location.pathname.split('/').pop() || S.home;
     const opt = (pre, label) => `<optgroup label="${label}">${T[pre].map(([f, n, l]) => `<option value="${f}${l && l !== '/' ? `?live=${encodeURIComponent(l)}` : ''}"${f === here ? ' selected' : ''}>${esc(n)}</option>`).join('')}</optgroup>`;
     document.body.insertAdjacentHTML('beforeend', `<div class="tswitch" id="tswitch"><button class="tsbtn" aria-expanded="false" aria-controls="tspanel"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Prototype pages</span></button>
-      <div class="tspanel" id="tspanel" hidden><p class="tsnow"><b>${esc(tpl)}</b> template<br>Live address kept: <code>${esc(live)}</code></p>${$('.heroB') ? `<div class="hopt"><span>Header option</span><a href="?hero=a" ${heroOpt === 'a' ? 'aria-current="true"' : ''}>A · Video</a><a href="?hero=b" ${heroOpt === 'b' ? 'aria-current="true"' : ''}>B · Shop-first</a></div>` : ''}<label for="tsel">Jump to a template</label><select id="tsel">${opt(S.pre, S.name)}</select>
+      <div class="tspanel" id="tspanel" hidden><p class="tsnow"><b>${esc(tpl)}</b> template<br>Live address kept: <code>${esc(live)}</code></p><div class="hopt"><span>Header option</span><a href="?header=a" ${hdrOpt === 'a' ? 'aria-current="true"' : ''}>A · Logos left</a><a href="?header=b" ${hdrOpt === 'b' ? 'aria-current="true"' : ''}>B · Logos centred</a></div><label for="tsel">Jump to a template</label><select id="tsel">${opt(S.pre, S.name)}</select>
         <div class="tsrow"><button data-ts="-1">← Previous</button><button data-ts="1">Next →</button></div></div></div>`);
     const sel = $('#tsel'), btn = $('.tsbtn'), panel = $('#tspanel');
     btn.addEventListener('click', () => { panel.hidden = !panel.hidden; btn.setAttribute('aria-expanded', String(!panel.hidden)); if (!panel.hidden) sel.focus(); });
