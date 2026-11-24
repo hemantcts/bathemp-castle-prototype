@@ -56,7 +56,7 @@ body[data-page=home] .hdr.stuck,body[data-page=home] .hdr:has(li.open){backgroun
 .hero p{max-width:34ch}
 
 /* ---------- homepage sections on charcoal (Kohler homepage), products stay on white ---------- */
-body[data-page=home] .sec:not(.stone):not(#appliances),body[data-page=home] .feat,body[data-page=home] .igsec{background:var(--char);color:#fff}
+body[data-page=home] .sec:not(.stone),body[data-page=home] .feat,body[data-page=home] .igsec{background:var(--char);color:#fff}
 body[data-page=home] .sec:not(.stone) .sh p,body[data-page=home] .feat p,body[data-page=home] .intro p{color:#cfcfcf}
 body[data-page=home] .sec.stone{background:#fff}
 body[data-page=home] .sec.dark,.split,.visit{background:var(--char)}
