@@ -67,8 +67,8 @@ PAGES = {
         ('ck-404.html', '404', '/404/', 'Page not found', '(any missing address)', '—'),
     ],
 }
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Inter:wght@400;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">'
-CSS = '<link rel="stylesheet" href="assets/group.css"><link rel="stylesheet" href="assets/pages.css">'
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">'
+CSS = '<link rel="stylesheet" href="assets/group.css"><link rel="stylesheet" href="assets/pages.css"><link rel="stylesheet" href="assets/kohler.css">'
 def scripts(site): return f'<script src="assets/site-{site}.js"></script><script src="assets/content-{site}.js"></script><script src="assets/templates.js"></script><script src="assets/group.js"></script><script src="assets/pages.js"></script>'
 
 import json as _j

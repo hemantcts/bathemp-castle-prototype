@@ -1,0 +1,119 @@
+/* Kohler look (kohler.ca/en, studied 2026-11-24): one sans family (Inter here, Helvetica Now on Kohler),
+   light headings in normal case with tight tracking, underlined text-link CTAs, charcoal sections, normal-case nav.
+   Loaded last so it restyles group.css + pages.css without touching markup or links. */
+:root{--head:"Inter",system-ui,sans-serif;--char:#222;--ink:#111;--grey:#5f5f5f;--mlink:#494949}
+
+/* ---------- type: no uppercase / wide tracking anywhere ---------- */
+h1,h2,h3,h4,.h2,.h1x,.eyebrow,.btn,.more,.ilink,.tile b,.tile span,.proj b,.card .br,.badge,.trust b,
+.nav>.wrap>ul>li>a,.nav>.wrap>ul>li>button,.mega h4,.mega .feat span,.ftr h4,.ftr form button,.visit dt,
+.modal h3,.modal label,.drawer summary,.drawer .lnk,.onestop a,.appcats b,.cquotes figcaption,.projlist b,.projlist span,
+.pbanner h1,.phead h1,.post h2,.post h3,.post small,.split h2,.visit h2,.sh h2,label,.lbl,th{
+  text-transform:none!important;letter-spacing:normal}
+h1,h2,.h2,.h1x,.sh h2,.split h2,.visit h2,.pbanner h1,.phead h1{font-family:var(--body);font-weight:300;letter-spacing:-.035em;line-height:1.08}
+h3,h4{font-family:var(--body)}
+.sh h2{font-size:clamp(30px,3.4vw,50px)}
+.hero h1,.hero h2.h1,.hero .h1x{font:300 clamp(40px,4.6vw,64px)/1.08 var(--body);letter-spacing:-.045em;max-width:16ch}
+.hero p{font-size:clamp(17px,1.4vw,20px);line-height:1.4;letter-spacing:-.02em}
+.eyebrow{font:500 14px var(--body);letter-spacing:-.01em;opacity:.85}
+.lead{font-weight:300;letter-spacing:-.02em}
+
+/* ---------- CTAs: underlined text links (Kohler), boxed only for primary actions ---------- */
+.more,.ilink,.tile span,.onestop a,.projlist span{font:500 15px var(--body);letter-spacing:-.01em;border-bottom:1px solid currentColor;padding-bottom:2px;text-decoration:none}
+.btn{font:500 15px var(--body);letter-spacing:-.01em;height:48px;padding:0 24px}
+.hero .btn.light,.split .btn.light,.visit .btn.light,.xhero .btn.light,.pbanner .btn.light{height:auto;padding:0 0 3px;border:0;border-bottom:1px solid #fff;font-size:17px;margin-right:26px;background:none}
+.hero .btn.light:hover,.split .btn.light:hover,.visit .btn.light:hover,.xhero .btn.light:hover,.pbanner .btn.light:hover{background:none;color:#fff;opacity:.75}
+.hero .btn svg,.split .btn svg,.visit .btn svg{display:none}
+.btn.dark,.card .btn.dark{background:#000;border-color:#000}
+
+/* ---------- header: black utility bar, normal-case nav, transparent over the homepage hero ---------- */
+.util{background:#000;color:#fff;font-size:13px;letter-spacing:-.01em}
+.util .wrap{height:40px}
+.hdr{background:#000}
+.nav{border-top:0}
+.nav>.wrap>ul{justify-content:flex-start;gap:clamp(16px,2vw,30px)}
+.nav>.wrap>ul>li>a,.nav>.wrap>ul>li>button{font:400 15px var(--body);color:#fff;height:46px;border-bottom:1px solid transparent}
+.nav>.wrap>ul>li>a:hover,.nav li.open>button,.nav>.wrap>ul>li>button:hover{border-color:#fff}
+.nav .sale{color:#fff!important}
+body[data-page=home] .hdr{margin-bottom:-130px;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0));transition:background .3s,box-shadow .2s}
+body[data-page=home] .hdr.stuck,body[data-page=home] .hdr:has(li.open){background:#000}
+
+/* mega menu: grouped columns, normal-case headings, grey links, promo column with chevrons */
+.mega{box-shadow:0 24px 40px rgba(0,0,0,.12)}
+.mega .wrap{padding-top:34px;padding-bottom:38px;gap:28px}
+.mega h4{font:500 16px var(--body);color:#000;margin:0 0 10px}
+.mega li a{font-size:15px;color:var(--mlink);padding:3px 0}
+.mega li a:hover{color:#000}
+.mega .feat{min-height:260px}
+.mega .feat::after{background:linear-gradient(transparent 55%,rgba(0,0,0,.55))}
+.mega .feat span{font:500 15px var(--body)}
+.mbar,.mbar a,.mega .feat small,.mega .feat em{text-transform:none!important;letter-spacing:normal!important;font-family:var(--body)!important}
+.mbar a{font-size:15px;font-weight:500}
+
+/* ---------- hero: centred copy like Kohler ---------- */
+.slide::after{background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.35) 55%,rgba(0,0,0,.55))}
+.hero .copy{text-align:center;bottom:clamp(70px,14vh,150px)}
+.hero h1,.hero h2.h1,.hero .h1x,.hero p{margin-left:auto;margin-right:auto}
+.hero p{max-width:34ch}
+
+/* ---------- homepage sections on charcoal (Kohler homepage), products stay on white ---------- */
+body[data-page=home] .sec:not(.stone):not(#appliances),body[data-page=home] .feat,body[data-page=home] .igsec{background:var(--char);color:#fff}
+body[data-page=home] .sec:not(.stone) .sh p,body[data-page=home] .feat p,body[data-page=home] .intro p{color:#cfcfcf}
+body[data-page=home] .sec.stone{background:#fff}
+body[data-page=home] .sec.dark,.split,.visit{background:var(--char)}
+body[data-page=home] .cquotes figure{border-color:#3a3a3a}
+body[data-page=home] .cquotes blockquote{color:#eee}
+body[data-page=home] .logos{border-color:#3a3a3a}
+body[data-page=home] .logos a+a{border-color:#3a3a3a}
+body[data-page=home] .logos img{filter:brightness(0) invert(1);opacity:.85}
+body[data-page=home] .trust svg{stroke:#fff}
+body[data-page=home] .trust span{color:#bdbdbd}
+body[data-page=home] .btn.line{border-color:#fff;color:#fff}
+body[data-page=home] .btn.line:hover{background:#fff;color:#000}
+body[data-page=home] .intro .btn:not(.line){background:#fff;color:#000;border-color:#fff}
+body[data-page=home] .ytcap,body[data-page=home] .post small{color:#aaa}
+body[data-page=home] .post p{color:#cfcfcf}
+body[data-page=home] .ctaband{background:#000}
+
+/* photo cards: centred title + underlined link, as on Kohler's 2x2 grids */
+.tile::after{background:rgba(0,0,0,.28)}
+.tile .t{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;left:0;right:0;bottom:0;padding:20px}
+.tile b{font:300 clamp(24px,2.6vw,36px)/1.1 var(--body);letter-spacing:-.04em}
+.tile span{margin-top:14px;color:#fff;border-color:#fff}
+.tile span svg{display:none}
+.tiles.big .tile .t{left:0;bottom:0}
+.tiles.big .tile b{font-size:clamp(26px,2.8vw,38px)}
+.tile .t p{text-align:center;margin-left:auto;margin-right:auto}
+.tiles.big{gap:16px}
+.proj b,.projlist b{font:400 20px var(--body);letter-spacing:-.02em}
+
+/* product cards */
+.card .br{font:500 12px var(--body);color:var(--grey)}
+.card h3{font-size:15px;letter-spacing:-.01em}
+.badge{font:500 11px var(--body)}
+
+/* one-stop shop */
+.onestop h3{font:300 24px var(--body);letter-spacing:-.03em}
+
+/* ---------- footer (Kohler): charcoal, light 20px headings, plain links ---------- */
+.ftr{background:var(--char);color:#d6d6d6;font-size:15px}
+.ftr h4{font:300 20px var(--body);color:#fff;letter-spacing:-.02em;margin-bottom:18px}
+.ftr ul{gap:10px}
+.ftr form{border-bottom:1px solid #8a8a8a}
+.ftr input{font-size:17px}
+.ftr form button{background:#fff;color:#000;padding:8px 16px;margin:0 0 8px;font:500 14px var(--body)}
+.ftr .bot{border-color:#3a3a3a}
+
+/* forms, modals, drawer */
+.modal h3{font:300 26px var(--body);letter-spacing:-.03em}
+.modal label,label{font:500 13px var(--body)}
+.drawer summary,.drawer .lnk{font:400 17px var(--body)}
+.visit dt{font:500 13px/2 var(--body);color:#9a9a9a}
+
+@media (max-width:1100px){body[data-page=home] .hdr{margin-bottom:-84px}}
+@media (max-width:820px){body[data-page=home] .hdr{margin-bottom:-64px}.tile b{font-size:26px}}
+body[data-page=home] section:has(>.wrap.trust){background:var(--char);color:#fff}
+body[data-page=home] .intro h1{font-weight:300;font-size:clamp(28px,2.9vw,42px);letter-spacing:-.035em}
+.promo-strip b{text-transform:none!important;letter-spacing:-.02em!important;font:400 clamp(16px,1.6vw,20px) var(--body)!important}
+
+/* catch-all: no uppercase labels anywhere (Kohler); the clearance pill keeps its caps */
+.acc h2,.appcats b,.bmark,.cart th,.catbar span,.cattiles b,.chatpanel header b,.cpanel .ch h2,.cquotes figcaption,.ctaband h2,.cup h3,.door figcaption b,.expressbox>span,.facts b,.filters summary,.h1,.h2,.h3,.hero .h1x,.hopt span,.howto b,.info .br,.intro h1,.mbar>.wrap>a,.media2 h2,.panel h2,.pbanner h1,.perks b,.pform h2,.pform label,.phead h1,.pkg b,.policy dt,.post small,.projlist b,.projlist span,.promo-strip b,.promos b,.promos span,.sdl dt,.summary h2,.tabs button,.tspanel label{text-transform:none!important;letter-spacing:normal!important}
