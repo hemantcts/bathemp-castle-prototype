@@ -141,7 +141,7 @@
   /* ---------- header ---------- */
   const tpl = route(live)[2];
   const navHtml = S.menu.map((m, i) => m.mega
-    ? `<li><button aria-expanded="false" aria-controls="mega${i}">${m.label}${ico.down}</button><div class="mega" id="mega${i}"><div class="wrap mgrid" style="--cols:${m.mega.length}"><div class="mcols">${m.mega.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}</div>${m.feat ? `<a class="feat" href="${url(m.feat.u)}"><img src="${m.feat.img}" alt="" loading="lazy"><span><small>Explore</small>${m.feat.t} →</span></a>` : ''}</div>
+    ? `<li><button aria-expanded="false" aria-controls="mega${i}">${m.label}${ico.down}</button><div class="mega" id="mega${i}"><div class="wrap mgrid" style="--cols:${m.mega.length}"><div class="mcols">${m.mega.map(c => `<div><h4>${c.h}</h4><ul>${c.links.map(([t, u]) => `<li><a href="${url(u)}">${t}</a></li>`).join('')}</ul></div>`).join('')}</div>${m.feat ? `<a class="feat" href="${url(m.feat.u)}"><img src="${m.feat.img}" alt=""><span><small>Explore</small>${m.feat.t} →</span></a>` : ''}</div>
       <div class="mbar"><div class="wrap">${m.feat ? `<a href="${url(m.feat.u)}">View all ${esc(m.label.toLowerCase())} →</a>` : ''}<span>Need help choosing? <a href="${url('/experience-centre/')}">Book a showroom visit</a> · (905) 944-0060</span></div></div></div></li>`
     : `<li><a href="${url(m.u)}"${m.sale ? ' class="sale"' : ''}>${m.label}${m.badge ? `<em class="nbadge" aria-label="up to ${esc(m.badge)}"><small>up to</small> ${esc(m.badge)}</em>` : ''}</a></li>`).join('');
   $('#hdr').outerHTML = `
@@ -167,7 +167,7 @@
 
   $$('.nav>.wrap>ul>li').forEach(li => {
     const b = $('button', li); if (!b) return;
-    const set = o => { $$('.nav li.open').forEach(x => { if (x !== li) { x.classList.remove('open'); $('button', x).setAttribute('aria-expanded', 'false'); } }); li.classList.toggle('open', o); b.setAttribute('aria-expanded', String(o)); };
+    const set = o => { $$('.nav li.open').forEach(x => { if (x !== li) { x.classList.remove('open'); $('button', x).setAttribute('aria-expanded', 'false'); } }); li.classList.toggle('open', o); $('.hdr').classList.toggle('menu-open', !!$('.nav li.open')); b.setAttribute('aria-expanded', String(o)); };
     let t; li.addEventListener('mouseenter', () => { clearTimeout(t); t = setTimeout(() => set(true), 120); });
     li.addEventListener('mouseleave', () => { clearTimeout(t); t = setTimeout(() => set(false), 160); });
     b.addEventListener('click', () => set(!li.classList.contains('open')));

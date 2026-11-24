@@ -395,10 +395,19 @@
   R.appliances = () => {
     const root = (C.cats || []).find(c => c.n.startsWith('High End'));
     const kids = (C.cats || []).filter(c => c.parent === root?.id && c.count).sort((a, b) => b.count - a.count);
-    main().innerHTML = banner('img/app-oak-1800.webp', 'Premium kitchen appliances', 'Thermador, Gaggenau, Miele, Monogram, Bertazzoni and more — see them working in our Markham showroom, buy online for Ontario delivery.', 'Castle Appliances') +
-      `<div class="wrap">${crumbs([['Appliances']])}</div><section class="sec tight"><div class="wrap"><div class="cattiles">${kids.map(c => `<a href="${url(c.live)}">${c.img ? `<img src="${c.img}" alt="" loading="lazy">` : '<span class="ph"></span>'}<b>${esc(c.n)}</b><span>${c.count} products</span></a>`).join('')}</div></div></section>` +
-      rail('Display clearance — buy online', (C.priced || []).slice(0, 8), `<a class="more" href="${url('/product-category/display-clearance/')}">All clearance ${arrow}</a>`) +
-      `<section class="sec"><div class="wrap"><div class="sh"><h2>Current promotions</h2></div><div class="promos">${[['Thermador', '/thermador-promotion/'], ['Miele', '/miele-appliances/'], ['Monogram', '/monogram-promotion-deals/'], ['Bertazzoni', '/bertazzoni-canada-promotion/'], ['Viking', '/viking-range-canada-promotion/'], ['JennAir', '/jennair-canada-promotions/']].map(([t, u]) => `<a href="${url(u)}"><b>${t}</b><span>View offer ${arrow}</span></a>`).join('')}</div></div></section>` + cta();
+    // room photos for the main categories (big Kohler cards); the rest become a quiet link row
+    const photo = { ranges: 'img/kit-island-1800.webp', refrigerators: 'img/ckh/cat-refrigerators.webp', 'wall-ovens': 'img/ckh/cat-wall-ovens.webp', cooktops: 'img/ckh/cat-cooktops.webp', ventilation: 'img/ckh/cat-ventilation.webp', 'wine-storage': 'img/ckh/cat-wine.webp' };
+    const slug = c => (c.live.match(/appliances\/([^/]+)\//) || [])[1];
+    const big = kids.filter(c => photo[slug(c)]), rest = kids.filter(c => !photo[slug(c)]);
+    const promos = [['Thermador', '/thermador-promotion/', 'thermador'], ['Miele', '/miele-appliances/', 'miele'], ['Bertazzoni', '/bertazzoni-canada-promotion/', 'bertazzoni'], ['Viking', '/viking-range-canada-promotion/', 'viking'], ['Monogram', '/monogram-promotion-deals/'], ['JennAir', '/jennair-canada-promotions/']];
+    main().innerHTML = banner('img/app-oak-1800.webp', 'Premium kitchen appliances', 'Thermador, Gaggenau, Miele, Monogram, Bertazzoni and more. See them working in our Markham showroom, buy online for delivery across Ontario.', 'Castle Appliances', `<a class="btn light" href="#shop-cats">Shop by category ${arrow}</a> <a class="btn light" href="${url('/product-category/display-clearance/')}">Display clearance</a>`).replace('class="pbanner"', 'class="pbanner xhero"') +
+      `<section class="sec brandsec" aria-label="Our brands"><div class="wrap"><p class="eyebrow" style="text-align:center;margin:0 0 18px">Authorized dealer for the world's finest brands</p><div class="logos" data-logos></div></div></section>
+      <section class="sec dark" id="shop-cats"><div class="wrap"><div class="sh"><div><h2>Shop by category</h2></div></div>
+        <div class="tiles big">${big.map(c => `<a class="tile" href="${url(c.live)}"><img src="${photo[slug(c)]}" alt="" loading="lazy"><div class="t"><b>${esc(c.n)}</b><span>Shop ${esc(c.n.toLowerCase())}</span></div></a>`).join('')}</div>
+        <nav class="catlinks" aria-label="More appliance categories"><span>More categories</span>${rest.map(c => `<a href="${url(c.live)}">${esc(c.n)}</a>`).join('')}<a href="${url('/product-category/coffee-machines/')}">Coffee machines</a></nav>
+      </div></section>` +
+      rail('Display clearance, buy online', (C.priced || []).slice(0, 8), `<a class="more" href="${url('/product-category/display-clearance/')}">All clearance ${arrow}</a>`) +
+      `<section class="sec dark"><div class="wrap"><div class="sh"><div><h2>Current promotions</h2></div><a class="more" href="${url('/special-offers-promotions/')}">All offers ${arrow}</a></div><div class="promocards">${promos.map(([t, u, lg]) => `<a href="${url(u)}"><span class="pl">${lg ? `<img src="img/logos/${lg}.webp" alt="${t}">` : `<b>${t}</b>`}</span><span class="pv">${t} offers ${arrow}</span></a>`).join('')}</div></div></section>` + cta();
   };
 
   R.promotion = () => {

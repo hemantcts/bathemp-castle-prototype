@@ -213,12 +213,12 @@ body[data-page=home] .tile span,.tiles.big .tile span{font-size:clamp(16px,1.15v
 .brandsec{padding:clamp(34px,4vw,56px) 0!important}
 .brandsec .eyebrow{margin-bottom:22px!important}
 /* brand band: white, logos in their own colours (several logo files carry their own background) */
-body[data-page=home] .brandsec{background:#fff!important;color:#111}
-body[data-page=home] .brandsec .logos,body[data-page=home] .brandsec .logos a+a{border-color:#e6e6e6}
-body[data-page=home] .brandsec .logos img{filter:none;opacity:1}
-body[data-page=home] .brandsec .eyebrow{color:#6b6b6b!important}
-body[data-page=home] .brandsec .logos img{filter:grayscale(1);opacity:.8;transition:filter .25s,opacity .25s}
-body[data-page=home] .brandsec .logos a:hover img{filter:none;opacity:1}
+.brandsec{background:#fff!important;color:#111}
+.brandsec .logos,.brandsec .logos a+a{border-color:#e6e6e6}
+.brandsec .logos img{filter:none;opacity:1}
+.brandsec .eyebrow{color:#6b6b6b!important}
+.brandsec .logos img{filter:grayscale(1);opacity:.8;transition:filter .25s,opacity .25s}
+.brandsec .logos a:hover img{filter:none;opacity:1}
 /* one calm grade across all homepage card photos so mixed sources sit together */
 body[data-page=home] .tile img{filter:saturate(.86) contrast(1.05) brightness(.93)}
 /* option B: the three brand logos together in the centre (current site bright), no brand list in the top bar */
@@ -236,3 +236,46 @@ body[data-page=home] .tile img{filter:saturate(.86) contrast(1.05) brightness(.9
 @media (max-width:1400px){.logos-own .logo svg{width:26px;height:26px}.logos-own .logo b{font-size:12.5px}}
 @media (max-width:820px){.logos-own .logo+.sep,.logos-own .sep+.logo{display:none}}
 @media (max-width:820px){.hdr-center .trio .logo.on~.logo.on{display:none}}
+
+/* ---------- photo grids without dead space (Kohler) ---------- */
+.cattiles{gap:20px}
+.cattiles a{border:0;padding:0;background:none;gap:2px}
+.cattiles img,.cattiles .ph{object-fit:cover;background:#f2f2f2;margin-bottom:12px}
+.cattiles b{font:400 16px var(--body)}
+.card .im{border:0;background:#f4f4f4}
+.card .im img{object-fit:cover;padding:0}
+
+/* appliances landing */
+.catlinks{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-top:34px}
+.catlinks span{color:#9a9a9a;font-size:15px;margin-right:8px}
+.catlinks a{border:1px solid #4a4a4a;color:#fff;padding:9px 16px;font-size:15px;transition:border-color .2s,background .2s}
+.catlinks a:hover{background:#fff;color:#000;border-color:#fff}
+.promocards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.promocards a{background:#fff;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;aspect-ratio:16/9;transition:transform .3s}
+.promocards a:hover{transform:translateY(-3px)}
+.promocards .pl img{max-width:180px;max-height:56px;object-fit:contain}
+.promocards .pl b{font:300 30px var(--body);letter-spacing:-.03em}
+.promocards .pv{font:500 15px var(--body);border-bottom:1px solid currentColor;padding-bottom:2px;display:inline-flex;gap:8px;align-items:center}
+.promocards .pv svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6}
+@media (max-width:820px){.promocards{grid-template-columns:1fr 1fr}}
+
+/* ---------- mega menu, Kohler style: plain columns, promo photo with caption below, no grey bar ---------- */
+.mega .mbar{display:none}
+.mega .wrap.mgrid{padding-top:32px;padding-bottom:36px;gap:48px}
+.mega h4{border:0!important;padding:0!important;margin:0 0 12px!important;font:500 16px var(--body)!important;color:#000}
+.mega li a{padding:4px 0;font-size:15px;color:#494949}
+.mega li a:hover{color:#000;text-decoration:underline;text-underline-offset:4px}
+.mega .feat{position:relative;display:flex;flex-direction:column;min-height:0;color:#111;overflow:visible}
+.mega .feat::after{display:none}
+.mega .feat img{position:static;width:100%;aspect-ratio:4/3;height:auto;object-fit:cover}
+.mega .feat span{position:static;margin-top:12px;font:400 15px var(--body);color:#494949}
+.mega .feat span small{display:none}
+.mega .feat:hover span{color:#000;text-decoration:underline;text-underline-offset:4px}
+.mega .wrap.mgrid{align-items:start}
+.mega .feat{background:none!important;height:auto!important;align-self:start}
+.mega .feat{padding:0!important;display:flex!important;gap:0!important;max-height:none!important}
+body[data-page=home] .hdr:hover,body[data-page=home] .hdr.stuck,body[data-page=home] .hdr:has(li.open),body[data-page=home] .hdr:focus-within{background:#fff;color:#000;-webkit-backdrop-filter:none;backdrop-filter:none}
+body[data-page=home] .hdr.menu-open{background:#fff;color:#000;-webkit-backdrop-filter:none;backdrop-filter:none}
+/* sub-category photos fill their square, no inner padding */
+.subtiles img{object-fit:cover!important;padding:0!important;mix-blend-mode:normal!important}
+.subtiles a{font-size:15px}
