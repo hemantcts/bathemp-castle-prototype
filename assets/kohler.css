@@ -193,7 +193,7 @@ body[data-page=home] .sec:has(>.wrap>.tiles) .wrap,.sec:has(>.wrap>.tiles.big) .
 body[data-page=home] .tiles,.tiles.big{gap:clamp(14px,1.6vw,28px)}
 body[data-page=home] .tile,.tiles.big .tile{aspect-ratio:812/612}
 body[data-page=home] .tile b,.tiles.big .tile b{font-size:clamp(30px,2.6vw,46px);line-height:1.1}
-body[data-page=home] .tile b br,.tiles.big .tile b br{display:none}
+
 body[data-page=home] .tile span,.tiles.big .tile span{font-size:clamp(16px,1.15vw,20px)}
 @media (max-width:820px){body[data-page=home] .tile,.tiles.big .tile{aspect-ratio:812/612}}
 
@@ -208,3 +208,13 @@ body[data-page=home] .tile span,.tiles.big .tile span{font-size:clamp(16px,1.15v
 .onestop svg{width:40px;height:40px;color:#fff}
 .onestop h3{font:500 15px/1.2 var(--mark)!important;letter-spacing:.2em!important;text-transform:uppercase!important}
 .sisters a{font-family:var(--mark);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+/* featured brands: first band under the fold */
+.brandsec{padding:clamp(34px,4vw,56px) 0!important}
+.brandsec .eyebrow{margin-bottom:22px!important}
+/* brand band: white, logos in their own colours (several logo files carry their own background) */
+body[data-page=home] .brandsec{background:#fff!important;color:#111}
+body[data-page=home] .brandsec .logos,body[data-page=home] .brandsec .logos a+a{border-color:#e6e6e6}
+body[data-page=home] .brandsec .logos img{filter:none;opacity:1}
+body[data-page=home] .brandsec .eyebrow{color:#6b6b6b!important}
+body[data-page=home] .brandsec .logos img{filter:grayscale(1);opacity:.8;transition:filter .25s,opacity .25s}
+body[data-page=home] .brandsec .logos a:hover img{filter:none;opacity:1}
