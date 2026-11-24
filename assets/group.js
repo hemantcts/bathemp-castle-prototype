@@ -150,6 +150,7 @@
     <div class="wrap bar">
       <button class="tool burger" aria-label="Menu" data-open-drawer>${ico.menu}</button>
       ${(() => { const m = brands.find(x => S.active.includes(x.id)); return `<a class="logo" href="${m.href}" aria-label="${m.name} ${m.sub} home">${ico[m.icon].replace(/#fff/g, 'currentColor')}<b>${m.name}<small>${m.sub}</small></b></a>`; })()}
+      <nav class="trio" aria-label="Our brands">${brands.map(b => `<a class="logo${S.active.includes(b.id) ? ' on' : ''}" href="${b.href}">${ico[b.icon]}<b>${b.name}<small>${b.sub}</small></b></a>`).join('<span class="sep"></span>')}</nav>
       <nav class="nav" aria-label="Main"><div class="wrap"><ul>${navHtml}</ul></div></nav>
       <div class="tools">
         <button class="tool" aria-label="Search" data-open-search>${ico.search}</button>
