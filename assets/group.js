@@ -149,7 +149,7 @@
   <header class="hdr" id="top">
     <div class="wrap bar">
       <button class="tool burger" aria-label="Menu" data-open-drawer>${ico.menu}</button>
-      ${(() => { const m = brands.find(x => S.active.includes(x.id)); return `<a class="logo" href="${m.href}" aria-label="${m.name} ${m.sub} home">${ico[m.icon].replace(/#fff/g, 'currentColor')}<b>${m.name}<small>${m.sub}</small></b></a>`; })()}
+      <div class="logos-own">${[(() => { const app = S.active.includes('appliances') && /^\/(appliances\/|product-category\/(appliances|coffee-machines|display-clearance)|product\/|brand\/|our-brands\/|special-offers-promotions\/|[a-z-]*(promotion|promo|deals)[a-z-]*\/|miele-appliances\/)/.test(live); return brands.find(x => x.id === (app ? 'appliances' : S.active[0])); })()].map(m => `<a class="logo" href="${m.href}" aria-label="${m.name} ${m.sub}">${ico[m.icon]}<b>${m.name}<small>${m.sub}</small></b></a>`).join('<span class="sep"></span>')}</div>
       <nav class="trio" aria-label="Our brands">${brands.map(b => `<a class="logo${S.active.includes(b.id) ? ' on' : ''}" href="${b.href}">${ico[b.icon]}<b>${b.name}<small>${b.sub}</small></b></a>`).join('<span class="sep"></span>')}</nav>
       <nav class="nav" aria-label="Main"><div class="wrap"><ul>${navHtml}</ul></div></nav>
       <div class="tools">

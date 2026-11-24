@@ -176,7 +176,8 @@ body[data-page=home] .hdr{background:rgba(24,24,24,.42);-webkit-backdrop-filter:
 .cur{border-color:#555}
 
 /* header: keep one clean row on laptop widths */
-@media (max-width:1400px){.nav .nbadge{display:none}.nav>.wrap>ul{gap:18px}.nav>.wrap>ul>li>a,.nav>.wrap>ul>li>button{font-size:15px}}
+@media (max-width:1520px){.nav .nbadge{display:none}}
+@media (max-width:1400px){.nav>.wrap>ul{gap:18px}.nav>.wrap>ul>li>a,.nav>.wrap>ul>li>button{font-size:15px}}
 
 /* category cards: Kohler 2-per-row, 4:3 photo cards on charcoal, centred title + underlined link */
 body[data-page=home] .tiles,.tiles.big{grid-template-columns:repeat(2,1fr);gap:clamp(14px,1.9vw,28px)}
@@ -222,10 +223,16 @@ body[data-page=home] .brandsec .logos a:hover img{filter:none;opacity:1}
 body[data-page=home] .tile img{filter:saturate(.86) contrast(1.05) brightness(.93)}
 /* option B: the three brand logos together in the centre (current site bright), no brand list in the top bar */
 .trio{display:none}
-.hdr-center .bar>.logo,.hdr-center .sisters{display:none}
+.hdr-center .bar>.logos-own,.hdr-center .sisters{display:none}
 .hdr-center .trio{display:flex;align-items:center;justify-content:center;gap:clamp(22px,3vw,44px);grid-area:logo;height:72px}
 .hdr-center .trio .logo{opacity:.55;transition:opacity .2s}
 .hdr-center .trio .logo.on,.hdr-center .trio .logo:hover{opacity:1}
 .hdr-center .trio .sep{width:1px;height:34px;background:currentColor;opacity:.25}
 .hdr-center .util .wrap{justify-content:flex-end}
 @media (max-width:820px){.hdr-center .trio .logo:not(.on),.hdr-center .trio .sep{display:none}}
+/* own-site marks (Castle site shows Castle Kitchens + Castle Appliances) */
+.logos-own{display:flex;align-items:center;gap:16px;flex:none}
+.logos-own .sep{width:1px;height:30px;background:currentColor;opacity:.25}
+@media (max-width:1400px){.logos-own .logo svg{width:26px;height:26px}.logos-own .logo b{font-size:12.5px}}
+@media (max-width:820px){.logos-own .logo+.sep,.logos-own .sep+.logo{display:none}}
+@media (max-width:820px){.hdr-center .trio .logo.on~.logo.on{display:none}}
