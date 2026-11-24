@@ -279,3 +279,7 @@ body[data-page=home] .hdr.menu-open{background:#fff;color:#000;-webkit-backdrop-
 /* sub-category photos fill their square, no inner padding */
 .subtiles img{object-fit:cover!important;padding:0!important;mix-blend-mode:normal!important}
 .subtiles a{font-size:15px}
+/* brand band wins over the old charcoal-homepage logo rules (white-inverted logos, dark borders) */
+body .brandsec .logos,body .brandsec .logos a+a{border-color:#e6e6e6}
+body .brandsec .logos img{filter:grayscale(1);opacity:.8}
+body .brandsec .logos a:hover img{filter:none;opacity:1}
