@@ -218,3 +218,5 @@ body[data-page=home] .brandsec .logos img{filter:none;opacity:1}
 body[data-page=home] .brandsec .eyebrow{color:#6b6b6b!important}
 body[data-page=home] .brandsec .logos img{filter:grayscale(1);opacity:.8;transition:filter .25s,opacity .25s}
 body[data-page=home] .brandsec .logos a:hover img{filter:none;opacity:1}
+/* one calm grade across all homepage card photos so mixed sources sit together */
+body[data-page=home] .tile img{filter:saturate(.86) contrast(1.05) brightness(.93)}
